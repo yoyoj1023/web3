@@ -6,9 +6,9 @@ async function main() {
   console.log("部署開始...");
   const hello = await HelloWorld.deploy();
   await hello.waitForDeployment();
+  console.log("部署結束...");
 
   console.log("HelloWorld deployed to:", await hello.getAddress());
-  console.log("部署結束...");
 
   const msg = await HelloWorld.attach(await hello.getAddress());
   console.log("msg = ", await msg.getMessage());
