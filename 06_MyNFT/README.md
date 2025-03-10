@@ -18,6 +18,10 @@
 1.先選擇一個 IPFS 服務供應商，將圖片或影片與 JSON 上傳，之後會取得 URI
 2.將 URI 傳入到合約(ERC721)，生成 NFT
 
+補充疑問：
+1.作者仍有可能移除檔案(或叫unpin)，使得NFT圖片連結失效成為空殼NFT。
+2.若考慮On-chain storage，則要付出高昂的儲存成本限制。
+
 ```
 
 四、openzeppelin
