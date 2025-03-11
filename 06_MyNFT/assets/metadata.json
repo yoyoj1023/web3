@@ -1,0 +1,21 @@
+{
+    "name": "My First NFT",
+    "description": "這是我的第一個 NFT 作品",
+    "image": "ipfs://YOUR_IMAGE_CID",
+    "external_url": "https://your-website.com/nft/1",
+    "attributes": [
+        {
+            "trait_type": "背景",
+            "value": "藍色"
+        },
+        {
+            "trait_type": "稀有度",
+            "value": "傳說"
+        },
+        {
+            "display_type": "number",
+            "trait_type": "等級",
+            "value": 1
+        }
+    ]
+}
