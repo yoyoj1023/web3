@@ -28,3 +28,24 @@
 
 五、等 Optimism (Optimistic Rollups) 研究一段時間後，可以深入研究另一個 L2 解決方案： ZK-Rollups，代表項目：zkSync、StarkNet。未來潛力巨大。
 
+六、設定 Hardhat 的 Optimism Sepolia 部署環境：
+
+```javascript
+require("@nomicfoundation/hardhat-toolbox");
+
+module.exports = {
+  solidity: "0.8.28",
+  networks: {
+    optimismSepolia: {
+      url: "https://sepolia.optimism.io",  //可換成 Alchemy 或 Infura 的 RPC URL
+      accounts: [process.env.PRIVATE_KEY]  // 你的錢包私鑰
+    }
+  }
+};
+```
+
+七、Hardhat 部屬 Optimism Sepolia 命令：
+
+```sh
+npx hardhat run scripts/deploy.js --network optimismSepolia
+```
