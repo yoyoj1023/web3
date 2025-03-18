@@ -15,12 +15,12 @@ https://github.com/OpenZeppelin/openzeppelin-contracts
 
 二、參考書目：
 
-1.精通以太坊
+1.精通以太坊：
 https://cypherpunks-core.github.io/ethereumbook_zh/
 
 
 三、挑戰 Solidity CTF（Capture The Flag）：
 
-1.Ethernaut CTF
+1.Ethernaut CTF：
 https://ethernaut.openzeppelin.com/
 

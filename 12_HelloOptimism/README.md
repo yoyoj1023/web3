@@ -18,7 +18,7 @@
   新增 RPC URL（New RPC URL）： https://sepolia.optimism.io
   鏈 ID（Chain ID）： 11155420
   貨幣符號（Currency symbol）： ETH
-  區塊鏈瀏覽器網址（Block explorer URL）： https://sepolia.optimism.etherscan.io
+  區塊鏈瀏覽器網址（Block explorer URL）： https://sepolia-optimism.etherscan.io
 4.儲存
 ```
 
