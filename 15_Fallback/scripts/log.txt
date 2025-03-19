@@ -1,0 +1,27 @@
+C:\VScodeProject\Web3\15_Fallback>npx hardhat run scripts/interact_hre_etherjs.js --network optimismSepolia
+目標 Fallback 合約地址: 0x7451Ec6AeFaF19D9766c4d45d66275CD87755297
+我的帳戶地址:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+我的帳戶地址 by hre:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+Contract owner: 0x716747Fbc1FcE4c36F2B369F87aDB5D4580e807f
+Owner 的貢獻: 1000.0 ether
+Owner 的貢獻: 1000000000000000000000n wei
+合約地址的以太幣餘額: 0.0 ETH
+合約地址的以太幣餘額 (Wei): 0
+我的貢獻: 0.0 ether
+我的貢獻: 0n wei
+交易成功，交易哈希: 0x93a4b469dbb79efe92088115dcdab3dc9bdab2b13e10e803372b927387167189
+執行 sendEtherToContribute()，貢獻 0.0001 ether
+更新我的貢獻: 0.0001 ether
+更新我的貢獻: 100000000000000n wei
+交易發送中，交易哈希: 0x6c88916ecec0c59317d3321e90c67f500a154d4f4f0fa6aed483031db1ac0ffb
+交易確認，區塊號: 25211834
+執行 sendEtherDirectly()，貢獻 0.0001 ether
+攻破後，更新 Contract owner: 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+攻破後，更新我的貢獻: 0.0001 ether
+攻破後，更新我的貢獻: 100000000000000n wei
+執行 sendEtherDirectly()，不會更新貢獻映射
+合約地址的以太幣餘額: 0.0002 ETH
+合約地址的以太幣餘額 (Wei): 200000000000000
+提款成功
+合約地址的以太幣餘額: 0.0 ETH
+合約地址的以太幣餘額 (Wei): 0
