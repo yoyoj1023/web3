@@ -1,13 +1,8 @@
-# Sample Hardhat Project
+# 17_Fallout Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+一、挑戰攻破 Ethernaut CTF 第2題： Fallout
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
+```
+1.勝利條件：成為合約所有者
+2.知識儲備：建構子
 ```
