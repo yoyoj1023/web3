@@ -1,0 +1,14 @@
+C:\VScodeProject\Web3\18_CoinFlip>npx hardhat run scripts/attack_CoinFlip.js --network optimismSepolia
+目標 CoinFlip 實例合約地址: 0x6e944eE85EE41F35D8Adcc7B7a3DE07bEb2f6dF1
+目標 CoinFlipAttack 實例合約地址: 0xC7a0d13a00959f9B3b04878d3511220A98008F3A
+我的帳戶地址:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+第 1 次攻擊後，consecutiveWins: 1
+第 2 次攻擊後，consecutiveWins: 2
+第 3 次攻擊後，consecutiveWins: 3
+第 4 次攻擊後，consecutiveWins: 4
+第 5 次攻擊後，consecutiveWins: 5
+第 6 次攻擊後，consecutiveWins: 6
+第 7 次攻擊後，consecutiveWins: 7
+第 8 次攻擊後，consecutiveWins: 8
+第 9 次攻擊後，consecutiveWins: 9
+第 10 次攻擊後，consecutiveWins: 10
