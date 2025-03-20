@@ -5,8 +5,11 @@
  - 勝利條件：成為合約所有者
  - 知識儲備：建構子
 
+二、解題思路：
 
-二、Solidity語法補充：關於 `view`
+1. 眼睛放大看清楚，直接呼叫 ```Fal1out()``` 就變成 owner 了
+
+三、Solidity語法補充：關於 `view`
 
 ```solidity
 function allocatorBalance(address allocator) public view returns (uint256) {
