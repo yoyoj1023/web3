@@ -1,0 +1,5 @@
+C:\VScodeProject\Web3\20_Token>npx hardhat run scripts/attack_Token.js --network optimismSepolia
+目標 Token 實例合約地址: 0xB6fE1A81704fB95E6658FFBE0DAe3aed344E4E7d
+我的帳戶地址:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+My balance:  20n
+My balance:  115792089237316195423570985008687907853269984665640564039457584007913129639833n
