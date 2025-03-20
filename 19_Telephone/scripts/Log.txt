@@ -1,0 +1,10 @@
+C:\VScodeProject\Web3\19_Telephone>npx hardhat run scripts/deploy_TelephoneCaller.js --network optimismSepolia
+TelephoneCaller deployed to:  0xe9fd1041D58C975269a0f61EF42AEdA0b3e6a63A
+
+C:\VScodeProject\Web3\19_Telephone>
+C:\VScodeProject\Web3\19_Telephone>npx hardhat run scripts/call_Telephone.js --network optimismSepolia
+目標 Telephone 實例合約地址: 0x45Df81613D3339C624cAD76FcD9DA5436a3c7FcD
+目標 TelephoneCaller 實例合約地址: 0xe9fd1041D58C975269a0f61EF42AEdA0b3e6a63A
+我的帳戶地址:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+telephone owner:  0x865e167C3db2c3E1C046cC67b05E6EcF9C897C2D
+Now, telephone owner:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
