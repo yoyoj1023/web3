@@ -1,0 +1,15 @@
+C:\VScodeProject\Web3\23_Force>
+C:\VScodeProject\Web3\23_Force>npx hardhat run scripts/ForceAttacker.js --network optimismSepolia
+Warning: "selfdestruct" has been deprecated. Note that, starting from the Cancun hard fork, the underlying opcode no longer deletes the code and data associated with an account and only transfers its Ether to the beneficiary, unless executed in the same transaction in which the contract was created (see EIP-6780). Any use in newly deployed contracts is strongly discouraged even if the new behavior is taken into account. Future changes to the EVM might further reduce the functionality of the opcode.
+  --> contracts/ForceAttacker.sol:17:9:
+   |
+17 |         selfdestruct(_force);
+   |         ^^^^^^^^^^^^
+
+
+Compiled 3 Solidity files successfully (evm target: paris).
+ForceAttacker 合約部署在:  0xE8937Bb364b02Ee3e5e2dea6E08B3105c03FFF1f
+目前 Force 合約地址的餘額:  0n
+Force 合約餘額:  0.0001 ETH
+
+C:\VScodeProject\Web3\23_Force>

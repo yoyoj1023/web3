@@ -16,10 +16,4 @@ contract ForceAttacker {
         // selfdestruct 會強制發送合約的所有餘額到指定地址
         selfdestruct(_force);
     }
-
-    function attack_byCall(address payable _force) public {
-        (bool success, ) = _force.call{value: address(this).balance}("");
-        require(success, "Transfer failed");
-    }
-
 }
