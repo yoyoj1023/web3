@@ -12,6 +12,9 @@ https://cloud.google.com/application/web3/search
 3. OpenZeppelin 常用庫：
 https://github.com/OpenZeppelin/openzeppelin-contracts
 
+4. Optimism 測試代幣水龍頭網站：
+https://console.optimism.io/faucet
+
 
 ### 二、參考書目：
 
