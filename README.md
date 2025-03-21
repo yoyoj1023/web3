@@ -24,12 +24,4 @@ https://cypherpunks-core.github.io/ethereumbook_zh/
 - Ethernaut CTF：
 https://ethernaut.openzeppelin.com/
 
-- 我的答案如下：
-
- 0. [HelloEthernaut](https://github.com/yoyoj1023/web3/tree/main/14_HelloEthernaut)
-
- 1. [Fallback](https://github.com/yoyoj1023/web3/tree/main/15_Fallback)
-
- 2. [Fallout](https://github.com/yoyoj1023/web3/tree/main/17_Fallout)
-
- 3. [CoinFlip](https://github.com/yoyoj1023/web3/tree/main/18_CoinFlip)
+- 我的解答：可參考這裡 [ethernaut-level-solutions](https://github.com/yoyoj1023/ethernaut-level-solutions)
