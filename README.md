@@ -1,7 +1,7 @@
 # web3
 這是一個 web3 練習項目集合，蒐集我從入門開始的學習歷程，項目編號越高，通常內容越進階
 
-一、實用工具：
+### 一、實用工具：
 
 1. Google Web3 測試代幣水龍頭：
 https://cloud.google.com/application/web3/faucet
@@ -13,13 +13,13 @@ https://cloud.google.com/application/web3/search
 https://github.com/OpenZeppelin/openzeppelin-contracts
 
 
-二、參考書目：
+### 二、參考書目：
 
 + 精通以太坊
 https://cypherpunks-core.github.io/ethereumbook_zh/
 
 
-三、挑戰 Solidity CTF（Capture The Flag）：
+### 三、挑戰 Solidity CTF（Capture The Flag）：
 
 - Ethernaut CTF：
 https://ethernaut.openzeppelin.com/
