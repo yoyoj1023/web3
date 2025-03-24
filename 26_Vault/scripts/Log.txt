@@ -1,0 +1,15 @@
+C:\VScodeProject\Web3\26_Vault>npx hardhat run scripts/VaultAttacker.js --network optimismSepolia
+目前金庫鎖的狀態:  true
+Vault is LOCKED
+password:  0x0000000000000000000000000000000000000000000000000000000000000001
+Vault is LOCKED
+
+
+C:\VScodeProject\Web3\26_Vault>
+C:\VScodeProject\Web3\26_Vault>npx hardhat run scripts/VaultAttacker.js --network optimismSepolia
+目前金庫鎖的狀態:  true
+Vault is LOCKED
+password:  0x412076657279207374726f6e67207365637265742070617373776f7264203a29
+Vault is UNLOCKED
+
+C:\VScodeProject\Web3\26_Vault>
