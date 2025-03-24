@@ -15,6 +15,9 @@ https://github.com/OpenZeppelin/openzeppelin-contracts
 4. Optimism 測試代幣水龍頭網站：
 https://console.optimism.io/faucet
 
+5. Chainlink 測試代幣水龍頭網站：
+https://faucets.chain.link/
+
 
 ### 二、參考書目：
 
