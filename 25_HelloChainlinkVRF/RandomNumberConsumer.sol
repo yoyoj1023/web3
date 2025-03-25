@@ -10,12 +10,21 @@ contract RandomNumberConsumer is VRFConsumerBaseV2 {
     // VRF Coordinator 地址 (請根據網絡選擇)
     // 在不同測試網上，VRF Coordinator 與 keyHash 會不同
     /*
-        Optimism Sepolia
+        web3 (Optimism Sepolia)
         VRF Coordinator address: 0x02667f44a6a44e4bdddcf80e724512ad3426b17d
         Subscription ID: 2883917582138870724148744573916001241795738694772607471286142455946613596512
         Admin address：0x93Ab509e357EE9E969b7922cb01FFe68613a4e8F
 
         Key Hash: 0xc3d5bc4d5600fa71f7a50b9ad841f14f24f9ca4236fd00bdb5fda56b052b28a4
+    */
+    /*
+        web3 op sepolia
+        VRF Coordinator address: 0x02667f44a6a44E4BDddCF80e724512Ad3426B17d
+        Subscription ID: 64961754151354309583369898804696992667570263189843848080297675318142668755054
+        Admin address： 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+
+        Key hash: 0xc3d5bc4d5600fa71f7a50b9ad841f14f24f9ca4236fd00bdb5fda56b052b28a4
+
     */
     address constant vrfCoordinator = 0x02667f44a6a44e4bdddcf80e724512ad3426b17d;
     
