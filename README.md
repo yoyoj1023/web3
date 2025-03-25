@@ -19,11 +19,13 @@ https://console.optimism.io/faucet
 https://faucets.chain.link/
 
 
-### 二、參考書目：
+### 二、參考書目與文件：
 
-+ 精通以太坊
++ 精通以太坊：
 https://cypherpunks-core.github.io/ethereumbook_zh/
 
++ ether.js 官方文件網站：
+https://docs.ethers.org/v6/
 
 ### 三、挑戰 Solidity CTF（Capture The Flag）：
 
