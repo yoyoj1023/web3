@@ -1,0 +1,14 @@
+C:\VScodeProject\Web3\27_King>npx hardhat run scripts/KingAttacker.js --network optimismSepolia
+KING_ADDRESS:  0xB74A565AD5498aC2b571fdC822D2C863c97fA88D
+KINGATTACKER_ADDRESS:  0x25a3078774069607CDD4377F8eC1F1F5B53b4E3e
+目前 KING 的 owner 狀態:  0x473c8dF98DFd41304Bff2c5945B9f73e30f5c013
+目前 KING 是誰:  0x473c8dF98DFd41304Bff2c5945B9f73e30f5c013
+目前 KING 的 prize 狀態:  0.001
+目前 KING 的餘額狀態:  0.001 ETH
+Sending transaction to toKing()...
+交易發送中，交易哈希: 0xf2a253d8f0bd377e41c5c0a87a239656f91ab8cb671f5fe81e4a73256ae58544
+交易確認，區塊號: 25553907
+目前 KING 的 owner 狀態:  0x473c8dF98DFd41304Bff2c5945B9f73e30f5c013
+目前 KING 是誰:  0x25a3078774069607CDD4377F8eC1F1F5B53b4E3e
+目前 KING 的 prize 狀態:  1200000000000000n
+目前 KING 的餘額狀態:  0.001 ETH
