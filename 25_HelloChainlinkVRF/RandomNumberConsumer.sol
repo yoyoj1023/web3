@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
  
 import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8//vrf/interfaces/VRFCoordinatorV2Interface.sol";
  
 contract RandomNumberConsumer is VRFConsumerBaseV2 {
     VRFCoordinatorV2Interface COORDINATOR;
@@ -26,7 +26,7 @@ contract RandomNumberConsumer is VRFConsumerBaseV2 {
         Key hash: 0xc3d5bc4d5600fa71f7a50b9ad841f14f24f9ca4236fd00bdb5fda56b052b28a4
 
     */
-    address constant vrfCoordinator = 0x02667f44a6a44e4bdddcf80e724512ad3426b17d;
+    address constant vrfCoordinator = 0x02667f44a6a44E4BDddCF80e724512Ad3426B17d;
     
     // 訂閱 ID
     uint64 public subscriptionId;
