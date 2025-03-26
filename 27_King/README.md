@@ -29,9 +29,10 @@
 
 - ```selfdestruct()``` 發送 ETH 時，這種轉移是在 EVM（以太坊虛擬機）的較低層次完成的，不會觸發目標地址的 ```receive()``` 函數。
 
-
+<div class="center-table">
 | 轉帳方式 | 說明 | Gas限制 |
 | :------: | :------: | :------: |
 | ```transfer``` | 安全轉帳，失敗會自動 revert | 2300 gas |
 | ```send``` | 返回 true/false，不會自動 revert | 2300 gas |
 | ```call``` | 自由度高，可自定義 gas 限制 | 無固定限制 |
+</div>
