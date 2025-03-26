@@ -27,7 +27,7 @@ async function encodeFunctionSignature(name, argTypes) {
 async function main() {
     // ethers.getSigners()
     const [signer] = await ethers.getSigners();
-    console.log("我的帳戶地址 by hre: ", signer.address);
+    console.log("我的帳戶地址: ", signer.address);
 
     // ethers.getContractAt()
     // ethers.provider.getStorage()
@@ -36,6 +36,10 @@ async function main() {
     const storageSlot = 1;
     const password = await ethers.provider.getStorage(vault_address, storageSlot);
     console.log("password: ", password);
+
+    // ethers.parseEther()
+    const value = ethers.parseEther("0.0012");
+    console.log("value: ", value);
 
     // encodeFunctionSignature()
     const functionSelector = await encodeFunctionSignature("pwn"); // 0xdd365b8b
