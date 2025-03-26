@@ -1,6 +1,7 @@
 import hre from "hardhat";
 import { keccak256 } from "@ethersproject/keccak256";
 import { toUtf8Bytes } from '@ethersproject/strings';
+import { toUtf8Bytes } from '@ethersproject/abi';
 
 const { ethers } = hre;
 
@@ -45,7 +46,7 @@ async function main() {
     const functionSelector = await encodeFunctionSignature("pwn"); // 0xdd365b8b
     console.log("pwn() selector:", functionSelector);
 
-    // keccak256()
+    // keccak256() ??????
     const commitment = keccak256(ethers.utils.defaultAbiCoder.encode(["string"], ["mySecret"]));
 
 }
