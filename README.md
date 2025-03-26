@@ -6,16 +6,10 @@
 1. Google Web3 測試代幣水龍頭：
 https://cloud.google.com/application/web3/faucet
 
-2. Google Web3 AI：
-https://cloud.google.com/application/web3/search
-
-3. OpenZeppelin 常用庫：
-https://github.com/OpenZeppelin/openzeppelin-contracts
-
-4. Optimism 測試代幣水龍頭網站：
+2. Optimism 測試代幣水龍頭：
 https://console.optimism.io/faucet
 
-5. Chainlink 測試代幣水龍頭網站：
+3. Chainlink 測試代幣水龍頭：
 https://faucets.chain.link/
 
 
@@ -24,10 +18,24 @@ https://faucets.chain.link/
 + 精通以太坊：
 https://cypherpunks-core.github.io/ethereumbook_zh/
 
-+ ethers.js 官方文件網站：
++ Solidity 官方文檔：
+https://soliditylang.org/
+
++ ethers.js 官方文檔：
 https://docs.ethers.org/v6/
 
-### 三、挑戰 Solidity CTF（Capture The Flag）：
++ Chainlink 官方開發者文檔：
+https://docs.chain.link/
+
+### 三、常用庫：
+
++ OpenZeppelin 常用庫：
+https://github.com/OpenZeppelin/openzeppelin-contracts
+
++ Chainlink 常用庫：
+https://github.com/smartcontractkit/chainlink
+
+### 四、挑戰 Solidity CTF（Capture The Flag）：
 
 - Ethernaut CTF：
 https://ethernaut.openzeppelin.com/
