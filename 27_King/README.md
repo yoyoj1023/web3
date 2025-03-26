@@ -35,3 +35,10 @@
 | ```transfer``` | 安全轉帳，失敗會自動 revert | 2300 gas |
 | ```send``` | 返回 true/false，不會自動 revert | 2300 gas |
 | ```call``` | 自由度高，可自定義 gas 限制 | 無固定限制 |
+
+
+### 四、其他：
+
+ - 可在hardhat.config.cjs添加： require("@nomicfoundation/hardhat-ethers");
+
+ - 讓 VScode 能查詢 hardhat-ethers 包內的所有函數的定義
