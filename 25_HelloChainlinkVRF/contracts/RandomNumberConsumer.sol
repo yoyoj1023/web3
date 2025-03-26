@@ -7,7 +7,6 @@ import "@chainlink/contracts/src/v0.8//vrf/interfaces/VRFCoordinatorV2Interface.
 contract RandomNumberConsumer is VRFConsumerBaseV2 {
     VRFCoordinatorV2Interface COORDINATOR;
  
-    // VRF Coordinator 地址 (請根據網絡選擇)
     // 在不同測試網上，VRF Coordinator 與 keyHash 會不同
     /*
         web3 (Optimism Sepolia)
@@ -26,7 +25,11 @@ contract RandomNumberConsumer is VRFConsumerBaseV2 {
         Key hash: 0xc3d5bc4d5600fa71f7a50b9ad841f14f24f9ca4236fd00bdb5fda56b052b28a4
 
     */
+    // VRF Coordinator 地址 (請根據網絡選擇)
     address constant vrfCoordinator = 0x02667f44a6a44E4BDddCF80e724512Ad3426B17d;
+
+    // VRF 哈希參數（Key Hash）
+    bytes32 keyHash = 0xc3d5bc4d5600fa71f7a50b9ad841f14f24f9ca4236fd00bdb5fda56b052b28a4;
     
     // 訂閱 ID
     uint64 public subscriptionId;
@@ -39,10 +42,8 @@ contract RandomNumberConsumer is VRFConsumerBaseV2 {
  
     // 選擇的隨機數字
     uint32 numWords = 1; // 只請求 1 個隨機數
- 
-    // VRF 參數（Key Hash）
-    bytes32 keyHash = 0xc3d5bc4d5600fa71f7a50b9ad841f14f24f9ca4236fd00bdb5fda56b052b28a4;
- 
+
+     
     // 存儲請求 ID 對應的隨機數
     mapping(uint256 => uint256) public requestIdToRandomNumber;
  
