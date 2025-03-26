@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.12;
 
+// https://github.com/ConsenSysMesh/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol
 import "openzeppelin-contracts-06/math/SafeMath.sol";
 
 contract Reentrance {
+
     using SafeMath for uint256;
 
     mapping(address => uint256) public balances;
@@ -20,7 +22,7 @@ contract Reentrance {
         if (balances[msg.sender] >= _amount) {
             (bool result,) = msg.sender.call{value: _amount}("");
             if (result) {
-                _amount;
+                _amount;  
             }
             balances[msg.sender] -= _amount;
         }
