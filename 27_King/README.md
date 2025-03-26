@@ -34,7 +34,7 @@
 | :------: | :------: | :------: |
 | ```transfer``` | 安全轉帳，失敗會自動 revert | 2300 gas |
 | ```send``` | 返回 true/false，不會自動 revert | 2300 gas |
-| ```call``` | 自由度高，可自定義 gas 限制 | 無固定限制 |
+| ```call``` | 可自定義 gas 限制，返回 true/false，不會自動 revert | 無固定限制 |
 
 
 ### 四、其他：
