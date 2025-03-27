@@ -13,7 +13,7 @@ https://console.optimism.io/faucet
 https://faucets.chain.link/
 
 
-### 二、參考書目與文件：
+### 二、參考書目與常用文檔：
 
 + 精通以太坊：
 https://cypherpunks-core.github.io/ethereumbook_zh/
@@ -23,6 +23,9 @@ https://soliditylang.org/
 
 + ethers.js 官方文檔：
 https://docs.ethers.org/v6/
+
++ OpenZeppelin 官方文檔：
+https://docs.openzeppelin.com/
 
 + Chainlink 官方開發者文檔：
 https://docs.chain.link/
