@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.12;
+pragma solidity ^0.8.0;
 
-// https://github.com/ConsenSysMesh/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol
-import "openzeppelin-contracts-06/math/SafeMath.sol";
+// import "https://github.com/ConsenSysMesh/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol";
+// import "openzeppelin-contracts-06/math/SafeMath.sol";
+// import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 
 contract Reentrance {
 
-    using SafeMath for uint256;
+    // using SafeMath for uint256;
 
     mapping(address => uint256) public balances;
 
     function donate(address _to) public payable {
-        balances[_to] = balances[_to].add(msg.value);
+        balances[_to] = balances[_to] + (msg.value);
     }
 
     function balanceOf(address _who) public view returns (uint256 balance) {
