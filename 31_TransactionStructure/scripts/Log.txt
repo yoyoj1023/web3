@@ -1,0 +1,36 @@
+C:\VScodeProject\Web3\31_TransactionStructure>npx hardhat run scripts/interact.js --network optimismSepolia
+Contract deployed to:  0xaf60652C6b34C0Bc7aeEF123c86F6A90F3A6e3F8
+我的帳戶地址:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+交易哈希: 0x18fc18af8daeaab6195c4034ab56634f26a52f7d93f0d6bdbc127a18ccba2fe9
+交易已確認
+交易收據: TransactionReceipt {
+  provider: HardhatEthersProvider {
+    _hardhatProvider: LazyInitializationProviderAdapter {
+      _providerFactory: [AsyncFunction (anonymous)],
+      _emitter: [EventEmitter],
+      _initializingPromise: [Promise],
+      provider: [BackwardsCompatibilityProviderAdapter]
+    },
+    _networkName: 'optimismSepolia',
+    _blockListeners: [],
+    _transactionHashListeners: Map(0) {},
+    _eventListeners: []
+  },
+  to: '0xaf60652C6b34C0Bc7aeEF123c86F6A90F3A6e3F8',
+  from: '0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6',
+  contractAddress: null,
+  hash: '0x18fc18af8daeaab6195c4034ab56634f26a52f7d93f0d6bdbc127a18ccba2fe9',
+  index: 1,
+  blockHash: '0x75b832b105454c55ad1596e17cf853eb5e938987b53e79098b7339309a7a49ac',
+  blockNumber: 25641267,
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  gasUsed: 43724n,
+  blobGasUsed: undefined,
+  cumulativeGasUsed: 87599n,
+  gasPrice: 20000000000n,
+  blobGasPrice: undefined,
+  type: 0,
+  status: 1,
+  root: undefined
+}
+更新後的 value: 100
