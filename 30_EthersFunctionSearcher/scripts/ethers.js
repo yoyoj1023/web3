@@ -4,6 +4,15 @@ import { toUtf8Bytes } from '@ethersproject/strings';
 
 const { ethers } = hre;
 
+async function deploy() {
+    const Contract = await ethers.getContractFactory("MyBuilding");
+    const contract = await Contract.deploy();
+    await contract.waitForDeployment();
+      
+    console.log("Contract deployed to: ", await contract.getAddress());
+    return contract; // return the deployed contract
+}
+
 async function encodeFunctionSignature(name, argTypes) {
     let args = "";
     if (argTypes) {
