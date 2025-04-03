@@ -1,0 +1,79 @@
+C:\VScodeProject\Web3\35_Privacy>
+C:\VScodeProject\Web3\35_Privacy>npx hardhat run scripts/interact.js --network optimismSepolia
+get locked 變數:  true
+get ID 變數:  1743649530n
+#0 storageSlot:  0x0000000000000000000000000000000000000000000000000000000000000001
+#1 storageSlot:  0x0000000000000000000000000000000000000000000000000000000067edfafa
+#2 storageSlot:  0x00000000000000000000000000000000000000000000000000000000fafaff0a
+#3 storageSlot:  0xea88d05b328fc3a9dd24f6324ef06f7c87640dd0567d4fae42512bc19ab4eeec
+#4 storageSlot:  0xc9e6b5ea45a7184f45e7d5b4e4acbd83afbfccd0a0ecc618dad904edd886539e
+#5 storageSlot:  0x7e001676ba21b9fb6fd3753b1dc0bbab66433e90e55e8da2515e99c3a07ad0a3
+#6 storageSlot:  0x0000000000000000000000000000000000000000000000000000000000000000
+#7 storageSlot:  0x0000000000000000000000000000000000000000000000000000000000000000
+key16:  0x7e001676ba21b9fb6fd3753b1dc0bbab
+tx:  ContractTransactionResponse {
+  provider: HardhatEthersProvider {
+    _hardhatProvider: LazyInitializationProviderAdapter {
+      _providerFactory: [AsyncFunction (anonymous)],
+      _emitter: [EventEmitter],
+      _initializingPromise: [Promise],
+      provider: [BackwardsCompatibilityProviderAdapter]
+    },
+    _networkName: 'optimismSepolia',
+    _blockListeners: [],
+    _transactionHashListeners: Map(0) {},
+    _eventListeners: []
+  },
+  blockNumber: 25923512,
+  blockHash: '0xf72d05d0a8bbac05fc102d873200a320270755f302bc4a92cb31ee09ae9c4417',
+  index: undefined,
+  hash: '0x88ecf98b30852ae6f0f946a9912d75fde851d23ab3fd606e075980e84a858cbc',
+  type: 2,
+  to: '0x90F7A08218882619bb0D31cCBDc79fFF363184bD',
+  from: '0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6',
+  nonce: 148,
+  gasLimit: 1000000n,
+  gasPrice: 1000302n,
+  maxPriorityFeePerGas: 1000000n,
+  maxFeePerGas: 1000382n,
+  maxFeePerBlobGas: null,
+  data: '0xe1afb08c7e001676ba21b9fb6fd3753b1dc0bbab00000000000000000000000000000000',
+  value: 0n,
+  chainId: 11155420n,
+  signature: Signature { r: "0xac1d8fbbee584e5e824c30b0e5d31e507dadc96eb0ebbd79c3082f2fab1e75c8", s: "0x6d718f84c2d83025dcb820ab80624114bc1c5f411aef812ac798c8a00dc2a4ed", yParity: 0, networkV: null },
+  accessList: [],
+  blobVersionedHashes: null
+}
+receipt:  ContractTransactionReceipt {
+  provider: HardhatEthersProvider {
+    _hardhatProvider: LazyInitializationProviderAdapter {
+      _providerFactory: [AsyncFunction (anonymous)],
+      _emitter: [EventEmitter],
+      _initializingPromise: [Promise],
+      provider: [BackwardsCompatibilityProviderAdapter]
+    },
+    _networkName: 'optimismSepolia',
+    _blockListeners: [],
+    _transactionHashListeners: Map(0) {},
+    _eventListeners: []
+  },
+  to: '0x90F7A08218882619bb0D31cCBDc79fFF363184bD',
+  from: '0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6',
+  contractAddress: null,
+  hash: '0x88ecf98b30852ae6f0f946a9912d75fde851d23ab3fd606e075980e84a858cbc',
+  index: 7,
+  blockHash: '0xf72d05d0a8bbac05fc102d873200a320270755f302bc4a92cb31ee09ae9c4417',
+  blockNumber: 25923512,
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  gasUsed: 24013n,
+  blobGasUsed: undefined,
+  cumulativeGasUsed: 16834495n,
+  gasPrice: 1000302n,
+  blobGasPrice: undefined,
+  type: 2,
+  status: 1,
+  root: undefined
+}
+get locked 變數:  false
+
+C:\VScodeProject\Web3\35_Privacy>
