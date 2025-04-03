@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "@chainlink/local/src/data-feeds/interfaces/AggregatorV3Interface.sol";
+import "hardhat/console.sol";
 
 contract BTCPriceConsumer {
     AggregatorV3Interface internal priceFeed;
@@ -15,6 +16,7 @@ contract BTCPriceConsumer {
      */
     constructor() {
         priceFeed = AggregatorV3Interface(0x3015aa11f5c2D4Bd0f891E708C8927961b38cE7D);
+        console.log("BTCPriceConsumer deployed");
     }
 
     /**
