@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>連結 MetaMask (Ethers.js v6)</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px 5px 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        #balance {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        #error {
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>連結 MetaMask 並查詢 OP Sepolia 餘額</h1>
+
+    <button id="connectButton">連結錢包 & 切換至 OP Sepolia</button>
+    <button id="getBalanceButton" disabled>查詢 OP Sepolia ETH 餘額</button>
+
+    <div id="status">狀態：尚未連接</div>
+    <div id="balance"></div>
+    <div id="error"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js" integrity="sha512-DXjeYBFgvMvXAojf37NlQJj1IOrm7S+4p8LMLWj7QND/v+gHqgMAywoLrHvxwrJm70kcm5PsvyS/nOor711Riw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
