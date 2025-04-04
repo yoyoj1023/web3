@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代幣鎖定器 - Optimism Sepolia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>代幣鎖定器 - Optimism Sepolia</h1>
+    <button id="connectButton">連接 MetaMask</button>
+    <div id="accountInfo" style="display: none;">
+        <p>已連接帳戶：<span id="account"></span></p>
+        <button id="depositButton">存款</button>
+        <button id="withdrawButton">提款</button>
+    </div>
+    <p id="status"></p>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js" type="text/javascript"></script>
+    <script>
+        // Optimism Sepolia 鏈 ID
+        const OP_SEPOLIA_CHAIN_ID = "0xaa36a7"; // 11155420 的十六進制表示
+
+        // 合約地址和 ABI（需替換為實際值）
+        const contractAddress = "YOUR_CONTRACT_ADDRESS"; // 替換為您的 TokenLocker 合約地址
+        const erc20Address = "YOUR_ERC20_ADDRESS"; // 替換為您的 ERC20 代幣地址
+        const contractABI = [ /* 您的 TokenLocker 合約 ABI */ ]; // 替換為 TokenLocker ABI
+        const erc20ABI = [ /* ERC20 代幣 ABI */ ]; // 替換為 ERC20 ABI
+
+        let provider;
+        let signer;
+        let contract;
+        let erc20Contract;
+        let userAccount;
+
+        // 檢查 MetaMask 是否可用
+        if (typeof window.ethereum === 'undefined') {
+            alert('請安裝 MetaMask 以使用此應用！');
+        }
+
+        // 檢查並切換到 Optimism Sepolia 網絡
+        async function checkNetwork() {
+            const chainId = await provider.getNetwork().then(net => net.chainId);
+            if (chainId !== parseInt(OP_SEPOLIA_CHAIN_ID, 16)) {
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: OP_SEPOLIA_CHAIN_ID }],
+                    });
+                } catch (switchError) {
+                    if (switchError.code === 4902) {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: OP_SEPOLIA_CHAIN_ID,
+                                chainName: 'Optimism Sepolia',
+                                nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+                                rpcUrls: ['https://sepolia.optimism.io'],
+                                blockExplorerUrls: ['https://sepolia-optimistic.etherscan.io'],
+                            }],
+                        });
+                    } else {
+                        throw switchError;
+                    }
+                }
+            }
+        }
+
+        // 連接 MetaMask
+        document.getElementById('connectButton').addEventListener('click', async () => {
+            try {
+                // 初始化 ethers provider 和 signer
+                provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts", []); // 請求連接
+                signer = provider.getSigner();
+                userAccount = await signer.getAddress();
+
+                // 檢查並切換網絡
+                await checkNetwork();
+
+                // 初始化合約實例
+                contract = new ethers.Contract(contractAddress, contractABI, signer);
+                erc20Contract = new ethers.Contract(erc20Address, erc20ABI, signer);
+
+                document.getElementById('account').innerText = userAccount;
+                document.getElementById('accountInfo').style.display = 'block';
+                document.getElementById('connectButton').style.display = 'none';
+                document.getElementById('status').innerText = '已連接到 Optimism Sepolia';
+            } catch (error) {
+                console.error(error);
+                document.getElementById('status').innerText = '連接失敗，請檢查 MetaMask';
+            }
+        });
+
+        // 存款功能
+        document.getElementById('depositButton').addEventListener('click', async () => {
+            const amount = prompt('請輸入存款金額（單位：wei）：');
+            if (amount) {
+                try {
+                    // 批准合約轉移代幣
+                    const approveTx = await erc20Contract.approve(contractAddress, amount);
+                    await approveTx.wait(); // 等待交易確認
+
+                    // 調用 deposit 函數存入代幣
+                    const depositTx = await contract.deposit(amount);
+                    await depositTx.wait(); // 等待交易確認
+
+                    document.getElementById('status').innerText = '存款成功';
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById('status').innerText = '存款失敗';
+                }
+            }
+        });
+
+        // 提款功能
+        document.getElementById('withdrawButton').addEventListener('click', async () => {
+            try {
+                const withdrawTx = await contract.withdraw();
+                await withdrawTx.wait(); // 等待交易確認
+                document.getElementById('status').innerText = '提款成功';
+            } catch (error) {
+                console.error(error);
+                document.getElementById('status').innerText = '提款失敗，可能鎖定時間未到';
+            }
+        });
+    </script>
+</body>
+</html>

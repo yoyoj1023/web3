@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Locker</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>OP Sepolia 上的 Token Locker</h1>
+    <button id="connectWallet">連接狐狸錢包</button>
+    <div id="walletInfo" style="display:none;">
+        <p>錢包地址: <span id="walletAddress"></span></p>
+        <p>代幣餘額: <span id="tokenBalance"></span></p>
+        <p>鎖定餘額: <span id="lockedBalance"></span></p>
+        <input type="number" id="depositAmount" placeholder="輸入存款金額">
+        <button id="depositButton">存款</button>
+        <button id="withdrawButton">提款</button>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
