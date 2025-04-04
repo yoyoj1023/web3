@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MetaMask Check</title>
+</head>
+<body>
+    <h1>Checking for MetaMask</h1>
+    <script>
+        // 方法一：監聽 DOMContentLoaded (DOM 結構載入完成)
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded - window.ethereum:', window.ethereum);
+            if (typeof window.ethereum !== 'undefined') {
+                console.log('MetaMask is installed!');
+            } else {
+                console.log('MetaMask is not installed or not detected yet.');
+            }
+        });
+
+        // 方法二：監聽 load (頁面所有資源載入完成)
+        window.addEventListener('load', () => {
+            console.log('window load - window.ethereum:', window.ethereum);
+            if (typeof window.ethereum !== 'undefined') {
+                console.log('MetaMask is installed!');
+            } else {
+                console.log('MetaMask is not installed or not detected yet.');
+            }
+        });
+
+        // 方法三：(推薦) 監聽 MetaMask 的特定事件 (如果支援)
+        // EIP-6963 引入了更標準化的發現機制，但檢查 `ethereum#initialized` 也是一種方法
+        if (window.ethereum) {
+             // 如果一開始就有，直接處理
+             handleEthereum();
+        } else {
+             // 監聽事件，等待注入
+             window.addEventListener('ethereum#initialized', handleEthereum, { once: true });
+
+             // 設定超時以防事件不觸發
+             setTimeout(() => {
+                if (!window.ethereum) {
+                    console.log('MetaMask provider not found after timeout.');
+                }
+             }, 3000); // 等待 3 秒
+        }
+
+        function handleEthereum() {
+            console.log('Ethereum provider is available:', window.ethereum);
+            // 在這裡可以開始與 MetaMask 互動，例如請求帳戶
+            // requestAccounts(); // 下一步通常是請求連接
+        }
+
+        async function requestAccounts() {
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                console.log('Connected accounts:', accounts);
+            } catch (error) {
+                console.error('Error requesting accounts:', error);
+            }
+        }
+
+        // 初始檢查 (可能為 undefined)
+        console.log('Initial check - window.ethereum:', window.ethereum);
+    </script>
+</body>
+</html>

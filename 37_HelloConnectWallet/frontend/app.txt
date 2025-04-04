@@ -1,0 +1,88 @@
+// Optimism Sepolia 網路參數
+const optimismSepolia = {
+    chainId: '0xAA36A7', // chainId 11155420 的十六進制表示
+    chainName: 'Optimism Sepolia',
+    nativeCurrency: {
+        name: 'Ether',
+        symbol: 'ETH',
+        decimals: 18
+    },
+    rpcUrls: ['https://sepolia.optimism.io'],
+    blockExplorerUrls: ['https://sepolia-optimism.etherscan.io']
+};
+
+let provider;
+let signer;
+let userAddress;
+
+// 連結 MetaMask 的函數
+async function connectWallet() {
+    if (typeof window.ethereum !== 'undefined') {
+        try {
+            // 創建 provider 實例並請求連結
+            provider = new ethers.BrowserProvider(window.ethereum);
+            await provider.send('eth_requestAccounts', []);
+            signer = await provider.getSigner();
+            userAddress = await signer.getAddress();
+            console.log('已連結帳戶:', userAddress);
+
+            // 檢查當前網路
+            const network = await provider.getNetwork();
+            if (network.chainId !== BigInt(11155420)) {
+                await addNetwork(); // 添加 Optimism Sepolia 網路
+                await switchNetwork(); // 切換到 Optimism Sepolia 網路
+            }
+
+            // 啟用顯示餘額按鈕
+            document.getElementById('showBalanceButton').disabled = false;
+            alert('MetaMask 連結成功！');
+        } catch (error) {
+            console.error('連結失敗:', error);
+            alert('連結失敗: ' + error.message);
+        }
+    } else {
+        alert('請先安裝 MetaMask！');
+    }
+}
+
+// 添加 Optimism Sepolia 網路
+async function addNetwork() {
+    try {
+        await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [optimismSepolia]
+        });
+    } catch (error) {
+        console.error('添加網路失敗:', error);
+        throw error;
+    }
+}
+
+// 切換到 Optimism Sepolia 網路
+async function switchNetwork() {
+    try {
+        await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: optimismSepolia.chainId }]
+        });
+    } catch (error) {
+        console.error('切換網路失敗:', error);
+        throw error;
+    }
+}
+
+// 獲取並顯示 Optimism Sepolia 測試以太幣餘額
+async function getBalance() {
+    try {
+        const balance = await provider.getBalance(userAddress);
+        const balanceInEth = ethers.formatEther(balance); // 將 wei 轉換為 ETH
+        document.getElementById('balanceDisplay').innerText = `餘額: ${balanceInEth} ETH`;
+    } catch (error) {
+        console.error('獲取餘額失敗:', error);
+        alert('獲取餘額失敗: ' + error.message);
+    }
+}
+
+// 綁定按鈕事件
+document.getElementById('connectButton').addEventListener('click', connectWallet);
+document.getElementById('showBalanceButton').addEventListener('click', getBalance);
