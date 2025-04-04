@@ -24,19 +24,14 @@ https://soliditylang.org/
 + ethers.js 官方文檔：
 https://docs.ethers.org/v6/
 
-+ OpenZeppelin 官方文檔：
-https://docs.openzeppelin.com/
++ OpenZeppelin: ｜[官方文檔](https://docs.openzeppelin.com/)｜[Github倉庫](https://github.com/OpenZeppelin/openzeppelin-contracts)｜
 
-+ Chainlink 官方開發者文檔：
-https://docs.chain.link/
++ Chainlink: ｜[官方開發者文檔](https://docs.chain.link/)｜[Github倉庫](https://github.com/smartcontractkit/chainlink)｜
 
-### 三、常用庫與知名專案：
+### 三、常用庫與知名開源專案：
 
-+ OpenZeppelin 常用庫：
-https://github.com/OpenZeppelin/openzeppelin-contracts
-
-+ Chainlink 常用庫：
-https://github.com/smartcontractkit/chainlink
++ MetaMask:
+https://github.com/MetaMask
 
 + Uniswap:
 https://github.com/Uniswap
