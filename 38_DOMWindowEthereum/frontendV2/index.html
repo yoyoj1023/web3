@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask 連接器</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 {
+            color: #ff9e2c;
+            margin-bottom: 1.5rem;
+        }
+        .button {
+            background-color: #ff9e2c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #e78b1f;
+        }
+        .button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .connected {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .address {
+            font-family: monospace;
+            word-break: break-all;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .balance-display {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MetaMask 連接器</h1>
+        <div id="statusMessage" class="status disconnected">未連接到 MetaMask</div>
+        <div id="addressDisplay" style="display: none;">
+            <p>錢包地址:</p>
+            <div id="address" class="address"></div>
+        </div>
+        <div id="balanceDisplay" class="balance-display" style="display: none;">
+            <p>OP Sepolia 以太幣餘額: <span id="balance">-</span> ETH</p>
+        </div>
+        <button id="connectButton" class="button">連接 MetaMask</button>
+        <button id="switchNetworkButton" class="button" style="display: none;">切換到 Optimism Sepolia</button>
+        <button id="getBalanceButton" class="button" style="display: none;">查詢餘額</button>
+    </div>
+    <!-- 引入外部 JavaScript 文件 -->
+    <script src="app.js"></script>
+</body>
+</html>
