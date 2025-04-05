@@ -1,0 +1,100 @@
+第  420  次進攻...
+第  421  次進攻...
+第  422  次進攻...
+第  423  次進攻...
+PASS GATE TWO
+PASS GATE TWO
+PASS GATE TWO
+PASS GATE TWO
+PASS GATE TWO
+uint32(uint64(_gateKey)) :  65535
+check conditions...
+uint16(uint64(_gateKey)) :  65535
+uint64(_gateKey) :  65535
+uint16(uint160(tx.origin)) :  8806
+第  424  次進攻...
+第  425  次進攻...
+第  426  次進攻...
+第  427  次進攻...
+第  428  次進攻...
+第  429  次進攻...
+
+
+PS C:\VScode\web3\39_GatekeeperOne> npx hardhat run .\scripts\interact.js --network optimismSepolia
+Compiled 1 Solidity file successfully (evm target: paris).
+我的帳戶地址 :  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+GatekeeperOneAttacker Contract deployed to:  0x323F0D91F65B4AaeD803D85B32bCb45A75cE2Fd4
+gatekeeperOne 關卡實例地址:  0x627c259e948CA7a63A1fE7A82a70D7F3C1482A86
+目前的 gatekeeperOne entrant:  0x0000000000000000000000000000000000000000
+所使用的 gateKey :  0x0000000100005df6
+目前的 gatekeeperOneAttacker gasOffset:  0n
+目前的 gatekeeperOneAttacker result:  false
+目前的 gatekeeperOneAttacker looptime:  0n
+發送交易... gasToUse =  24573
+tx:  ContractTransactionResponse {
+  provider: HardhatEthersProvider {
+    _hardhatProvider: LazyInitializationProviderAdapter {
+      _providerFactory: [AsyncFunction (anonymous)],
+      _emitter: [EventEmitter],
+      _initializingPromise: [Promise],
+      provider: [BackwardsCompatibilityProviderAdapter]
+    },
+    _networkName: 'optimismSepolia',
+    _blockListeners: [],
+    _transactionHashListeners: Map(0) {},
+    _eventListeners: []
+  },
+  blockNumber: 26022930,
+  blockHash: '0xa3a42283235aa84a5f06f4cbca193b539ecd3669587932f66685abc09db98c4d',
+  index: undefined,
+  hash: '0x0d8853dd072ce323781b5101b0a5d4a6783e97e58629c47cca3207db63c8add3',
+  type: 2,
+  to: '0x323F0D91F65B4AaeD803D85B32bCb45A75cE2Fd4',
+  from: '0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6',
+  nonce: 406,
+  gasLimit: 10000000n,
+  gasPrice: 1000304n,
+  maxPriorityFeePerGas: 1000001n,
+  maxFeePerGas: 1000384n,
+  maxFeePerBlobGas: null,
+  data: '0xd561b6050000000000000000000000000000000000000000000000000000000000005ffd',
+  value: 0n,
+  chainId: 11155420n,
+  signature: Signature { r: "0xa42de8224b1d3783cc5bb9c58b2f9e2faf9e7e6e179f825945d825d6df10c4d2", s: "0x65d84584a56c67ab820c491b4909ce3ee33076a3c48dcf8175c28f00d0714a7c", yParity: 0, networkV: null },
+  accessList: [],
+  blobVersionedHashes: null
+}
+交易成功 receipt:  ContractTransactionReceipt {
+  provider: HardhatEthersProvider {
+    _hardhatProvider: LazyInitializationProviderAdapter {
+      _providerFactory: [AsyncFunction (anonymous)],
+      _emitter: [EventEmitter],
+      _initializingPromise: [Promise],
+      provider: [BackwardsCompatibilityProviderAdapter]
+    },
+    _networkName: 'optimismSepolia',
+    _blockListeners: [],
+    _transactionHashListeners: Map(0) {},
+    _eventListeners: []
+  },
+  to: '0x323F0D91F65B4AaeD803D85B32bCb45A75cE2Fd4',
+  from: '0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6',
+  contractAddress: null,
+  hash: '0x0d8853dd072ce323781b5101b0a5d4a6783e97e58629c47cca3207db63c8add3',
+  index: 21,
+  blockHash: '0xa3a42283235aa84a5f06f4cbca193b539ecd3669587932f66685abc09db98c4d',
+  blockNumber: 26022930,
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  gasUsed: 804834n,
+  blobGasUsed: undefined,
+  cumulativeGasUsed: 2802765n,
+  gasPrice: 1000304n,
+  blobGasPrice: undefined,
+  type: 2,
+  status: 1,
+  root: undefined
+}
+攻擊後 gatekeeperOneAttacker looptime:  256n
+攻擊後 gatekeeperOneAttacker result:  true
+攻擊後 gatekeeperOneAttacker gasOffset:  256n
+攻擊後，目前的 gatekeeperOne entrant:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
