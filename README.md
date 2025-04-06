@@ -1,13 +1,15 @@
 # web3
 這是一個 web3 探索與練習項目集合，蒐集我從入門開始的學習歷程，項目編號越高，通常內容越進階
 
-### 一、測試代幣水龍頭：
+### 一、實用工具：
 
-1. [Google Web3](https://cloud.google.com/application/web3/faucet)
+1. Google Web3 : [水龍頭](https://cloud.google.com/application/web3/faucet)
 
-2. [Optimism](https://console.optimism.io/faucet)
+2. Optimism : [水龍頭](https://console.optimism.io/faucet)
 
-3. [Chainlink](https://faucets.chain.link/)
+3. Chainlink : [水龍頭](https://faucets.chain.link/)
+
+4. Alchemy : [儀錶板](https://dashboard.alchemy.com/?a=)
 
 ### 二、常用文檔：
 
