@@ -2,6 +2,8 @@
 
 本項目展示如何使用 UniswapV2 核心庫來建立兩個 ERC20 代幣和對應的交易對，並透過 UniswapV2Factory 進行對應部署與配對。
 
+![示意圖](https://github.com/yoyoj1023/web3/blob/main/41_HelloUniswapV2/HelloUniswapV2.png)
+
 ## 環境要求
 - [Hardhat](https://hardhat.org)
 - Solidity 編譯器版本: 0.5.16
