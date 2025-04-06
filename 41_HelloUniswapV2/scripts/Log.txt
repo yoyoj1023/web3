@@ -1,0 +1,13 @@
+PS C:\VScode\web3\41_HelloUniswapV2> npx hardhat run .\scripts\createPair.js --network opS
+使用帳戶: 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+Pair created!
+交易確認，區塊號: 26070078
+Pair address: 0xe1f551a975124D01cd29dca60E69D796cD42Ab14
+PS C:\VScode\web3\41_HelloUniswapV2>
+PS C:\VScode\web3\41_HelloUniswapV2>
+PS C:\VScode\web3\41_HelloUniswapV2> npx hardhat run .\scripts\checkPair.js --network opS
+Pair address: 0xe1f551a975124D01cd29dca60E69D796cD42Ab14
+Token0: 0x76Ee828a2a3D69BDE22076F6d1A81DD35F5116a7
+Token1: 0xa69d9914d93596219aF55A4A56Fb3135A26876B7
+PS C:\VScode\web3\41_HelloUniswapV2>
+PS C:\VScode\web3\41_HelloUniswapV2>
