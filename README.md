@@ -23,6 +23,8 @@
 
 + Chainlink: ｜[官方開發者文檔](https://docs.chain.link/)｜[Github倉庫](https://github.com/smartcontractkit/chainlink)｜
 
++ Hardhat: ｜[官方文檔](https://hardhat.org/hardhat-runner/docs/getting-started)｜
+
 ### 三、知名開源專案：
 
 + MetaMask: ｜[Github](https://github.com/MetaMask)｜
@@ -32,12 +34,19 @@
 ### 四、參考書目：
 
 1. [精通以太坊](https://cypherpunks-core.github.io/ethereumbook_zh/)  
+
 2. [Pro Git book](https://git-scm.com/book/zh-tw/v2) 
+
 3. [Alchemy University](https://www.alchemy.com/university)
+
+4. [Foundry Book](https://book.getfoundry.sh/)
 
 ### 五、挑戰 Solidity CTF（Capture The Flag）：
 
-- Ethernaut CTF：
+1. Ethernaut CTF: 
 https://ethernaut.openzeppelin.com/
 
-- 自寫解答： [ethernaut-level-solutions](https://github.com/yoyoj1023/ethernaut-level-solutions)
+    - 自寫解答： [ethernaut-level-solutions](https://github.com/yoyoj1023/ethernaut-level-solutions)
+
+2. Speed Run Ethereum:
+https://speedrunethereum.com/
