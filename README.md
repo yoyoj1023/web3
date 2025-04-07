@@ -11,6 +11,8 @@
 
 4. Alchemy : [儀錶板](https://dashboard.alchemy.com/?a=)
 
+5. 密碼學線上計算工具 : [emn178](https://emn178.github.io/online-tools/)
+
 ### 二、常用文檔：
 
 + Solidity: ｜[官方文檔](https://soliditylang.org/)｜
