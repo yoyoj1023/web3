@@ -23,7 +23,7 @@ contract GatekeeperOneAttacker {
         // gateKey = 0x0000000000005d6f == uint64(_gateKey)
         // 0x00005d6f == uint32(uint64(_gateKey))
         // 遮罩 = 0xffffffff0000ffff
-        // 得出 gateKey 可以 = 0x0100000000005d6f
+        // 得出 gateKey 可以 = 0x0100000000005df6
         gateKey = 0x0000000100005df6;
         // gateKey = bytes8(uint64(uint16(uint160(tx.origin))) + 2 ** 32);
     }
