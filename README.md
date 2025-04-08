@@ -13,6 +13,8 @@
 
 5. 密碼學線上計算工具 : [emn178](https://emn178.github.io/online-tools/)
 
+6. EVM Opcodes : [Instructions](https://www.evm.codes/)
+
 ### 二、常用文檔：
 
 + Solidity: ｜[官方文檔](https://soliditylang.org/)｜
