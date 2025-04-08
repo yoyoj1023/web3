@@ -7,7 +7,6 @@ async function main() {
     await contract.waitForDeployment();
       
     console.log("GatekeeperTwoGateTwo Contract deployed to: ", await contract.getAddress());
-
 }
 
 main().catch((error) => {
