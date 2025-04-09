@@ -29,7 +29,7 @@
 
 + Foundry: | [官方文檔 Foundry Book](https://book.getfoundry.sh/) |
 
-+ React: | [官方文檔](https://react.dev/) |
++ React: | [官方文檔](https://react.dev/) | [Github倉庫](https://github.com/facebook/react) |
 
 ### 三、知名開源專案：
 
