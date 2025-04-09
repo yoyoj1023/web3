@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "hardhat/console.sol";
+
 contract GatekeeperTwoGateTwo {
     address public entrant;
 
@@ -11,9 +13,11 @@ contract GatekeeperTwoGateTwo {
 
     modifier gateTwo() {
         uint256 x;
+        console.log("x: ", x);
         assembly {
             x := extcodesize(caller())
         }
+        console.log("x := extcodesize(caller())", x);
         require(x == 0);
         _;
     }

