@@ -27,6 +27,10 @@
 
 + Hardhat: ｜[官方文檔](https://hardhat.org/hardhat-runner/docs/getting-started)｜
 
++ Foundry: | [官方文檔 Foundry Book](https://book.getfoundry.sh/) |
+
++ React: | [官方文檔](https://react.dev/) |
+
 ### 三、知名開源專案：
 
 + MetaMask: ｜[Github](https://github.com/MetaMask)｜
@@ -40,8 +44,6 @@
 2. [Pro Git book](https://git-scm.com/book/zh-tw/v2) 
 
 3. [Alchemy University](https://www.alchemy.com/university)
-
-4. [Foundry Book](https://book.getfoundry.sh/)
 
 ### 五、挑戰 Solidity CTF（Capture The Flag）：
 
