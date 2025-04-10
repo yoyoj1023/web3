@@ -13,6 +13,11 @@ const config: HardhatUserConfig = {
       url: process.env.OP_SEPOLIA_RPC_URL_API_KEY,  
       accounts: [process.env.PRIVATE_KEY || (() => { throw new Error("PRIVATE_KEY is not defined in the environment variables"); })()],  // 你的錢包私鑰
       timeout: 60000, // 設置為 60 秒
+    },
+    opS: {
+      url: process.env.OP_SEPOLIA_RPC_URL_API_KEY,  
+      accounts: [process.env.PRIVATE_KEY],  // 你的錢包私鑰
+      timeout: 600000, // 設置為 600 秒
     }
   }
 };
