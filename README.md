@@ -27,9 +27,11 @@
 
 + Hardhat: ｜[官方文檔](https://hardhat.org/hardhat-runner/docs/getting-started)｜
 
-+ Foundry: | [官方文檔 Foundry Book](https://book.getfoundry.sh/) |
+- Foundry: | [官方文檔 Foundry Book](https://book.getfoundry.sh/) |
 
 + React: | [官方文檔](https://react.dev/) | [Github倉庫](https://github.com/facebook/react) |
+
++ Scaffold-ETH 2: | [官方文檔](https://scaffoldeth.io/) |
 
 ### 三、知名開源專案：
 
