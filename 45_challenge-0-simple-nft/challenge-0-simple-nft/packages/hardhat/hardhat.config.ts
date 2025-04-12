@@ -24,8 +24,6 @@ const etherscanApiKey = process.env.ETHERSCAN_MAINNET_API_KEY || "DNXJA8RX2Q3VZ4
 const etherscanOptimisticApiKey = process.env.ETHERSCAN_OPTIMISTIC_API_KEY || "RM62RDISS1RH448ZY379NX625ASG1N633R";
 const basescanApiKey = process.env.BASESCAN_API_KEY || "ZZZEIPMT1MNJ8526VV2Y744CA7TNZR64G6";
 
-const yoyoj1023key = process.env.PRIVATE_KEY || "0x4c0883a69102937d6231471b5ecb5f2a7b8e9e4f6c1d4f2a7b8e9e4f6c1d4f2a";
-
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
@@ -85,7 +83,7 @@ const config: HardhatUserConfig = {
     },
     optimismSepolia: {
       url: `https://opt-sepolia.g.alchemy.com/v2/${providerApiKey}`,
-      accounts: [yoyoj1023key],
+      accounts: [deployerPrivateKey],
       verify: {
         etherscan: {
           apiUrl: "https://api-sepolia-optimistic.etherscan.io",
@@ -94,9 +92,14 @@ const config: HardhatUserConfig = {
       },
     },
     opS: {
-      url: process.env.OP_SEPOLIA_RPC_URL_API_KEY,  
-      accounts: [yoyoj1023key],  // 你的錢包私鑰
-      timeout: 600000, // 設置為 600 秒
+      url: `https://opt-sepolia.g.alchemy.com/v2/${providerApiKey}`,
+      accounts: [deployerPrivateKey],
+      verify: {
+        etherscan: {
+          apiUrl: "https://api-sepolia-optimistic.etherscan.io",
+          apiKey: etherscanOptimisticApiKey,
+        },
+      },
     },
     polygon: {
       url: `https://polygon-mainnet.g.alchemy.com/v2/${providerApiKey}`,
