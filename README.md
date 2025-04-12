@@ -23,7 +23,7 @@
 
 + Solidity: ｜[官方文檔](https://soliditylang.org/)｜
 
-+ ethers.js： ｜[官方文檔](https://docs.ethers.org/v6/)｜
++ Ethers.js： ｜[官方文檔](https://docs.ethers.org/v6/)｜
 
 + OpenZeppelin: ｜[官方文檔](https://docs.openzeppelin.com/)｜[Github倉庫](https://github.com/OpenZeppelin/openzeppelin-contracts)｜
 
@@ -34,6 +34,8 @@
 - Foundry: | [官方文檔 Foundry Book](https://book.getfoundry.sh/) |
 
 + React: | [官方文檔](https://react.dev/) | [Github倉庫](https://github.com/facebook/react) |
+
++ Next.js : | [官方文檔](https://nextjs.org/docs) | [官網](https://nextjs.org/) |
 
 + Scaffold-ETH 2: | [官方文檔](https://scaffoldeth.io/) |
 
@@ -50,6 +52,10 @@
 2. [Pro Git book](https://git-scm.com/book/zh-tw/v2) 
 
 3. [Alchemy University](https://www.alchemy.com/university)
+
+4. [Learn React](https://react.dev/learn/describing-the-ui)
+
+5. [Learn Next.js](https://nextjs.org/learn)
 
 ### 五、挑戰 Solidity CTF（Capture The Flag）：
 
