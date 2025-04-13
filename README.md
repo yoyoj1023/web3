@@ -39,6 +39,8 @@
 
 + Scaffold-ETH 2: | [官方文檔](https://scaffoldeth.io/) |
 
++ Scaffole-Alchemy: | [官方文檔](https://docs.alchemy.com/docs/scaffold-alchemy) |
+
 ### 三、知名開源專案：
 
 + MetaMask: ｜[Github](https://github.com/MetaMask)｜
