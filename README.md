@@ -29,7 +29,7 @@
 
 + Chainlink: ｜[官方開發者文檔](https://docs.chain.link/)｜[Github倉庫](https://github.com/smartcontractkit/chainlink)｜
 
-+ Hardhat: ｜[官方文檔](https://hardhat.org/hardhat-runner/docs/getting-started)｜
++ Hardhat: ｜[官方文檔](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Github倉庫](https://github.com/NomicFoundation/hardhat)｜
 
 - Foundry: | [官方文檔 Foundry Book](https://book.getfoundry.sh/) |
 
