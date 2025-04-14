@@ -59,6 +59,8 @@
 
 5. [Learn Next.js](https://nextjs.org/learn)
 
+6. [Solidity by Example](https://solidity-by-example.org/)
+
 ### 五、挑戰 Solidity CTF（Capture The Flag）：
 
 1. Ethernaut CTF: 
