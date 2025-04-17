@@ -51,7 +51,7 @@
 
 1. [精通以太坊](https://cypherpunks-core.github.io/ethereumbook_zh/)  
 
-2. [Pro Git book](https://git-scm.com/book/zh-tw/v2) 
+2. [Learn me a bitcoin](https://learnmeabitcoin.com/) 
 
 3. [Alchemy University](https://www.alchemy.com/university)
 
