@@ -9,11 +9,14 @@ contract Vendor {
 
     YourToken public yourToken;
 
+    uint256 public constant tokensPerEth = 100;
+
     constructor(address tokenAddress) {
         yourToken = YourToken(tokenAddress);
     }
 
     // ToDo: create a payable buyTokens() function:
+    
 
     // ToDo: create a withdraw() function that lets the owner withdraw ETH
 
