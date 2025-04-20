@@ -1,0 +1,12 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.23.0"
+  },
+  "dependencies": {
+    "@gelatonetwork/automate-sdk": "^3.1.0",
+    "@openzeppelin/contracts": "^5.3.0",
+    "dotenv": "^16.5.0"
+  }
+}
