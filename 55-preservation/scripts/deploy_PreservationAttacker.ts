@@ -2,7 +2,7 @@ import hre from "hardhat";
 const { ethers } = hre;
 
 // Change your target address
-const CONTRACT_ADDRESS = "****";
+const CONTRACT_ADDRESS = "0x54058aA94F43E509Ad7B3D305aF9d612133f7907";
 
 async function main() {
     const [signer] = await ethers.getSigners();

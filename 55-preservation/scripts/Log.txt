@@ -1,0 +1,31 @@
+PS C:\VScode\web3\55-preservation>
+PS C:\VScode\web3\55-preservation> npx hardhat run .\scripts\deploy_PreservationAttacker.ts --network opS
+Warning: Return value of low-level calls not used.
+  --> contracts/Preservation.sol:21:9:
+   |
+21 |         timeZone1Library.delegatecall(abi.encodePacked(setTimeSignature, _timeStamp));
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Warning: Return value of low-level calls not used.
+  --> contracts/Preservation.sol:26:9:
+   |
+26 |         timeZone2Library.delegatecall(abi.encodePacked(setTimeSignature, _timeStamp));
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/PreservationAttacker.sol:28:22:
+   |
+28 |     function setTime(uint256 _timeStamp) public {
+   |                      ^^^^^^^^^^^^^^^^^^
+
+
+Compiled 3 Solidity files successfully (evm target: paris).
+我的帳戶地址 :  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+Preservation 關卡實例地址:  0x54058aA94F43E509Ad7B3D305aF9d612133f7907
+目前的 Preservation owner:  0x35b28CB86846382Aa6217283F12C13657FF0110B
+PreservationAttacker Contract deployed to:  0xC85d492a8Da94fdd05E2BdCA39B8b725fA1602D2
+目前的 PreservationAttacker owner:  0x0000000000000000000000000000000000000000
+目前的 Preservation owner:  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+PS C:\VScode\web3\55-preservation>
