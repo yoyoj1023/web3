@@ -3,6 +3,9 @@
 ## 專案說明
 這個專案是我在挑戰 Speedrun Ethereum 第3關: 🏵 Challenge #3: Dice Game 中所開發的，採用 Scaffold eth 2 全端架構。專案整合了鏈上 (Hardhat) 與前端 (React + Next.js) 技術，特色包含錢包連結、連接至 sepolia 測試網路，以及與已部署的 Dice Game 合約互動，使用者可以擲骰子賭博，若賭贏則可以贏得獎金，若賭輸，則會增加獎金池。
 
+![示例圖片](https://github.com/yoyoj1023/dapps/blob/main/05-dice-game/sample.png)
+
+![示例圖片](https://github.com/yoyoj1023/dapps/blob/main/05-dice-game/sample2.png)
 
 - 部署網址： [網站連結](https://56-dice-game.vercel.app/)
 - 部署合約： [已驗證合約地址](https://sepolia-optimism.etherscan.io/address/0xDc1ad2812c5f93e66032f17383f164F7Bed317E2#code)
