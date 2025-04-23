@@ -1,0 +1,8 @@
+PS C:\VScode\web3\59-recovery> npx hardhat run .\scripts\interact.ts --network opS
+我的帳戶地址 :  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+SimpleToken 關卡實例地址:  0xeC104fC1E3aEe786E97dD30c2bb2D9d8E89Ea1f0
+simpleToken name :  InitialToken
+simpleToken creator balance:  0n
+simpleToken 合約餘額:  1000000000000000n
+攻擊後 simpleToken 合約餘額:  0n
+PS C:\VScode\web3\59-recovery>
