@@ -71,7 +71,21 @@ contract DEX {
      * @notice returns yOutput, or yDelta for xInput (or xDelta)
      * @dev Follow along with the [original tutorial](https://medium.com/@austin_48503/%EF%B8%8F-minimum-viable-exchange-d84f30bd0c90) Price section for an understanding of the DEX's pricing model and for a price function to add to your contract. You may need to update the Solidity syntax (e.g. use + instead of .add, * instead of .mul, etc). Deploy when you are done.
      */
-    function price(uint256 xInput, uint256 xReserves, uint256 yReserves) public pure returns (uint256 yOutput) {}
+    function price(uint256 xInput, uint256 xReserves, uint256 yReserves) public pure returns (uint256 yOutput) {
+        uint k = xReserves * yReserves;
+        uint fee = (xInput * 3) / 1000;  // tax fee 0.03% from xInput
+        uint xInputWithFee  = xInput - fee;  
+        // k* 公式:
+        // (xReserves + xInput) * (yReserves - yOutput) == k
+        // xReserves * yReserves - xReserves * yOutput + xInput * yReserves - xInput * yOutput == k
+        // k - xReserves * yOutput + xInput * yReserves - xInput * yOutput == k
+        // xInput * yReserves == xReserves * yOutput + xInput * yOutput
+        // xInput * yReserves == (xReserves + xInput) * yOutput
+        // (xInput * yReserves) / (xReserves + xInput) == yOutput
+        // (xInputWithFee * yReserves) / (xReserves + xInputWithFee) == yOutput
+        uint256 yOutput = (xInputWithFee * yReserves) / (xReserves + xInputWithFee);
+        return yOutput;
+    }
 
     /**
      * @notice returns liquidity for a user.
