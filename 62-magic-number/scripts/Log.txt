@@ -1,0 +1,6 @@
+PS C:\VScode\web3\62-magic-number> npx hardhat run .\scripts\interact.ts --network opS
+Compiled 2 Solidity files successfully (evm target: paris).
+我的帳戶地址 :  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+MagicNum 關卡實例地址:  0x6b1f3245eA9221580271787E2DF07EAbdE40F468
+MagicNum solver :  0x0000000000000000000000000000000000000000
+MagicNum solver:  0x05adc4b7ab6A7c95C208e783E011fbbB2e62cb65
