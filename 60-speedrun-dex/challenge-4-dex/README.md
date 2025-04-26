@@ -4,9 +4,9 @@
 
 在這個挑戰中，我們建立了一個去中心化交易所 (DEX)，讓使用者可以在 ETH 和自定義 ERC20 代幣 (BAL) 之間進行交換。
 
-![示例圖片](https://github.com/yoyoj1023/dapps/blob/main/05-dice-game/sample.png)
+![示例圖片](https://github.com/yoyoj1023/dapps/blob/main/06-speedrun-dex/sample1.png)
 
-![示例圖片](https://github.com/yoyoj1023/dapps/blob/main/05-dice-game/sample2.png)
+![示例圖片](https://github.com/yoyoj1023/dapps/blob/main/06-speedrun-dex/sample2.png)
 
 - 部署網址： [網站連結](https://60-speedrun-dex.vercel.app/)
 - 部署合約： [已驗證合約地址](https://sepolia-optimism.etherscan.io/address/0x0EA37cc43567dF4BA5C332df9c0922527E121fe7)
