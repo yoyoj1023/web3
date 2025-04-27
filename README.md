@@ -3,19 +3,21 @@
 
 ### 一、實用工具：
 
-1. 水龍頭 : ｜[Google Web3 水龍頭](https://cloud.google.com/application/web3/faucet)｜ [Optimism 水龍頭](https://console.optimism.io/faucet)｜[Chainlink 水龍頭](https://faucets.chain.link/)｜
+1. Google Web3 : [水龍頭](https://cloud.google.com/application/web3/faucet)
 
-2. Alchemy : [儀錶板](https://dashboard.alchemy.com/?a=)
+2. Optimism : [水龍頭](https://console.optimism.io/faucet)
 
-3. Vercel : [儀錶板](https://vercel.com/)
+3. Chainlink : [水龍頭](https://faucets.chain.link/)
 
-4. Reown Cloud : [儀錶板](https://cloud.reown.com/)
+4. Alchemy : [儀錶板](https://dashboard.alchemy.com/?a=)
 
-5. 密碼學線上計算工具 : [emn178](https://emn178.github.io/online-tools/)
+5. Vercel : [儀錶板](https://vercel.com/)
 
-6. EVM Opcodes : [Instructions](https://www.evm.codes/)
+6. Reown Cloud : [儀錶板](https://cloud.reown.com/)
 
-7. 區塊鏈瀏覽器： ｜[Blockchain.com](https://www.blockchain.com/explorer)｜[Bitcoin Office](https://bitcoin.gob.sv/)｜
+7. 密碼學線上計算工具 : [emn178](https://emn178.github.io/online-tools/)
+
+8. EVM Opcodes : [Instructions](https://www.evm.codes/)
 
 ### 二、常用文檔：
 
@@ -27,19 +29,14 @@
 
 + Chainlink: ｜[官方開發者文檔](https://docs.chain.link/)｜[Github倉庫](https://github.com/smartcontractkit/chainlink)｜
 
-+ Hardhat: ｜[官方文檔](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Github倉庫](https://github.com/NomicFoundation/hardhat)｜
-
-- Foundry: | [官方文檔 Foundry Book](https://book.getfoundry.sh/) |
-
 + React: | [官方文檔](https://react.dev/) | [Github倉庫](https://github.com/facebook/react) |
 
 + Next.js : | [官方文檔](https://nextjs.org/docs) | [官網](https://nextjs.org/) |
 
-+ Scaffold-ETH 2: | [官方文檔](https://scaffoldeth.io/) |
++ 開發工具文檔： ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Hardhat Github](https://github.com/NomicFoundation/hardhat)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffole-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) |
 
-+ Scaffole-Alchemy: | [官方文檔](https://docs.alchemy.com/docs/scaffold-alchemy) |
 
-### 三、知名開源專案：
+### 三、常用知名開源專案：
 
 + MetaMask: ｜[Github](https://github.com/MetaMask)｜
 
@@ -49,7 +46,7 @@
 
 1. [精通以太坊](https://cypherpunks-core.github.io/ethereumbook_zh/)  
 
-2. [Learn me a bitcoin](https://learnmeabitcoin.com/) 
+2. [Pro Git book](https://git-scm.com/book/zh-tw/v2) 
 
 3. [Alchemy University](https://www.alchemy.com/university)
 
