@@ -1,0 +1,10 @@
+PS C:\VScode\web3\69-alien-codex> npx hardhat run .\scripts\interact.ts --network opS
+Compiled 1 Solidity file successfully (evm target: unknown evm version for solc version 0.5.0).
+我的帳戶地址 :  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+AlienCodex 關卡實例地址:  0x0292a45140694F44B5194417A005966b1f0309C5
+AlienCodex owner :  0x734CfE306C0C4130051A194BA110BC808B13C439
+codexDataStartStorageSlot :  0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6
+ownerPositionInMap :  35707666377435648211887908874984608119992236509074197713628505308453184860938n
+parsedAddress :  0x000000000000000000000000db4101e7f5e2cc0e1a749092ff5287e3d36a5df6
+AlienCodex owner :  0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+PS C:\VScode\web3\69-alien-codex>
