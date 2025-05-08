@@ -31,6 +31,8 @@
 
 + Next.js : | [官方文檔](https://nextjs.org/docs) | [官網](https://nextjs.org/) |
 
++ Alchemy: | [官方文檔](https://www.alchemy.com/docs) |
+
 + 開發工具與框架文檔： ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) |
 
 
