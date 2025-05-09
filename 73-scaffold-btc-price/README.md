@@ -2,6 +2,11 @@
 
 這是一個基於 Scaffold-ETH 2 框架開發的 Web3 應用程式，允許用戶查詢 BTC 和 ETH 的即時價格資訊。應用使用 Chainlink 預言機來獲取可靠的加密貨幣價格數據。
 
+![示例圖片](https://github.com/yoyoj1023/dapps/blob/main/07-scaffold-prices-getter/sample.png)
+
+- 部署網址： [網站連結](https://prices-getter.vercel.app/prices)
+- 部署合約： [已驗證合約地址](https://sepolia-optimistic.etherscan.io/address/0xF2AAAf372B1c91Ba025d6BDA464431Dfe1B4B504#code)
+
 ## 功能特點
 
 - 🔍 查詢比特幣 (BTC) 實時價格
