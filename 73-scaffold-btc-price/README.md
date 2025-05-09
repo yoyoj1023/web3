@@ -1,80 +1,158 @@
-# 🏗 Scaffold-ETH 2
+# 加密貨幣價格查詢應用
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+這是一個基於 Scaffold-ETH 2 框架開發的 Web3 應用程式，允許用戶查詢 BTC 和 ETH 的即時價格資訊。應用使用 Chainlink 預言機來獲取可靠的加密貨幣價格數據。
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## 功能特點
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+- 🔍 查詢比特幣 (BTC) 實時價格
+- 💰 查詢以太幣 (ETH) 實時價格 
+- ⏱️ 顯示價格更新時間戳
+- 🔄 視覺化更新動畫效果
+- 🌐 可部署在多種以太坊網絡 (支援測試網和主網)
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+## 技術棧
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+- **前端框架**: Next.js 15.x
+- **UI 組件**: Tailwind CSS, DaisyUI
+- **區塊鏈交互**: wagmi, viem, ethers.js
+- **智能合約**: Solidity 0.8.x
+- **開發環境**: Hardhat
+- **Oracle 服務**: Chainlink 預言機
 
-## Requirements
+## 前置需求
 
-Before you begin, you need to install the following tools:
+開始前，請確保你的環境已安裝：
 
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+- [Node.js](https://nodejs.org/) (>= 20.18.3)
+- [Yarn](https://yarnpkg.com/) (>= 3.2.3)
+- [Git](https://git-scm.com/)
 
-## Quickstart
+## 安裝指南
 
-To get started with Scaffold-ETH 2, follow the steps below:
+1. 克隆專案儲存庫：
 
-1. Install dependencies if it was skipped in CLI:
-
+```bash
+git clone https://github.com/yourusername/73-scaffold-btc-price.git
+cd 73-scaffold-btc-price/get-btc-price
 ```
-cd my-dapp-example
+
+2. 安裝依賴：
+
+```bash
 yarn install
 ```
 
-2. Run a local network in the first terminal:
+3. 環境設置：
 
+複製 `.env.example` 為 `.env.local`，並根據需要修改環境變數。
+
+```bash
+cp .env.example .env.local
 ```
+
+## 運行方式
+
+### 本地開發
+
+1. 啟動本地以太坊網絡
+
+```bash
 yarn chain
 ```
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
+2. 在新的終端視窗中，部署智能合約
 
-3. On a second terminal, deploy the test contract:
-
-```
+```bash
 yarn deploy
 ```
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
+3. 啟動前端應用程式
 
-4. On a third terminal, start your NextJS app:
-
-```
+```bash
 yarn start
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+4. 訪問應用程式
 
-Run smart contract test with `yarn hardhat:test`
+打開瀏覽器，訪問 [http://localhost:3000](http://localhost:3000)
 
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
+### 部署到測試網
 
+1. 配置網絡設置
 
-## Documentation
+編輯 `packages/hardhat/hardhat.config.ts` 檔案，確保你已經設置了正確的測試網絡 (如 OP Sepolia)。
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+2. 設置錢包私鑰
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+將你的錢包私鑰加入到 `.env.local` 檔案中：
 
-## Contributing to Scaffold-ETH 2
+```
+DEPLOYER_PRIVATE_KEY=your_private_key_here
+```
 
-We welcome contributions to Scaffold-ETH 2!
+3. 部署合約到測試網
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+```bash
+yarn deploy --network optimismSepolia
+```
+
+4. 啟動前端
+
+```bash
+yarn start
+```
+
+## 項目結構
+
+```
+get-btc-price/
+├── packages/
+│   ├── hardhat/                # 智能合約及區塊鏈相關
+│   │   ├── contracts/          # Solidity 合約檔案
+│   │   │   └── PriceFeed.sol   # 價格查詢合約
+│   │   ├── deploy/             # 部署腳本
+│   │   └── ...
+│   └── nextjs/                 # 前端應用
+│       ├── app/                # Next.js 頁面
+│       │   ├── prices/         # 價格查詢頁面
+│       │   └── ...
+│       ├── components/         # 共用組件
+│       └── ...
+├── package.json
+└── README.md
+```
+
+## 智能合約說明
+
+### PriceFeed.sol
+
+`PriceFeed.sol` 合約用於與 Chainlink 預言機交互，獲取 BTC 和 ETH 的實時價格數據。
+
+主要功能:
+- `getBTCPrice()`: 獲取 BTC/USD 價格
+- `getETHPrice()`: 獲取 ETH/USD 價格
+- `getBTCDecimals()`: 獲取 BTC 價格的小數位數
+- `getETHDecimals()`: 獲取 ETH 價格的小數位數
+
+## 前端功能說明
+
+- **Header**: 導航欄包含 "Home", "Debug Contracts" 和 "get prices" 三個主要頁面鏈接
+- **Prices Page**: 顯示 BTC 和 ETH 的價格查詢介面，包括:
+  - 價格顯示區域
+  - 查詢按鈕
+  - 最後更新時間戳
+  - 視覺化更新動畫
+
+## 注意事項
+
+- 在測試網上使用時，請確保你的錢包中有足夠的測試網代幣支付交易費用
+- Chainlink 預言機在不同網絡上的地址可能不同，請根據部署的目標網絡調整 `PriceFeed.sol` 中的預言機地址
+- 預言機數據有更新週期，短時間內多次查詢可能返回相同的價格數據
+
+## 貢獻指南
+
+歡迎提交 Pull Request 或建立 Issue 來改進這個專案。
+
+## 授權
+
+本專案採用 MIT 授權條款。
