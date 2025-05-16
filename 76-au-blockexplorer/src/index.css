@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.token-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.token-logo {
+  border-radius: 50%;
+}
+
+.detail-note {
+  background-color: #f8f9fa;
+  border-left: 4px solid #6c757d;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.detail-note p {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.detail-note ul {
+  margin-bottom: 0;
+  padding-left: 20px;
+}
+
+.home-section {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .detail-row {
+    flex-direction: column;
+  }
+  
+  .detail-label {
+    margin-bottom: 5px;
+  }
+}
