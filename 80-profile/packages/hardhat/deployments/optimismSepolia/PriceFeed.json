@@ -1,0 +1,137 @@
+{
+  "address": "0xF2AAAf372B1c91Ba025d6BDA464431Dfe1B4B504",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "getBTCDecimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getBTCPrice",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getETHDecimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getETHPrice",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x62f3e99d69badc481c6f3ecdb0309040fe9d574ef0fe2ecd7e97af72d0ee5dae",
+  "receipt": {
+    "to": null,
+    "from": "0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6",
+    "contractAddress": "0xF2AAAf372B1c91Ba025d6BDA464431Dfe1B4B504",
+    "transactionIndex": 73,
+    "gasUsed": "263405",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x86473a085ce154954d0218a23266672aec526bbf7783f93300f81e187b451a59",
+    "transactionHash": "0x62f3e99d69badc481c6f3ecdb0309040fe9d574ef0fe2ecd7e97af72d0ee5dae",
+    "logs": [],
+    "blockNumber": 27498139,
+    "cumulativeGasUsed": "16513466",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "1d5c78f5d43c1eaef92fd97599bf52e1",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"getBTCDecimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBTCPrice\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getETHDecimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getETHPrice\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"\\u9810\\u8a2d\\u5efa\\u69cb\\u5b50\\u8a2d\\u7f6e\\u4e0d\\u540c\\u7db2\\u7d61\\u7684 Chainlink \\u9810\\u8a00\\u6a5f\\u5730\\u5740 \\u4f7f\\u7528 OP Sepolia \\u6e2c\\u8a66\\u7db2\\u7684\\u5730\\u5740 BTC/USD: 0x3015aa11f5c2D4Bd0f891E708C8927961b38cE7D ETH/USD: 0x61Ec26aA57019C486B10502285c5A3D4A4750AD7\"},\"getBTCDecimals()\":{\"notice\":\"\\u8fd4\\u56de BTC/USD \\u50f9\\u683c\\u5c0f\\u6578\\u4f4d\\u6578\"},\"getBTCPrice()\":{\"notice\":\"\\u8fd4\\u56de\\u6700\\u65b0\\u7684 BTC/USD \\u50f9\\u683c\"},\"getETHDecimals()\":{\"notice\":\"\\u8fd4\\u56de ETH/USD \\u50f9\\u683c\\u5c0f\\u6578\\u4f4d\\u6578\"},\"getETHPrice()\":{\"notice\":\"\\u8fd4\\u56de\\u6700\\u65b0\\u7684 ETH/USD \\u50f9\\u683c\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/PriceFeed.sol\":\"PriceFeed\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/PriceFeed.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.0;\\r\\n\\r\\n/**\\r\\n * @title PriceFeed\\r\\n * @dev \\u4f7f\\u7528 Chainlink \\u9810\\u8a00\\u6a5f\\u7372\\u53d6 BTC \\u548c ETH \\u7684\\u50f9\\u683c\\u8cc7\\u8a0a\\r\\n */\\r\\n \\r\\n// Chainlink AggregatorV3Interface\\r\\ninterface AggregatorV3Interface {\\r\\n  function decimals() external view returns (uint8);\\r\\n  function description() external view returns (string memory);\\r\\n  function version() external view returns (uint256);\\r\\n  function getRoundData(uint80 _roundId)\\r\\n    external\\r\\n    view\\r\\n    returns (\\r\\n      uint80 roundId,\\r\\n      int256 answer,\\r\\n      uint256 startedAt,\\r\\n      uint256 updatedAt,\\r\\n      uint80 answeredInRound\\r\\n    );\\r\\n  function latestRoundData()\\r\\n    external\\r\\n    view\\r\\n    returns (\\r\\n      uint80 roundId,\\r\\n      int256 answer,\\r\\n      uint256 startedAt,\\r\\n      uint256 updatedAt,\\r\\n      uint80 answeredInRound\\r\\n    );\\r\\n}\\r\\n\\r\\ncontract PriceFeed {\\r\\n    AggregatorV3Interface internal btcPriceFeed;\\r\\n    AggregatorV3Interface internal ethPriceFeed;\\r\\n\\r\\n    /**\\r\\n     * \\u9810\\u8a2d\\u5efa\\u69cb\\u5b50\\u8a2d\\u7f6e\\u4e0d\\u540c\\u7db2\\u7d61\\u7684 Chainlink \\u9810\\u8a00\\u6a5f\\u5730\\u5740\\r\\n     * \\u4f7f\\u7528 OP Sepolia \\u6e2c\\u8a66\\u7db2\\u7684\\u5730\\u5740\\r\\n     * BTC/USD: 0x3015aa11f5c2D4Bd0f891E708C8927961b38cE7D\\r\\n     * ETH/USD: 0x61Ec26aA57019C486B10502285c5A3D4A4750AD7\\r\\n     */\\r\\n    constructor() {\\r\\n        btcPriceFeed = AggregatorV3Interface(0x3015aa11f5c2D4Bd0f891E708C8927961b38cE7D);\\r\\n        ethPriceFeed = AggregatorV3Interface(0x61Ec26aA57019C486B10502285c5A3D4A4750AD7);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * \\u8fd4\\u56de\\u6700\\u65b0\\u7684 BTC/USD \\u50f9\\u683c\\r\\n     */\\r\\n    function getBTCPrice() public view returns (int) {\\r\\n        (, int price, , , ) = btcPriceFeed.latestRoundData();\\r\\n        return price;\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * \\u8fd4\\u56de\\u6700\\u65b0\\u7684 ETH/USD \\u50f9\\u683c\\r\\n     */\\r\\n    function getETHPrice() public view returns (int) {\\r\\n        (, int price, , , ) = ethPriceFeed.latestRoundData();\\r\\n        return price;\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * \\u8fd4\\u56de BTC/USD \\u50f9\\u683c\\u5c0f\\u6578\\u4f4d\\u6578\\r\\n     */\\r\\n    function getBTCDecimals() public view returns (uint8) {\\r\\n        return btcPriceFeed.decimals();\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * \\u8fd4\\u56de ETH/USD \\u50f9\\u683c\\u5c0f\\u6578\\u4f4d\\u6578\\r\\n     */\\r\\n    function getETHDecimals() public view returns (uint8) {\\r\\n        return ethPriceFeed.decimals();\\r\\n    }\\r\\n} \",\"keccak256\":\"0x6f9c84676ebeab1c459c04fd85251d0e73e5c7a81d86b74db02de7e6db4e8594\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50600080546001600160a01b0319908116733015aa11f5c2d4bd0f891e708c8927961b38ce7d17909155600180549091167361ec26aa57019c486b10502285c5a3d4a4750ad71790556102fb806100686000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806315e94f9314610051578063a607a8d914610070578063d53f222314610086578063dd22db801461008e575b600080fd5b610059610096565b60405160ff90911681526020015b60405180910390f35b610078610113565b604051908152602001610067565b610059610198565b6100786101e2565b60008060009054906101000a90046001600160a01b03166001600160a01b031663313ce5676040518163ffffffff1660e01b8152600401602060405180830381865afa1580156100ea573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061010e919061022c565b905090565b600080600160009054906101000a90046001600160a01b03166001600160a01b031663feaf968c6040518163ffffffff1660e01b815260040160a060405180830381865afa158015610169573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018d9190610275565b509195945050505050565b6001546040805163313ce56760e01b815290516000926001600160a01b03169163313ce5679160048083019260209291908290030181865afa1580156100ea573d6000803e3d6000fd5b6000805460408051633fabe5a360e21b8152905183926001600160a01b03169163feaf968c9160048083019260a09291908290030181865afa158015610169573d6000803e3d6000fd5b60006020828403121561023e57600080fd5b815160ff8116811461024f57600080fd5b9392505050565b805169ffffffffffffffffffff8116811461027057600080fd5b919050565b600080600080600060a0868803121561028d57600080fd5b61029686610256565b94506020860151935060408601519250606086015191506102b960808701610256565b9050929550929590935056fea264697066735822122047862a359c6ea580466c933f8c60388d227e1d37b950f09c8a15b9191543212f64736f6c63430008140033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c806315e94f9314610051578063a607a8d914610070578063d53f222314610086578063dd22db801461008e575b600080fd5b610059610096565b60405160ff90911681526020015b60405180910390f35b610078610113565b604051908152602001610067565b610059610198565b6100786101e2565b60008060009054906101000a90046001600160a01b03166001600160a01b031663313ce5676040518163ffffffff1660e01b8152600401602060405180830381865afa1580156100ea573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061010e919061022c565b905090565b600080600160009054906101000a90046001600160a01b03166001600160a01b031663feaf968c6040518163ffffffff1660e01b815260040160a060405180830381865afa158015610169573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018d9190610275565b509195945050505050565b6001546040805163313ce56760e01b815290516000926001600160a01b03169163313ce5679160048083019260209291908290030181865afa1580156100ea573d6000803e3d6000fd5b6000805460408051633fabe5a360e21b8152905183926001600160a01b03169163feaf968c9160048083019260a09291908290030181865afa158015610169573d6000803e3d6000fd5b60006020828403121561023e57600080fd5b815160ff8116811461024f57600080fd5b9392505050565b805169ffffffffffffffffffff8116811461027057600080fd5b919050565b600080600080600060a0868803121561028d57600080fd5b61029686610256565b94506020860151935060408601519250606086015191506102b960808701610256565b9050929550929590935056fea264697066735822122047862a359c6ea580466c933f8c60388d227e1d37b950f09c8a15b9191543212f64736f6c63430008140033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "constructor": {
+        "notice": "預設建構子設置不同網絡的 Chainlink 預言機地址 使用 OP Sepolia 測試網的地址 BTC/USD: 0x3015aa11f5c2D4Bd0f891E708C8927961b38cE7D ETH/USD: 0x61Ec26aA57019C486B10502285c5A3D4A4750AD7"
+      },
+      "getBTCDecimals()": {
+        "notice": "返回 BTC/USD 價格小數位數"
+      },
+      "getBTCPrice()": {
+        "notice": "返回最新的 BTC/USD 價格"
+      },
+      "getETHDecimals()": {
+        "notice": "返回 ETH/USD 價格小數位數"
+      },
+      "getETHPrice()": {
+        "notice": "返回最新的 ETH/USD 價格"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 49,
+        "contract": "contracts/PriceFeed.sol:PriceFeed",
+        "label": "btcPriceFeed",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_contract(AggregatorV3Interface)46"
+      },
+      {
+        "astId": 52,
+        "contract": "contracts/PriceFeed.sol:PriceFeed",
+        "label": "ethPriceFeed",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_contract(AggregatorV3Interface)46"
+      }
+    ],
+    "types": {
+      "t_contract(AggregatorV3Interface)46": {
+        "encoding": "inplace",
+        "label": "contract AggregatorV3Interface",
+        "numberOfBytes": "20"
+      }
+    }
+  }
+}

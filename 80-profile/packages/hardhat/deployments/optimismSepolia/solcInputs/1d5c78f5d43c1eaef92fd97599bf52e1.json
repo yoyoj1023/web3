@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/PriceFeed.sol": {
+      "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n * @title PriceFeed\r\n * @dev 使用 Chainlink 預言機獲取 BTC 和 ETH 的價格資訊\r\n */\r\n \r\n// Chainlink AggregatorV3Interface\r\ninterface AggregatorV3Interface {\r\n  function decimals() external view returns (uint8);\r\n  function description() external view returns (string memory);\r\n  function version() external view returns (uint256);\r\n  function getRoundData(uint80 _roundId)\r\n    external\r\n    view\r\n    returns (\r\n      uint80 roundId,\r\n      int256 answer,\r\n      uint256 startedAt,\r\n      uint256 updatedAt,\r\n      uint80 answeredInRound\r\n    );\r\n  function latestRoundData()\r\n    external\r\n    view\r\n    returns (\r\n      uint80 roundId,\r\n      int256 answer,\r\n      uint256 startedAt,\r\n      uint256 updatedAt,\r\n      uint80 answeredInRound\r\n    );\r\n}\r\n\r\ncontract PriceFeed {\r\n    AggregatorV3Interface internal btcPriceFeed;\r\n    AggregatorV3Interface internal ethPriceFeed;\r\n\r\n    /**\r\n     * 預設建構子設置不同網絡的 Chainlink 預言機地址\r\n     * 使用 OP Sepolia 測試網的地址\r\n     * BTC/USD: 0x3015aa11f5c2D4Bd0f891E708C8927961b38cE7D\r\n     * ETH/USD: 0x61Ec26aA57019C486B10502285c5A3D4A4750AD7\r\n     */\r\n    constructor() {\r\n        btcPriceFeed = AggregatorV3Interface(0x3015aa11f5c2D4Bd0f891E708C8927961b38cE7D);\r\n        ethPriceFeed = AggregatorV3Interface(0x61Ec26aA57019C486B10502285c5A3D4A4750AD7);\r\n    }\r\n\r\n    /**\r\n     * 返回最新的 BTC/USD 價格\r\n     */\r\n    function getBTCPrice() public view returns (int) {\r\n        (, int price, , , ) = btcPriceFeed.latestRoundData();\r\n        return price;\r\n    }\r\n\r\n    /**\r\n     * 返回最新的 ETH/USD 價格\r\n     */\r\n    function getETHPrice() public view returns (int) {\r\n        (, int price, , , ) = ethPriceFeed.latestRoundData();\r\n        return price;\r\n    }\r\n\r\n    /**\r\n     * 返回 BTC/USD 價格小數位數\r\n     */\r\n    function getBTCDecimals() public view returns (uint8) {\r\n        return btcPriceFeed.decimals();\r\n    }\r\n\r\n    /**\r\n     * 返回 ETH/USD 價格小數位數\r\n     */\r\n    function getETHDecimals() public view returns (uint8) {\r\n        return ethPriceFeed.decimals();\r\n    }\r\n} "
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
