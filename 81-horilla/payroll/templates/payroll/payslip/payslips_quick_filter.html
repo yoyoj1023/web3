@@ -1,0 +1,74 @@
+{% load i18n %}
+<div
+  class="d-flex flex-row-reverse oh-wrapper mb-2"
+  style="padding-bottom: 10px; justify-content: right; align-items: center"
+>
+  {% if perms.payroll.add_payslip %}
+    <span
+    class="paid me-3"
+    onclick="$('[name=sent_to_employee]').val('false'); $('[name=sent_to_employee]').first().change(); $('.filterButton').click()"
+    style="cursor: pointer; margin-left: 5px"
+    >
+    <span
+    class="oh-dot oh-dot--small me-1"
+    style="background-color: grey"
+    ></span>
+    {% trans "Mail Not Sent" %}
+    </span>
+    <span
+      class="paid me-3"
+      onclick="$('[name=sent_to_employee]').val('true'); $('[name=sent_to_employee]').first().change(); $('.filterButton').click()"
+      style="cursor: pointer; margin-left: 5px"
+    >
+      <span
+        class="oh-dot oh-dot--small me-1"
+        style="background-color: yellowgreen"
+      ></span>
+      {% trans "Mail Sent" %}
+    </span>
+  {% endif %}
+  <span
+    class="draft me-3"
+    onclick="$('[name=status]').val('draft'); $('[name=status]').first().change(); $('.filterButton').click();"
+    style="cursor: pointer; margin-left: 5px"
+  >
+    <span
+      class="oh-dot oh-dot--small me-1"
+      style="background-color: gray"
+    ></span>
+    {% trans "Draft" %}
+  </span>
+  <span
+    class="review_ongoing me-3"
+    onclick="$('[name=status]').val('review_ongoing'); $('[name=status]').first().change(); $('.filterButton').click()"
+    style="cursor: pointer; margin-left: 5px"
+  >
+    <span
+      class="oh-dot oh-dot--small me-1"
+      style="background-color: orange"
+    ></span>
+    {% trans "Review Ongoing" %}
+  </span>
+  <span
+    class="confirmed me-3"
+    onclick="$('[name=status]').val('confirmed'); $('[name=status]').first().change(); $('.filterButton').click()"
+    style="cursor: pointer; margin-left: 5px"
+  >
+    <span
+      class="oh-dot oh-dot--small me-1"
+      style="background-color: rgb(103, 171, 238)"
+    ></span>
+    {% trans "Confirmed" %}
+  </span>
+  <span
+    class="paid me-3"
+    onclick="$('[name=status]').val('paid'); $('[name=status]').first().change(); $('.filterButton').click()"
+    style="cursor: pointer; margin-left: 5px"
+  >
+    <span
+      class="oh-dot oh-dot--small me-1"
+      style="background-color: yellowgreen"
+    ></span>
+    {% trans "Paid" %}
+  </span>
+</div>

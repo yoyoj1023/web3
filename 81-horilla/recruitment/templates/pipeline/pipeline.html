@@ -1,0 +1,248 @@
+{% extends 'index.html' %} {% load i18n %} {% block content %} {% load static %} {% load recruitmentfilters %}
+<div id="messages" class="oh-alert-container">
+
+</div>
+<style>
+  .oh-tabs__tab--active {
+    border-right: solid 1px #dedede !important;
+}
+  .avatars {
+    display: flex;
+    padding: 8px 10px 8px 10px;
+  }
+
+  .avatars__item {
+    background-color: #596376;
+    border: 2px solid white;
+    border-radius: 100%;
+    color: #ffffff;
+    display: block;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 100;
+    height: 26px;
+    width: 26px;
+    line-height: 17px;
+    text-align: center;
+    transition: margin 0.1s ease-in-out;
+    overflow: hidden;
+    margin-left: -10px;
+  }
+
+  .avatars__item:first-child {
+    z-index: 5;
+  }
+
+  .avatars__item:nth-child(2) {
+    z-index: 4;
+  }
+
+  .avatars__item:nth-child(3) {
+    z-index: 3;
+  }
+
+  .avatars__item:nth-child(4) {
+    z-index: 2;
+  }
+
+  .avatars__item:nth-child(5) {
+    z-index: 1;
+  }
+
+  .avatars__item:last-child {
+    z-index: 0;
+  }
+
+  .avatars__item img {
+    width: 100%;
+  }
+
+  .avatars:hover .avatars__item {
+    margin-right: 10px;
+  }
+  .select2-container .select2-selection.select2-selection--multiple{
+    padding: 5px !important;
+    max-height: 70px !important;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .search-highlight{
+    background-color: rgba(255, 68, 0, 0.076);
+  }
+  #enlargeImageContainer {
+    position: absolute;
+    left: -300px;
+    top: 100px;
+    height: 200px;
+    width: 200px;
+  }
+</style>
+<script>
+  $(document).ready(function () {
+    $(".pipeline-toggle").click(function (e) {
+      e.preventDefault();
+      toggle = $(this).attr("data-stage-id");
+      if ($(`[data-stage-toggle-id=${toggle}]`).hasClass("d-none")) {
+        $(`[data-stage-toggle-id=${toggle}]`).removeClass("d-none");
+      }
+      else {
+        setTimeout(function() {
+          $(`[data-stage-toggle-id=${toggle}]`).addClass("d-none");
+        }, 100);
+      }
+
+    });
+  });
+</script>
+<style>
+  .select2-container{
+    width: 100% !important;
+}
+.select2-container .select2-selection {
+    padding: 10px !important;
+    height: 50px !important; /* Adjust the height value as needed */
+}
+  .pipeline-header {
+    padding: 0.3rem 0.75rem;
+    border-bottom: 1px solid hsl(213deg, 22%, 84%);
+    /* display: -webkit-box; */
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  .pipeline-toggle {
+    cursor: move;
+  }
+  .ui-sortable-placeholder {
+    min-height: 50px !important
+  }
+  @keyframes placeHolderShimmer {
+    0% {
+      background-position: -800px 0
+    }
+    100% {
+      background-position: 800px 0
+    }
+  }
+
+  .animated-background {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background-color: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee9c -58%, #e4e4e496 18%, #eeeeee61 33%);
+    background-size: 800px 64px;
+    height: 300px;
+    position: relative;
+}
+</style>
+
+  <div id="ohMessages"></div>
+  {% include 'pipeline/nav.html' %}
+  <div class="oh-tabs oh-wrapper" hx-get="{% url 'pipeline-search' %}?{{request.GET.urlencode}}" hx-trigger="load" id="pipelineSearchContainer">
+    <div class="animated-background"></div>
+  </div>
+
+<script>
+  function submitForm(elem) {
+    $(elem).siblings(".add_more_submit").click();
+  }
+
+	function enlargeImage(src) {
+		var enlargeImageContainer = $('#enlargeImageContainer');
+		enlargeImageContainer.empty();
+    style = "width:100%; height:90%; box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); background:white"
+		var enlargedImage = $('<iframe>').attr({'src': src,'style': style,});
+    var name =$('<span>').text(src.split('/').pop().replace(/_/g, " "))
+		enlargeImageContainer.append(enlargedImage);
+		enlargeImageContainer.append(name);
+		setTimeout(function() {
+		  enlargeImageContainer.show();
+
+      const iframe = document.querySelector("iframe").contentWindow;
+      var iframe_document = iframe.document
+      iframe_image = iframe_document.getElementsByTagName('img')[0]
+      $(iframe_image).attr("style","width:100%; height:100%;")
+
+		}, 100);
+	}
+
+  function hideEnlargeImage() {
+		var enlargeImageContainer = $('#enlargeImageContainer');
+		enlargeImageContainer.empty();
+  }
+
+  $(document).on('click', function(event){
+    if (!$(event.target).closest('#enlargeImageContainer').length) {
+        hideEnlargeImage();
+    }
+  });
+
+
+  $(document).ready(function () {
+    $(".stage-candidates").change(function (e) {
+      var stageId = $(this).attr("data-stage-id");
+      $(`[data-container='candidate'][data-stage-id=${stageId}] [type=checkbox].stage-candidate-row`).prop("checked",false).closest(".oh-sticky-table__tr")
+      .removeClass("highlight-selected");;
+      $(`[data-container='candidate'][data-stage-id=${stageId}] [type=checkbox].stage-candidate-row`).change()
+      if ($(this).is(":checked")) {
+        $(`[data-container='candidate'][data-stage-id=${stageId}] [type=checkbox].stage-candidate-row`).prop("checked",true).closest(".oh-sticky-table__tr")
+        .addClass("highlight-selected");
+        $(`[data-container='candidate'][data-stage-id=${stageId}] [type=checkbox].stage-candidate-row`).change()
+      }else{
+
+      }
+    });
+    $("[name=bulk_stage]").change(function (e) {
+      e.preventDefault();
+      var currentStageId = $(this).attr("data-stage-id");
+      var nextStageId = $(this).val();
+      var select = $(`.stage-change[data-stage-id=${currentStageId}]`).filter(function() {
+        var checked = $(this).closest(".oh-sticky-table__tr").find("[type=checkbox]").is(":checked")
+        return checked
+      });
+      select.attr("data-stage-id",nextStageId)
+      if (!select.length) {
+        $("#ohMessages").html(`
+        <div class="oh-alert-container">
+          <div class="oh-alert oh-alert--animated oh-alert--info">
+            No candidates are selected on '${$(`[hx-post="/recruitment/stage-title-update/${currentStageId}/"]`).val()}' stage
+          </div>
+        </div>
+        `);
+      }
+      select.val(nextStageId)
+      select.change()
+      $(this).val("");
+      $(this).closest(".oh-table-config__tr").find(".stage-candidates").prop("checked",false).change()
+    });
+  });
+  $(document).ready(function () {
+    $('.oh-tabs__tab').click(function (e) {
+        // Remove fw-bold class from all tabs
+        $('.oh-tabs__tab').removeClass('fw-bold');
+
+        // Add fw-bold class to the clicked tab
+        $(this).addClass('fw-bold');
+
+        // Your existing code for storing the active tab
+        var activeTab = $(this).attr('data-target');
+        localStorage.setItem('activeTabOnboarding', activeTab);
+    });
+
+    // Your existing code for setting the active tab on page load
+    var activeTab = localStorage.getItem('activeTabOnboarding');
+    if (activeTab != null) {
+        var tab = $(`[data-target="${activeTab}"]`);
+        $(tab).addClass('fw-bold');
+    }
+});
+</script>
+{% include 'pipeline/footer_components.html' %} {% endblock %}

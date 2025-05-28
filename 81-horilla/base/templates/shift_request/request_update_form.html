@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load static %}
+<form hx-post="{% url 'shift-request-update' form.instance.id %}"
+    hx-target="#shiftRequestModalUpdateBody">
+    {% comment %} <div id="updateformBody"> {% endcomment %}
+        {{form.as_p}}
+    {% comment %} </div> {% endcomment %}
+</form>
+<script>
+  function toggleFunctionShiftRequestForm(element){
+    if (element.is(":checked")){
+      $("[id=id_requested_till]").parent().hide();
+    } else {
+      $("[id=id_requested_till]").parent().show();
+    }
+  }
+
+    $(document).ready(function(){
+        $("[type=checkbox]").change(function (e) {
+        e.preventDefault();
+        toggleFunctionShiftRequestForm($(this));
+        });
+    })
+    toggleFunctionShiftRequestForm($("#shiftRequestModalUpdateBody #id_is_permanent_shift"));
+</script>

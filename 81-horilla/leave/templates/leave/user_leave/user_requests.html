@@ -1,0 +1,332 @@
+{% load i18n %}
+{% load static %}
+{% if messages %}
+<div class="oh-wrapper">
+  {% for message in messages %}
+  <div class="oh-alert-container">
+    <div class="oh-alert oh-alert--animated {{message.tags}}">
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% include 'filter_tags.html' %}
+<div class="d-flex flex-row-reverse mb-2">
+    <span class="me-3" style="cursor:pointer;" onclick="$('[name=status]').val('rejected');$('[name=status]').first().change();$('.filterButton').click()">
+        <span class="oh-dot oh-dot--small me-1" style="background-color:red"></span>
+        {% trans "Rejected" %}
+    </span>
+    <span class="me-3" style="cursor:pointer;" onclick="$('[name=status]').val('cancelled');$('[name=status]').first().change();$('.filterButton').click()">
+        <span class="oh-dot oh-dot--small me-1" style="background-color:gray"></span>
+        {% trans "Cancelled" %}
+    </span>
+    <span class="me-3" style="cursor:pointer;" onclick="$('[name=status]').val('approved');$('[name=status]').first().change();$('.filterButton').click()">
+        <span class="oh-dot oh-dot--small me-1" style="background-color:yellowgreen"></span>
+        {% trans "Approved" %}
+    </span>
+    <span class="me-3" style="cursor:pointer;" onclick="$('[name=status]').val('requested');$('[name=status]').first().change();$('.filterButton').click()">
+        <span class="oh-dot oh-dot--small me-1" style="background-color:orange;"></span>
+        {% trans "Requested" %}
+    </span>
+</div>
+<!-- start of selection buttons -->
+<div
+    class="oh-checkpoint-badge text-success mb-2"
+    id="selectAllUserrequests"
+    style="cursor: pointer"
+    >
+    {% trans "Select All Requests" %}
+</div>
+<div
+    class="oh-checkpoint-badge text-secondary mb-2"
+    id="unselectAllUserrequests"
+    style="cursor: pointer;display: none;"
+    >
+    {% trans "Unselect All Requests" %}
+</div>
+<div class="oh-checkpoint-badge text-danger mb-2" id="selectedShowUserrequests" style="display: none"></div>
+<!-- end of selection buttons -->
+
+
+{% if leave_requests %}
+    <div class="oh-sticky-table">
+        <div class="oh-sticky-table__table oh-table--sortable">
+            <div class="oh-sticky-table__thead">
+                <div class="oh-sticky-table__tr">
+                    <div class="oh-sticky-table__th" style="width: 10px">
+                        <div class="centered-div">
+                            <input
+                            type="checkbox"
+                            title='{% trans "Select All" %}'
+                            class="oh-input oh-input__checkbox all-user-requests"
+                            />
+                        </div>
+                    </div>
+                    <div class="oh-sticky-table__th {% if request.sort_option.order == '-leave_type_id' %}arrow-up {% elif request.sort_option.order == 'leave_type_id' %}arrow-down {% else %}arrow-up-down {% endif %}" hx-get="{% url 'user-request-filter' %}?{{pd}}&sortby=leave_type_id" hx-target="#userRequest">{% trans "Leave Type" %}</div>
+                    <div class="oh-sticky-table__th {% if request.sort_option.order == '-start_date' %}arrow-up {% elif request.sort_option.order == 'start_date' %}arrow-down {% else %}arrow-up-down {% endif %}" hx-get="{% url 'user-request-filter' %}?{{pd}}&sortby=start_date" hx-target="#userRequest">{% trans "Start Date" %}</div>
+                    <div class="oh-sticky-table__th {% if request.sort_option.order == '-end_date' %}arrow-up {% elif request.sort_option.order == 'end_date' %}arrow-down {% else %}arrow-up-down {% endif %}" hx-get="{% url 'user-request-filter' %}?{{pd}}&sortby=end_date" hx-target="#userRequest">{% trans "End Date" %}</div>
+                    <div class="oh-sticky-table__th {% if request.sort_option.order == '-requested_days' %}arrow-up {% elif request.sort_option.order == 'requested_days' %}arrow-down {% else %}arrow-up-down {% endif %}" hx-get="{% url 'user-request-filter' %}?{{pd}}&sortby=requested_days" hx-target="#userRequest">{% trans "Requested Days" %}</div>
+                    <div class="oh-sticky-table__th {% if request.sort_option.order == '-status' %}arrow-up {% elif request.sort_option.order == 'status' %}arrow-down {% else %}arrow-up-down {% endif %}" hx-get="{% url 'user-request-filter' %}?{{pd}}&sortby=status" hx-target="#userRequest">{% trans "Status" %}</div>
+                    <div class="oh-sticky-table__th" style="width:115px;">{% trans "Comment" %}</div>
+                    <div class="oh-sticky-table__th">{% trans 'Confirmation' %}</div>
+                    <div class="oh-sticky-table__th">{% trans "Actions" %}</div>
+                </div>
+            </div>
+            <div class="oh-sticky-table__tbody">
+                {% for leave_request in leave_requests %}
+                <div class="oh-sticky-table__tr" data-toggle="oh-modal-toggle" data-target="#objectDetailsModalW25"
+                    hx-get="{% url 'user-request-one' leave_request.id %}?instances_ids={{request_ids}}"
+                    hx-target="#objectDetailsModalW25Target">
+                    <div class="oh-sticky-table__sd {% if leave_request.status == "requested" %}row-status--orange
+                        {% elif leave_request.status == "cancelled" %} row-status--gray
+                        {% elif leave_request.status == "approved" %} row-status--yellow {% elif leave_request.status == "rejected" %} row-status--red{% endif %}" onclick="event.stopPropagation()">
+                        <div class="centered-div">
+                            <input
+                            type="checkbox"
+                            id="{{leave_request.id}}"
+                            onchange="highlightRow($(this))"
+                            class="oh-input oh-input__checkbox all-user-requests-row"
+                            />
+                        </div>
+                    </div>
+                    <div class="oh-sticky-table__td">
+
+
+
+                        <div class="oh-profile oh-profile--md">
+                            <div class="oh-profile__avatar mr-1">
+                                <img src="{{leave_request.leave_type_id.get_avatar}}" class="oh-profile__image"
+                                    alt="Leave Type Icon" />
+                            </div>
+                            <span class="oh-profile__name oh-text--dark">{{leave_request.leave_type_id|truncatechars:12}}</span>
+
+                            {% if leave_request in leave_requests_with_interview %}
+                                <span class="tooltip">
+                                    <span class="material-symbols-outlined" style="flex-direction: row-reverse;color:#ff9146;">
+                                        warning
+                                    </span>
+                                    <span class="tooltiptext fw-bold">
+                                    {% trans "You have an interview in this requested date range." %}
+                                    </span>
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="oh-sticky-table__td {% if leave_request.status == 'rejected' %} diff-cell{% endif %} dateformat_changer"> {{leave_request.start_date}}</div>
+                    <div class="oh-sticky-table__td {% if leave_request.status == 'rejected' %} diff-cell{% endif %} dateformat_changer">{{leave_request.end_date}}</div>
+                    <div class="oh-sticky-table__td {% if leave_request.status == 'rejected' %} diff-cell{% endif %}">{{leave_request.requested_days}}</div>
+                    <div class="oh-sticky-table__td {% if leave_request.status == 'rejected' %} diff-cell{% endif %}">
+                        {% if leave_request.multiple_approvals and leave_request.status == "requested" %}
+                            <div class="oh-checkpoint-badge oh-checkpoint-badge--secondary" title="{% for manager in leave_request.multiple_approvals.managers %}{{ manager }}{% if not forloop.last %} , {% endif %}{% endfor %}">
+                            {{leave_request.multiple_approvals.approved|length}} / {{leave_request.multiple_approvals.managers|length}} {% trans "Approved" %}
+                            </div>
+                        {% else %}
+                            {{leave_request.get_status_display}}
+                        {% endif %}
+                    </div>
+                    <div class="oh-sticky-table__td" onclick="event.stopPropagation();">
+
+                        <button type="button" hx-get="{% url 'leave-request-view-comment' leave_request.id %}?{{pd}}&target=userRequest" hx-target="#commentContainer"
+                        data-target = '#leaveactivitySidebar' title="{% trans 'Add / View Comment' %}"  class="oh-btn oh-btn--light oh-activity-sidebar__open w-100" style="flex: 1 0 auto; width:20px;height: 40.68px; padding: 0;" onclick="event.stopPropagation()">
+                        <ion-icon name="newspaper-outline" role="img" class="md hydrated" aria-label="newspaper outline"></ion-icon>
+                        </button>
+
+                    </div>
+
+                    <div class="oh-sticky-table__td {% if leave_request.status == 'rejected' %} diff-cell{% endif %}" onclick="event.stopPropagation()">
+                        {% if leave_request.status == 'approved' and leave_request.end_date >= current_date %}
+                            <a type="submit" data-toggle="oh-modal-toggle"
+                                data-target="#cancelModal"
+                                hx-get="{% url 'user-request-cancel' leave_request.id %}"
+                                hx-target="#cancelForm"
+                                title="{% trans 'Cancel' %}"
+                                class="oh-btn oh-btn--primary w-100"> {% trans "Cancel" %}
+                            </a>
+                        {% else %}
+                            <button class="oh-btn oh-btn--primary w-100" disabled>
+                                {% trans "Cancel" %}
+                            </button>
+                        {% endif %}
+
+                    </div>
+                    <div class="oh-sticky-table__td {% if leave_request.status == 'rejected' %} diff-cell{% endif %}" onclick="event.stopPropagation()">
+                        {% if leave_request.status == 'requested'%}
+                            <div class="oh-btn-group" >
+                                <button class="oh-btn oh-btn--light-bkg w-100" title="{% trans 'Edit' %}" data-toggle="oh-modal-toggle"
+                                    data-target="#objectUpdateModal" hx-get="{% url 'user-request-update' leave_request.id %}?{{pd}}"
+                                    hx-target="#objectUpdateModalTarget">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </button>
+                                <a class="oh-btn oh-btn--danger-outline oh-btn--light-bkg w-100"
+                                    title="{% trans 'Delete' %}" id="delete-link"
+                                    hx-confirm="{% trans 'Are you sure you want to delete this leave request?' %}"
+                                    hx-post="{% url 'user-request-delete' leave_request.id %}?{{pd}}"
+                                    hx-target="#userRequest"
+                                    >
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="oh-btn-group" >
+                                <button
+                                    class="oh-btn oh-btn--light-bkg w-50" disabled>
+                                    <ion-icon name="create-outline" ></ion-icon>
+                                </button></td>
+                                <button class="oh-btn oh-btn--light-bkg w-50" disabled>
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button></td>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="oh-pagination" data-pd="{{pd}}">
+    <span class="oh-pagination__page">
+        {% trans "Page" %} {{ leave_requests.number }} {% trans "of" %} {{ leave_requests.paginator.num_pages }}.
+    </span>
+    <nav class="oh-pagination__nav">
+        <div class="oh-pagination__input-container me-3">
+            <span class="oh-pagination__label me-1">{% trans "Page" %}</span>
+            <input type="number" name="page" class="oh-pagination__input" value="{{leave_requests.number}}"
+                hx-get="{% url 'user-request-filter' %}?{{pd}}" hx-target="#userRequest" min="1" />
+            <span class="oh-pagination__label">{% trans "of" %} {{leave_requests.paginator.num_pages}}</span>
+        </div>
+        <ul class="oh-pagination__items">
+            {% if leave_requests.has_previous %}
+            <li class="oh-pagination__item oh-pagination__item--wide">
+                <a hx-target='#userRequest' hx-get="{% url 'user-request-filter' %}?{{pd}}&page=1"
+                    class="oh-pagination__link">{% trans "First" %}</a>
+            </li>
+            <li class="oh-pagination__item oh-pagination__item--wide">
+                <a hx-target='#userRequest'
+                    hx-get="{% url 'user-request-filter' %}?{{pd}}&page={{ leave_requests.previous_page_number }}"
+                    class="oh-pagination__link">{% trans "Previous" %}</a>
+            </li>
+            {% endif %}
+            {% if leave_requests.has_next %}
+            <li class="oh-pagination__item oh-pagination__item--wide">
+                <a hx-target='#userRequest'
+                    hx-get="{% url 'user-request-filter' %}?{{pd}}&page={{ leave_requests.next_page_number }}"
+                    class="oh-pagination__link">{% trans "Next" %}</a>
+            </li>
+            <li class="oh-pagination__item oh-pagination__item--wide">
+                <a hx-target='#userRequest'
+                    hx-get="{% url 'user-request-filter' %}?{{pd}}&page={{ leave_requests.paginator.num_pages }}"
+                    class="oh-pagination__link">{% trans "Last" %}</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+  </div>
+{% else %}
+    <div>
+        <div style="height: 310px; display:flex;align-items: center;justify-content: center;" >
+            <div style="" class="">
+                <img
+                style="width: 150px; height: 150px"
+                src="{% static 'images/ui/no-results.png' %}"
+                class="oh-404__image mb-4"
+                />
+                <h5 class="oh-404__subtitle">
+                {% trans "No search result found!" %}
+                </h5>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+<!-- start of comment modal -->
+<div
+	class="oh-modal"
+	id="requestcommentModal"
+	role="dialog"
+	aria-labelledby="requestCommentModalLabel"
+	aria-hidden="true"
+ >
+	<div class="oh-modal__dialog" id="requestCommentFormModal"> </div>
+</div>
+<!-- end of comment modal -->
+
+<div
+  class="oh-modal" style="z-index: 60;"
+  id="shiftRequestDetailModal"
+  role="dialog"
+  aria-labelledby="shiftRequestDetailModal"
+  aria-hidden="true"
+>
+  <div class="oh-modal__dialog">
+    <div class="oh-modal__dialog-header">
+      <h2
+        class="oh-modal__dialog-title"
+        id=""
+      >
+        {% trans "Details" %}
+      </h2>
+      <button class="oh-modal__close" aria-label="Close">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+    <div
+      class="oh-modal__dialog-body oh-modal__dialog-relative"
+      id="shiftRequestDetailTarget"
+    ></div>
+  </div>
+</div>
+
+
+<script>
+  $(".all-user-requests").change(function (e) {
+    var is_checked = $(this).is(":checked");
+    if (is_checked) {
+      $(".all-user-requests-row")
+        .prop("checked", true)
+        .closest(".oh-sticky-table__tr")
+        .addClass("highlight-selected");
+    } else {
+      $(".all-user-requests-row")
+        .prop("checked", false)
+        .closest(".oh-sticky-table__tr")
+        .removeClass("highlight-selected");
+    }
+  });
+
+  $(document).ready(function () {
+    var pd = $(".oh-pagination").attr("data-pd");
+    var hxVals = JSON.stringify(pd);
+    $("#requestCreateCard").attr("hx-vals", `{"pd":${hxVals}}`);
+    $("#requestCreateButton").attr("hx-vals", `{"pd":${hxVals}}`);
+
+    tickUserrequestsCheckboxes();
+    $(".all-user-requests-row").change(function () {
+      var parentTable = $(this).closest(".oh-sticky-table");
+      var body = parentTable.find(".oh-sticky-table__tbody");
+      var parentCheckbox = parentTable.find(".all-user-requests");
+      parentCheckbox.prop(
+        "checked",
+        body.find(".all-user-requests-row:checked").length ===
+          body.find(".all-user-requests-row").length
+      );
+      addingUserrequestsIds();
+    });
+
+    $(".all-user-requests").change(function () {
+      addingUserrequestsIds();
+    });
+    $("#selectAllUserrequests").click(function () {
+      selectAllUserrequests();
+    });
+    $("#unselectAllUserrequests").click(function () {
+      unselectAllUserrequests();
+    });
+    $("#exportUserrequests").click(function (e) {
+      exportUserrequests();
+    });
+  });
+</script>

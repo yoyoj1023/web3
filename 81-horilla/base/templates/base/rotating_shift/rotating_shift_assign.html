@@ -1,0 +1,28 @@
+{% extends 'index.html' %} {% block content %}
+{% load static %}
+{% load i18n %}
+
+<style>
+  form label {
+    margin:5px 0;
+  }
+</style>
+
+{% include 'base/rotating_shift/rotating_shift_assign_nav.html' %}
+
+<div class="oh-checkpoint-badge mb-2" id="selectedRShifts" data-ids="[]" data-clicked="" style="display:none;" >
+  {% trans "Selected Shifts" %}
+</div>
+<div class="oh-inner-sidebar-content">
+  <div id="view-container">
+  {% if rshift_assign %}
+    {% include 'base/rotating_shift/rotating_shift_assign_view.html' %}
+  {% else %}
+    {% include 'base/rotating_shift/rotating_shift_assign_empty.html' %}
+  {% endif %}
+  </div>
+</div>
+
+<script src="{% static 'basedOn.js' %}"></script>
+
+{% endblock content %}

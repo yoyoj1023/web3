@@ -1,0 +1,322 @@
+{% load static %}
+{% load i18n %}
+{% load horillafilters %}
+<!DOCTYPE html>
+<html>
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% get_current_language as LANGUAGE_CODE %}
+{% comment %} <html dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" lang="{{ LANGUAGE_CODE }}"> {% endcomment %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        var at_work_seconds = {{ request.user.employee_get.get_forecasted_at_work.forecasted_at_work_seconds }}
+        var run = 0
+    </script>
+    <title class="time-runner stop-runner">{{white_label_company_name}}</title>
+    <link rel="stylesheet" href="{% static 'build/css/driver.min.css' %}" />
+    <meta name="theme-color" content="orangered">
+    <link rel="manifest" href="{% static 'build/manifest.json' %}">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{% if white_label_company.icon %}{{white_label_company.icon.url}} {% else %}{% static 'favicons/apple-touch-icon.png' %}{% endif %}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{% if white_label_company.icon %}{{white_label_company.icon.url}} {% else %}{% static 'favicons/favicon-32x32.png' %}{% endif %}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{% if white_label_company.icon %}{{white_label_company.icon.url}} {% else %}{% static 'favicons/favicon-16x16.png' %}{% endif %}">
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="{% static 'build/css/style.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'build/css/sweetalert2.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'build/css/summernote-lite.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'build/css/orgChart.css' %}" />
+    <link rel="stylesheet" href="{% static '/jquery/jqueryui.css' %}">
+    <link rel="stylesheet" href="{% static 'build/css/pivottable.min.css' %}" />
+    <script src="{% static '/jquery/ajax.js' %}"></script>
+    <script src="{% static '/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '/jquery/jqueryui.js' %}"></script>
+    <script src="{% static '/base/toggleColumn.js' %}"></script>
+    <script src="{% static '/build/js/orgChart.js' %}"></script>
+    <script src="{% static 'build/js/driver.js' %}"></script>
+    <script src="{% static 'build/js/clearFilter.js' %}"></script>
+
+
+
+    <!-- Popper.JS -->
+    <!-- Bootstrap JS -->
+    {% block styles %}
+    {% endblock styles %}
+</head>
+
+
+<div hidden id="statiUrl" data-url='{% static "" %}'></div>
+
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <span class="logged-in" data-user-id="{{request.user.id}}"></span>
+    <div id="reloadMessages">
+        {% include "generic/messages.html" %}
+    </div>
+    {% if messages %}
+        <div class="oh-alert-container">
+            {% for message in messages %}
+                <div class="oh-alert oh-alert--animated {{message.tags}}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if is_birthday %}
+        <div class="page-wrapper">
+            <div class="blurred-background"></div>
+            <canvas id="c"></canvas>
+        </div>
+    {% endif %}
+    <button id="reloadMessagesButton" hx-get="{% url 'reload-messages' %}" hx-swap="afterend" hidden hx-target="#reloadMessages"></button>
+
+    <div class="oh-wrapper-main">
+
+        <!-- Start of Sidebar -->
+        <div id="sidebar">
+            {% include 'sidebar.html' %}
+        </div>
+        <!-- End of Sidebar -->
+
+        <div id="main">
+            <!-- Start of Confirmation Modal -->
+            <div class="oh-modal" id="confirmModal" role="dialog" aria-labelledby="confirmModalLabel"
+                aria-hidden="true">
+                <div class="oh-modal__dialog oh-modal__dialog--confirm">
+                    <div class="oh-modal__dialog-header">
+                        <span class="oh-modal__dialog-title" id="confirmModalLabel"></span>
+                    </div>
+                    <div class="oh-modal__dialog-body" id="confirmModalBody">
+
+                    </div>
+                    <div class="oh-modal__dialog-footer">
+                        <button class="oh-btn oh-btn--success" id="ok">{% trans "Confirm" %}</button>
+                        <button class="oh-btn oh-btn--danger oh-modal__cancel" id="cancel">
+                            {% trans "Cancel" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Confirm Modal -->
+
+            <!-- Start of Notifications activity bar -->
+            <div class="oh-activity-sidebar " id="allNotifications" style="z-index:1000">
+                <div class="oh-activity-sidebar__header">
+                    <span id="notificationClose" style="cursor: pointer;" title="{% trans 'Close' %}">
+                        <ion-icon name="chevron-forward-outline"
+                            class="oh-activity-sidebar__header-icon me-2 oh-activity-sidebar__close" id="close"
+                            data-target="#activitySidebar" style="font-size: 24px;"></ion-icon>
+                    </span>
+                    <span class="oh-activity-sidebar__title"> {% trans "All Notifications" %}</span>
+                    <a class="delete-all-link" hx-target="#allNotificationBody"
+                        hx-post="{% url 'delete-all-notifications'%}">{% trans "Clear all" %}</a>
+                </div>
+                <div class="oh-activity-sidebar__body" id="allNotificationBody">
+                    {% include "notification/all_notifications.html" %}
+                </div>
+            </div>
+            <!-- End of Notifications activity bar -->
+
+            <!-- Start of Nav bar -->
+            <nav class="oh-navbar" style="width: -webkit-fill-available;;">
+                <div class="oh-wrapper oh-navbar__wrapper">
+                    <div class="oh-navbar__toggle-container">
+                        <a href="#" class="oh-navbar__toggle-link oh-link__unstyled" onclick="handleSidebarToggle()">
+                            <img src="{% static 'images/ui/menu.svg' %}" width="24" height="24"
+                                class="oh-navbar__toggle-menu" loading="lazy" />
+                        </a>
+
+                        {% if breadcrumbs %}
+                            <!-- Start of breadcrumb in nav bar -->
+                            {% include "base/navbar_components/breadcrumbs_view.html" %}
+                            <!-- End of breadcrumb in nav bar -->
+                        {% endif %}
+                        </a>
+                    </div>
+                    <div class="oh-navbar__systray">
+                        {% if "attendance"|app_installed %}
+                            <!-- Start of check in/out button in nav bar -->
+                            <div id="attendance-activity-container">
+                                {% include "attendance/components/in_out_component.html" %}
+                            </div>
+                            <!-- End of check in/out button in nav bar -->
+                        {% endif %}
+
+                        {% if request.user|any_permission:'base' or perms.attendance.view_attendancevalidationcondition %}
+                            <!-- Start of settings button in nav bar -->
+                            <div class="oh-navbar__action-icons" title="Settings">
+                                <a href="{% url 'general-settings' %}" id="settingsMenu" class="oh-navbar__action-icons-link">
+                                    <ion-icon name="settings-outline" class="oh-navbar__icon"></ion-icon>
+                                </a>
+                            </div>
+                            <!-- End of settings button in nav bar -->
+                        {% endif %}
+
+                        <!-- Start of notifications button in nav bar -->
+                        {% include 'notification/notification.html' %}
+                        <!-- End of notifications button in nav bar -->
+
+                        <!-- Start of Languages dropdown in nav bar -->
+                        {% include "base/navbar_components/language_settings.html" %}
+                        <!-- End of Languages dropdown in nav bar -->
+
+                        {% if perms.base.change_company %}
+                            <!-- Start of Companies dropdown in nav bar -->
+                            {% include "base/navbar_components/company_selection.html" %}
+                            <!-- End of Companies dropdown in nav bar -->
+                        {% endif %}
+
+                        <!-- Start of profile dropdown in nav bar -->
+                        {% include "navbar_component/profile_section.html" %}
+                        <!-- End of profile dropdown in nav bar -->
+                    </div>
+                </div>
+                <!-- Start of quick access in index page -->
+                {% include "floating_button.html" %}
+                <!-- End of quick access in index page -->
+            </nav>
+            <!-- End of Nav bar -->
+
+            <!-- Start of main section -->
+            <div id='main-section'>
+                {% comment %} <div id="tripple-loader-contaner"
+                    class="d-flex justify-content-center align-items-center  tripple-loader-contaner--visible"
+                    style="height:90vh;">
+                    <div class="triple-spinner"></div>
+                </div> {% endcomment %}
+                <div id="main-section-data" style="display: none;" data-lang="{{LANGUAGE_CODE}}">
+                    {% block content %}
+                        {% include 'dashboard.html' %}
+                    {% endblock content %}
+                    <div class="oh-modal" style="z-index: 100;" id="objectDetailsModal" role="dialog"
+                        aria-labelledby="objectDetailsModalLabel" aria-hidden="true">
+                        <div class="oh-modal__dialog oh-modal__dialog-relative" style="max-width: 550px" id="objectDetailsModalTarget"> </div>
+                    </div>
+                    <div class="oh-modal" style="z-index: 100;" id="objectDetailsModalW25" role="dialog"
+                        aria-labelledby="objectDetailsModalW25Label" aria-hidden="true">
+                        <div class="oh-modal__dialog oh-modal__dialog-relative" style="max-width: 410px" id="objectDetailsModalW25Target"> </div>
+                    </div>
+                    <div class="oh-modal" id="objectCreateModal" role="dialog" aria-labelledby="objectCreateModalLabel" aria-hidden="true">
+                        <div class="oh-modal__dialog" id="objectCreateModalTarget"></div>
+                    </div>
+                    <div class="oh-modal" id="objectUpdateModal" role="dialog" aria-labelledby="objectUpdateModalLabel" aria-hidden="true">
+                        <div class="oh-modal__dialog" id="objectUpdateModalTarget"></div>
+                    </div>
+                    <div class="oh-modal" id="dynamicCreateModal" role="dialog" aria-hidden="true" style="z-index: 1022;">
+                        <div id="dynamicCreateModalTarget" class="oh-modal__dialog" style="max-width: 550px"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of main section -->
+        </div>
+    </div>
+
+    <!--htmx script -->
+    <script src="{% static 'build/js/web.frontend.min.js' %}"></script>
+    <script src="{% static 'htmx/htmx.min.js' %}"></script>
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
+    <!-- this is the master js  -->
+    <script src="{% static '/index/index.js' %}"></script>
+    <script src="{% static '/index/saveFilters.js' %}"></script>
+    <script src="{% static 'build/js/htmxSelect2.js' %}"></script>
+    <script src="{% static 'build/js/summernote-lite.min.js' %}"></script>
+
+    <!-- This CDN is for date format change -->
+    <script src="{% static 'build/js/moment.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+
+    <script src="{% static '/base/date_settings.js' %}"></script>
+    <script src="{% static '/base/time_formatting.js' %}"></script>
+    <script src="{% static '/base/time_settings.js' %}"></script>
+    <script src="{% static '/base/date_formatting.js' %}"></script>
+
+    <script src="{% static 'build/js/pivottable.min.js' %}"></script>
+    <script src="{% static 'build/js/pivottable_plot.min.js' %}"></script>
+    <script src="{% static 'build/js/pivottable_ploty.min.js' %}"></script>
+    <script src="{% static 'build/js/pivottable_excel.min.js' %}"></script>
+
+    {% if "attendance"|app_installed %}
+        <script src="{% static 'attendance/actions.js' %}"></script>
+    {% endif %}
+    <script type="module" src="{% static 'images/ionicons/ui_icons/ionicons/ionicons.esm.js' %}"></script>
+    <script src="{% static '/build/js/sweetAlert.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Clear all query parameters from the URL
+        function clearQueryParameters() {
+            var urlWithoutQuery = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, urlWithoutQuery);
+        }
+    </script>
+    {% if enabled_timerunner %}
+        <script>
+            // time-runner
+            function secondsToDuration(seconds) {
+                var hours = Math.floor(seconds / 3600);
+                var minutes = Math.floor((seconds % 3600) / 60);
+                var remainingSeconds = Math.floor(seconds % 60);
+
+                // add leading zeros if necessary
+                var formattedHours = (hours < 10) ? "0" + hours : hours;
+                var formattedMinutes = (minutes < 10) ? "0" + minutes : minutes;
+                var formattedSeconds = (remainingSeconds < 10) ? "0" + remainingSeconds : remainingSeconds;
+
+                return formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+            }
+            // accessing initial worked hours from the user
+            $(".time-runner").not("title").html(secondsToDuration(at_work_seconds));
+            $("title.time-runner").html("{{white_label_company_name}} | " + secondsToDuration(at_work_seconds));
+            setInterval(() => {
+                if (run) {
+                    at_work_seconds = at_work_seconds + 1
+                    $("div.time-runner").html(secondsToDuration(at_work_seconds));
+                    $("title").html("{{white_label_company_name}} | " + secondsToDuration(at_work_seconds));
+                }
+            }, 1000);
+
+            function switchTab(e) {
+                let parentContainerEl = e.target.closest(".oh-tabs");
+                let tabElement = e.target.closest(".oh-tabs__tab");
+                let targetSelector = e.target.dataset.target;
+                let targetEl = parentContainerEl
+                    ? parentContainerEl.querySelector(targetSelector)
+                    : null;
+
+                // Highlight active tabs
+                if (tabElement && !tabElement.classList.contains("oh-tabs__tab--active")) {
+                    parentContainerEl
+                        .querySelectorAll(".oh-tabs__tab--active")
+                        .forEach(function (item) {
+                            item.classList.remove("oh-tabs__tab--active");
+                        });
+
+                    if (!tabElement.classList.contains("oh-tabs__new-tab")) {
+                        tabElement.classList.add("oh-tabs__tab--active");
+                    }
+                }
+
+                // Switch tabs
+                if (targetEl && !targetEl.classList.contains("oh-tabs__content--active")) {
+                    parentContainerEl
+                        .querySelectorAll(".oh-tabs__content--active")
+                        .forEach(function (item) {
+                            item.classList.remove("oh-tabs__content--active");
+                        });
+                    targetEl.classList.add("oh-tabs__content--active");
+                }
+            }
+        </script>
+    {% endif %}
+</body>
+
+</html>

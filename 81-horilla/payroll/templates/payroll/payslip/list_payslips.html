@@ -1,0 +1,16 @@
+{% load i18n %} {% load static i18n %} {% include 'filter_tags.html' %}
+<div id="payslips-table">
+  {% include "payroll/payslip/payslip_table.html" %}
+</div>
+<script>
+  $(document).ready(function () {
+    $("#selectAllPayslip").click(function () {
+      selectAllPayslip();
+    });
+
+    $("#unselectAllPayslip").click(function () {
+      unselectAllPayslip();
+    });
+  });
+</script>
+<script src="{% static 'payroll/action.js' %}"></script>

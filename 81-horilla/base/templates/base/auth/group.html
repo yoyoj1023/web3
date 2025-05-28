@@ -1,0 +1,59 @@
+{% extends 'settings.html' %} {% load i18n %} {% block settings %}{% load basefilters %}
+<script>
+  $(document).ready(function () {
+    $(".view-employees [name=permissions]").change(function (e) {
+      e.preventDefault();
+      var permissions = [];
+      var panelId =
+        "#" +
+        $(this).closest(".panel.view-employees").closest(".panel").attr("id");
+      var groupId = $(panelId).attr("data-group-id");
+      var name = $(panelId).attr("data-group-name");
+
+      $(panelId + " [name=permissions]").each(function () {
+        if ($(this).is(":checked")) {
+          var permissionValue = $(this).val();
+          permissions.push(permissionValue);
+        }
+      });
+      $.ajax({
+        type: "post",
+        url: '{% url "update-group-permission" %}',
+        traditional: true,
+        data: {
+          csrfmiddlewaretoken: getCookie("csrftoken"),
+          permissions: permissions,
+          id: groupId,
+          name:name,
+        },
+        success: function (response) {
+
+          $("#messages").html($(`
+            <div class="oh-alert oh-alert--animated oh-alert--${response.type}">
+              ${response.message}.
+            </div>
+          `));
+        },
+        error:function (response){
+          $("#messages").html($(`
+            <div class="oh-alert oh-alert--animated oh-alert--danger">
+              Sever error.
+            </div>
+          `));
+        }
+      });
+    });
+  });
+  function checkSelected(names, target,initial=false) {
+    names = JSON.parse(`${names}`);
+    $.each(names, function (indexInArray, valueOfElement) {
+      if (!initial) {
+        $(target).find(`[value=${valueOfElement}]`).prop("checked", true).change();
+      }else{
+        $(target).find(`[value=${valueOfElement}]`).prop("checked", true);
+      }
+    });
+  }
+</script>
+{% include "base/auth/group_accordion.html" %}
+{% endblock settings %}

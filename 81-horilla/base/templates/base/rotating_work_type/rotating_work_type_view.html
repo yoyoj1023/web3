@@ -1,0 +1,47 @@
+{% load i18n %}
+<div class="oh-sticky-table">
+	<div class="oh-sticky-table__table oh-table--sortable">
+		<div class="oh-sticky-table__thead">
+			<div class="oh-sticky-table__tr">
+				<div class="oh-sticky-table__th">{% trans "Title" %}</div>
+				<div class="oh-sticky-table__th">{% trans "Work Type 1" %}</div>
+				<div class="oh-sticky-table__th">{% trans "Work Type 2" %}</div>
+				{% if perms.base.change_rotatingworktype or perms.base.delete_rotatingworktype %}
+					<div class="oh-sticky-table__th">{% trans "Actions" %}</div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="oh-sticky-table__tbody">
+			{% for rwork in rwork_type %}
+				<div class="oh-sticky-table__tr" draggable="true" id="rotatingWorkTypeTr{{rwork.id}}">
+					<div class="oh-sticky-table__td">{{rwork.name}}</div>
+					<div class="oh-sticky-table__td">{{rwork.work_type1}}</div>
+					<div class="oh-sticky-table__td">{{rwork.work_type2}}</div>
+					{% if perms.base.change_rotatingworktype or perms.base.delete_rotatingworktype %}
+						<div class="oh-sticky-table__td">
+							<div class="oh-btn-group">
+								{% if perms.base.change_rotatingworktype %}
+									<a data-toggle="oh-modal-toggle" data-target="#objectUpdateModal"
+										hx-get="{% url 'rotating-work-type-update' rwork.id %}" hx-target="#objectUpdateModalTarget"
+										type="button" class="oh-btn oh-btn--light-bkg w-50" title="{% trans 'Edit' %}">
+										<ion-icon name="create-outline"></ion-icon></a>
+								{% endif %}
+								{% if perms.base.delete_rotatingworktype %}
+									<form hx-confirm="{% trans 'Are you sure you want to delete this rotating work type?' %}"
+										hx-post="{% url 'rotating-work-type-delete' rwork.id %}" hx-swap="outerHTML" class="w-50"
+										hx-target="#rotatingWorkTypeTr{{rwork.id}}" hx-on-htmx-after-request="reloadMessage(this);" >
+										{% csrf_token %}
+										<button type="submit" class="oh-btn oh-btn--danger-outline oh-btn--light-bkg w-100"
+											title="{% trans 'Remove' %}">
+											<ion-icon name="trash-outline"></ion-icon>
+										</button>
+									</form>
+								{% endif %}
+							</div>
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

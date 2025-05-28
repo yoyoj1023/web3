@@ -1,0 +1,16 @@
+{% load i18n %}
+<label
+  class="oh-label"
+  for="id_{{ form.leave_type_id.name }}"
+  title="{{ form.leave_type_id.help_text|safe }}"
+  >{% trans form.leave_type_id.label %}</label
+>
+{{form.leave_type_id}}
+<script>
+  $(document).ready(function () {
+
+      $("select").on("select2:select", function (e) {
+          $(this).closest("select")[0].dispatchEvent(new Event("change"));
+      });
+  });
+</script>

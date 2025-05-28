@@ -1,0 +1,35 @@
+{% load i18n %} {% load static %} {% if messages %}
+<div class="oh-wrapper">
+  {% for message in messages %}
+  <div class="oh-alert-container">
+    <div class="oh-alert oh-alert--animated {{message.tags}}">
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
+  <script>
+    setTimeout(function () {
+      $(".oh-modal__close").click();
+    }, 1000);
+  </script>
+</div>
+{% endif %}
+
+<div class="oh-modal__dialog-body" style="padding: 0">
+  <form
+    hx-post="{% url 'shift-request-reallocate' %}?emp_id={{request.user.employee_get.id}}"
+    hx-target="#shiftRequestTargetModal"
+    id="addForm"
+  >
+    {{form.as_p}}
+  </form>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $("select").on("select2:select", function (e) {
+      $(".leave-message").hide()
+      $(this).closest("select")[0].dispatchEvent(new Event("change"));
+    });
+  });
+</script>

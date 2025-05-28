@@ -1,0 +1,318 @@
+{% load basefilters %}
+{% load static %}
+{% load i18n %}
+
+<style>
+  .count-span{
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0.5rem 0rem;
+    font-style: italic;
+    color: hsl(0deg,0%,37%);
+    width: 100%;
+  }
+</style>
+<script>
+  $(document).ready(function () {
+    $("[data-toggle-count]").click(function (e) {
+      e.preventDefault();
+      span = $(this).parent().find(".count-span").toggle()
+    });
+
+  })
+  function copyLink(link){
+    var $temp = $("<input>");
+    var $url = $(location).attr('href');
+    $("body").append($temp);
+    $temp.val(link).select();
+    document.execCommand("copy");
+    $temp.remove();
+    Swal.fire({
+      text: "Link copied",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 3000, // Set the timer to 3000 milliseconds (3 seconds)
+      timerProgressBar: true, // Show a progress bar as the timer counts down
+    });
+  }
+</script>
+{% include "filter_tags.html" %}
+{% if data %}
+  <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="oh-card p-4">
+              <div class="oh-card__body">
+                <!-- start of column toggle button-->
+                <div class="oh-table_sticky--wrapper">
+                  <div class="oh-sticky-dropdown--header">
+                      <div class="oh-dropdown" x-data="{open: false}">
+                          <button class="oh-sticky-dropdown_btn " @click="open = !open"><ion-icon name="ellipsis-vertical-sharp"
+                              role="img" class="md hydrated" aria-label="ellipsis vertical sharp"></ion-icon></button>
+                          <div class="oh-dropdown__menu oh-sticky-table_dropdown" x-show="open" @click.outside="open = false">
+                              <ul class="oh-dropdown__items" id="RecruitmentCells">
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- end of column toggle button-->
+                <div id="recruitment-table" data-table-name="recruitment_table">
+                  <div class="oh-sticky-table oh-sticky-table--no-highlight">
+                    <!-- start of sticky table -->
+                    <div class="oh-sticky-table__table">
+                      <div class="oh-sticky-table__thead">
+                        <div class="oh-sticky-table__tr">
+                          <div class="oh-sticky-table__th {% if request.sort_option.order == '-title' %}arrow-up {% elif request.sort_option.order == 'title' %}arrow-down {% else %} arrow-up-down {% endif %}" hx-get="{% url 'recruitment-search' %}?{{pd}}&orderby=title" hx-target="#recruitment-container">{% trans "Recruitment" %}</div>
+                          <div data-cell-index="1" data-cell-title='{% trans "Managers" %}' class="oh-sticky-table__th" >{% trans "Managers" %}</div>
+                          <div data-cell-index="2" data-cell-title='{% trans "Open Jobs" %}' class="oh-sticky-table__th" >{% trans "Open Jobs" %}</div>
+                          <div data-cell-index="3" data-cell-title='{% trans "Vacancy" %}'
+                            class="oh-sticky-table__th {% if request.sort_option.order == '-vacancy' %}arrow-up {% elif request.sort_option.order == 'vacancy' %}arrow-down {% else %} arrow-up-down {% endif %}"
+                            hx-get="{% url 'recruitment-search' %}?{{pd}}&orderby=vacancy"
+                            hx-target="#recruitment-container"
+                          >{% trans "Vacancy" %}</div>
+                          <div data-cell-index="4" data-cell-title='{% trans "Total Hires" %}' class="oh-sticky-table__th" >{% trans "Total Hires" %}</div>
+                          <div data-cell-index="5" data-cell-title='{% trans "Start Date" %}'
+                            class="oh-sticky-table__th {% if request.sort_option.order == '-start_date' %}arrow-up {% elif request.sort_option.order == 'start_date' %}arrow-down {% else %} arrow-up-down {% endif %}"
+                            hx-get="{% url 'recruitment-search' %}?{{pd}}&orderby=start_date"
+                            hx-target="#recruitment-container"
+                          >{% trans "Start Date" %}</div>
+                          <div data-cell-index="6" data-cell-title='{% trans "End Date" %}'
+                            class="oh-sticky-table__th {% if request.sort_option.order == '-end_date' %}arrow-up {% elif request.sort_option.order == 'end_date' %}arrow-down {% else %} arrow-up-down {% endif %}"
+                            hx-get="{% url 'recruitment-search' %}?{{pd}}&orderby=end_date"
+                            hx-target="#recruitment-container"
+                          >{% trans "End Date" %}</div>
+                          <div data-cell-index="7" data-cell-title='{% trans "Status" %}'
+                            class="oh-sticky-table__th"
+                          >{% trans "Status" %}</div>
+                          <div class="oh-sticky-table__th oh-sticky-table__right" style="width: 315px;">{% trans "Actions" %}</div>
+                        </div>
+                      </div>
+                      <div class="oh-sticky-table__tbody">
+                        {% for rec in data %}
+                        <div class="oh-sticky-table__tr oh-permission-table__tr oh-permission-table--collapsed" >
+                          <div class="oh-sticky-table__sd oh-permission-table--toggle {% if rec.closed %} row-status--red
+                            {% elif not rec.closed %} row-status--yellow
+                            {% endif %}"
+                            data-toggle-count
+                          >
+                            <div class="d-flex align-items-center">
+                              <button class="oh-permission-table__collapse me-2">
+                                <span  title="{% trans "Reveal" %}"><ion-icon class="oh-permission-table__collapse-down" name="chevron-down-outline"></ion-icon></span>
+                                <span  title="{% trans "Collapse" %}"><ion-icon class="oh-permission-table__collapse-up" name="chevron-up-outline"></ion-icon></span>
+                              </button>
+                              <span class="oh-permission-table__user">
+                                <div class="d-flex" style="align-items: center;">
+                                  <div>{{ rec }}</div>
+                                  {% if rec.linkedin_account_id %}
+                                    <div style="margin-left: 8px;" title="{{ rec }} posted on {{ rec.linkedin_account_id }} LinkedIn account.">
+                                      <ion-icon name="logo-linkedin"></ion-icon>
+                                    </div>
+                                  {% endif %}
+                                </div>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div data-cell-index="1" class="oh-sticky-table__td">
+                            {% for manager in rec.recruitment_managers.all %}
+                            <span class="oh-user-panel oh-collapse-panel" data-type="user">
+                              <div class="oh-profile oh-profile--md">
+                                <div class="oh-profile__avatar mr-1">
+                                  <img
+                                  src="https://ui-avatars.com/api/?name={{manager.get_full_name}}&background=random"
+                                  class="oh-profile__image"
+                                  alt="Baby C."
+                                  />
+                                </div>
+                                <span class="oh-profile__name oh-text--dark" title="{{manager}}"
+                                >{{manager.employee_first_name|truncatechars:4}}</span
+                                >
+                              </div>
+                              {% if perms.recruitment.change_recruitment or request.user.employee_get in rec.recruitment_managers.all %}
+                                <a hx-post="{% url 'remove-recruitment-manager' manager.id rec.id %}?{{pd}}&page={{data.number}}"  title="{% trans "Remove" %}" hx-target="#recruitment-container"class="oh-user-panel__remove">
+                                  <ion-icon name="close-outline"></ion-icon>
+                                </a>
+                              {% endif %}
+                            </span>
+                            {% endfor %}
+                            <span class="count-span">{{rec.recruitment_managers.all|length}} {% trans "Managers" %}</span>
+
+                          </div>
+                          <div data-cell-index="2" class="oh-sticky-table__td">
+                            {% for jb in rec.open_positions.all %}
+                            <span class="oh-user-panel oh-collapse-panel" data-type="user">
+                              <div class="oh-profile oh-profile--md">
+                                <div class="oh-profile__avatar mr-1">
+                                  <img
+                                  src="https://ui-avatars.com/api/?name={{jb.job_position}}&background=random"
+                                  class="oh-profile__image"
+                                  alt="Baby C."
+                                  />
+                                </div>
+                                <span class="oh-profile__name oh-text--dark" title="{{jb}}"
+                                >{{jb.job_position|truncatechars:5}}.</span
+                                >
+                              </div>
+                            </span>
+                            {% endfor %}
+                            <span class="count-span">{{rec.open_positions.all|length}} {% trans "Jobs" %}</span>
+
+                          </div>
+                          <div data-cell-index="3" class="oh-sticky-table__td">
+                            {{rec.vacancy}}
+                          </div>
+                          <div data-cell-index="4" class="oh-sticky-table__td">
+                            {{rec.total_hires}} {% trans "Hired" %} <span style="font-size: 12px; color: gray;">{% trans "of" %} {{rec.candidate.all|length}} {% trans "Candidates" %}</span>
+                          </div>
+                          <div data-cell-index="5" class="oh-sticky-table__td dateformat_changer">
+                            {{rec.start_date}}
+                          </div>
+                          <div data-cell-index="6" class="oh-sticky-table__td dateformat_changer">
+                            {{rec.end_date}}
+                          </div>
+                          <div data-cell-index="7" class="oh-sticky-table__td">
+                            {% if not rec.closed %}
+                            {% trans "Open" %}
+                            {% else %}
+                            {% trans "Closed" %}
+                            {% endif %}
+                          </div>
+                          <div class="oh-sticky-table__td oh-sticky-table__right">
+                            <div class="oh-btn-group">
+                              <a href="#" class="oh-btn oh-btn--light-bkg w-100" onclick="copyLink(window.location.origin+'/recruitment/application-form?recruitmentId={{rec.id}}')" title="{% trans "Share Link" %}">
+                                <ion-icon name="share-social-outline"></ion-icon>
+                              </a>
+                              {% if perms.recruitment.change_recruitment %}
+                                <a hx-get="{% url 'recruitment-update' rec.id %}" hx-target='#objectUpdateModalTarget' hx-swap='innerHTML' data-toggle='oh-modal-toggle' data-target='#objectUpdateModal'  class="oh-btn oh-btn--light-bkg w-100" title="Edit"><ion-icon name="create-outline"></ion-icon></a>
+                              {% endif %}
+                              {% if perms.recruitment.add_recruitment %}
+                                <a hx-get="{% url 'recruitment-duplicate' rec.id %}" hx-target='#objectCreateModalTarget' hx-swap='innerHTML' data-toggle='oh-modal-toggle' data-target='#objectCreateModal'  class="oh-btn oh-btn--light-bkg w-100" title="{% trans 'Duplicate' %}"><ion-icon name="copy-outline"></ion-icon></a>
+                              {% endif %}
+                              {% if perms.recruitment.delete_recruitment %}
+                                {% if rec.is_active %}
+                                  <a href="{% url 'recruitment-archive' rec.id %}" class="oh-btn oh-btn--light-bkg w-100" title="{% trans 'Archive' %}"><ion-icon name="archive"></ion-icon></a>
+                                  {% else %}
+                                  <a href="{% url 'recruitment-archive' rec.id %}" class="oh-btn oh-btn--light-bkg w-100" title="{% trans 'Unarchive' %}"><ion-icon name="archive"></ion-icon></a>
+                                {% endif %}
+                                <span>
+                                  <form
+                                    action="{% url 'recruitment-delete' rec.id  %}"
+                                    onsubmit="return confirm('{% trans "Are you sure to delete this recruitment?" %}')"
+                                    method="post"
+                                    style="display: contents">
+                                    {% csrf_token %}
+                                    <button class="oh-btn oh-btn--light-bkg oh-btn--danger-outline  w-100" title="{% trans 'Delete' %}">
+                                      <ion-icon name="trash-outline" role="img" class="md hydrated" aria-label="trash outline"></ion-icon>
+                                    </button>
+                                  </form>
+                                </span>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <!-- end of sticky table -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- start of pagination -->
+  <div class="oh-pagination">
+    <span
+      class="oh-pagination__page"
+      data-toggle="modal"
+      data-target="#addEmployeeModal"
+      >
+      {% trans "Page" %} {{ data.number }} {% trans "of" %} {{ data.paginator.num_pages }}.
+      </span
+    >
+
+    <nav class="oh-pagination__nav">
+      <div class="oh-pagination__input-container me-3">
+        <span class="oh-pagination__label me-1">{% trans "Page" %}</span>
+
+        <input
+          type="number"
+          name="page"
+          class="oh-pagination__input"
+          value="{{data.number}}"
+          hx-get="{% url 'recruitment-search' %}?{{pd}}" hx-target="#recruitment-container"
+          min="1"
+        />
+        <span class="oh-pagination__label">{% trans "of" %} {{data.paginator.num_pages}}</span>
+      </div>
+
+      <ul class="oh-pagination__items">
+        {% if data.has_previous %}
+        <li class="oh-pagination__item oh-pagination__item--wide">
+          <a hx-target='#recruitment-container' hx-get="{% url 'recruitment-search' %}?{{pd}}&page=1" class="oh-pagination__link">{% trans "First" %}</a>
+        </li>
+        <li class="oh-pagination__item oh-pagination__item--wide">
+          <a hx-target='#recruitment-container' hx-get="{% url 'recruitment-search' %}?{{pd}}&page={{ data.previous_page_number }}" class="oh-pagination__link">{% trans "Previous" %}</a>
+        </li>
+        {% endif %}
+        {% if data.has_next %}
+        <li class="oh-pagination__item oh-pagination__item--wide">
+          <a hx-target='#recruitment-container' hx-get="{% url 'recruitment-search' %}?{{pd}}&page={{ data.next_page_number }}" class="oh-pagination__link">{% trans "Next" %}</a>
+        </li>
+        <li class="oh-pagination__item oh-pagination__item--wide">
+          <a hx-target='#recruitment-container' hx-get="{% url 'recruitment-search' %}?{{pd}}&page={{ data.paginator.num_pages }}" class="oh-pagination__link">{% trans "Last" %}</a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </nav>
+  </div>
+  <!-- end of pagination -->
+
+{% else %}
+  <!-- start of empty page -->
+  <div class="oh-404">
+    <img
+      style="width: 150px; height: 150px"
+      src="{% static 'images/ui/no-results.png' %}"
+      class="oh-404__image mb-4"
+    />
+    <h5 class="oh-404__subtitle">
+      {% trans "No search result found!" %}
+    </h5>
+  </div>
+  <!-- end of empty page -->
+{% endif %}
+
+<div
+  class="oh-modal"
+  id="duplicateRecruitmentModal"
+  role="dialog"
+  aria-labelledby="duplicateRecruitmentModal"
+  aria-hidden="true"
+>
+  <div class="oh-modal__dialog">
+    <div class="oh-modal__dialog-header">
+      <h5 class="oh-modal__dialog-title" id="duplicateRecruitmentModalLabel"
+        >{% trans "Duplicate Recruitment" %}</span
+      >
+      <button class="oh-modal__close" aria-label="Close"title="{% trans "Close" %}" >
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+    <div class="oh-modal__dialog-body" id='duplicateFormContainer'>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // toggle colums //
+  toggleColumns("recruitment-table","RecruitmentCells")
+  localStorageRecruitmentCells = localStorage.getItem("recruitment_table")
+  if (!localStorageRecruitmentCells) {
+      $("#RecruitmentCells").find("[type=checkbox]").prop("checked",true)
+  }
+  $("[type=checkbox]").change()
+</script>

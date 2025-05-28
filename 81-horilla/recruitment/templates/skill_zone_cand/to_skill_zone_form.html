@@ -1,0 +1,12 @@
+{% load i18n %}
+    <form
+        hx-post="{% url 'to-skill-zone' cand_id %}"
+        hx-target="#createTarget"
+        hx-encoding="multipart/form-data"
+        id="skillform"
+    >
+        {{form.as_p}}
+    </form>
+    <script>
+        $("#skillform .col-md-6").toggleClass("col-md-6");
+    </script>

@@ -1,0 +1,14 @@
+{% load i18n %}
+<form
+	{% if t_type_id %}
+    hx-post="{% url 'ticket-type-update' t_type_id %}"
+	{% else	%}
+	hx-post="{% url 'ticket-type-create' %}"
+	{% endif %}
+	hx-target="#ticketForm"
+	method="post"
+>
+	{% csrf_token %}
+	{{form.non_field_errors}}
+    {{form.as_p}}
+</form>

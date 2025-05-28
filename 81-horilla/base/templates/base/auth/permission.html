@@ -1,0 +1,20 @@
+{% extends 'settings.html' %} {% block settings %}
+
+<script>
+
+  function checkSelected(names, target, initial = false) {
+    names = JSON.parse(`${names}`);
+    $.each(names, function (indexInArray, valueOfElement) {
+      if (!initial) {
+        $(target)
+          .find(`[value=${valueOfElement}]`)
+          .prop("checked", true)
+          .change();
+      } else {
+        $(target).find(`[value=${valueOfElement}]`).prop("checked", true);
+      }
+    });
+  }
+  var showSearch = true
+</script>
+{% include "base/auth/permission_accordion.html" %} {% endblock settings %}

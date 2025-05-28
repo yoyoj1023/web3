@@ -1,0 +1,29 @@
+{% extends 'index.html' %} {% block content %}{% load i18n %}
+<div class="oh-wrapper">
+	{% include 'recruitment/nav.html' %}
+  	<!-- start of quick filters -->
+	<div class="d-flex flex-row-reverse">
+
+		<span class="m-1" style="margin-left: 15px;cursor: pointer;" onclick="$('[name=closed]').val('false'); $('[name=closed]').first().change(); $('.filterButton').click()" style="cursor: pointer">
+		  <span class="oh-dot oh-dot--small me-1" style="background-color:yellowgreen"></span>
+		  {% trans "Open" %}
+		</span>
+		<span class="m-1" style="margin-left: 15px;cursor: pointer;" onclick="$('[name=closed]').val('true'); $('[name=closed]').first().change(); $('.filterButton').click()" style="cursor: pointer">
+		  <span class="oh-dot oh-dot--small me-1" style="background-color:red" ></span>
+		  {% trans "Closed" %}
+		</span>
+	</div>
+  	<!-- end of quick filters -->
+
+	<div id="recruitment-container">
+		{% include 'recruitment/recruitment_component.html' %}
+	</div>
+</div>
+
+<script>
+	function toggleLinkedIn(){
+		const linkedInInput = $("[name='linkedin_account_id']");
+		linkedInInput.closest('div').toggleClass('d-none');
+	};
+</script>
+{% endblock %}

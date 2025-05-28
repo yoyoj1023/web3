@@ -1,0 +1,28 @@
+{% extends 'index.html' %} {% block content %} {% load static %} {% load i18n %}
+<style>
+  form label {
+    margin: 5px 0;
+  }
+</style>
+{% include 'base/rotating_work_type/rotating_work_type_assign_nav.html' %}
+<div
+  class="oh-checkpoint-badge mb-2"
+  id="selectedRWorktypes"
+  data-ids="[]"
+  data-clicked=""
+  style="display: none"
+>
+  {% trans "Selected Worktypes" %}
+</div>
+<div class="oh-wrapper mb-4">
+  <div id="view-container">
+    {% if rwork_type_assign %}
+      {% include 'base/rotating_work_type/rotating_work_type_assign_view.html' %}
+    {% else %}
+      {% include "base/rotating_work_type/rotating_work_type_assign_empty.html" %}
+    {% endif %}
+  </div>
+</div>
+
+<script src="{% static 'basedOn.js' %}"></script>
+{% endblock content %}

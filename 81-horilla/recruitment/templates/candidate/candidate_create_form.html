@@ -1,0 +1,201 @@
+{% extends 'index.html' %} {% block content %} {% load static %} {% load i18n %}
+{% comment %} {% include 'candidate/candidate_nav.html' %} {% endcomment %}
+{{form.load}}
+<div
+  class="oh-wrapper mt-5"
+  id="section"
+  data-select2-id="select2-data-40-yu7x"
+>
+  <form
+    data-select2-id="select2-data-47-5jxy"
+    action= "{{request.path}}?{{request.GET.urlencode}}"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div
+      class="oh-general__tab-target oh-profile-section mb-4"
+      id="personal"
+      data-select2-id="select2-data-personal"
+    >
+      <div
+        class="oh-profile-section__card"
+        data-select2-id="select2-data-48-0df8"
+      >
+        <div id="personalMessage">
+          {% if messages %}
+          <div class="oh-alert-container">
+            {% for message in messages %}
+            <div class="oh-alert oh-alert--animated {{message.tags}}">
+              {{ message }}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% csrf_token %}
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-12 col-lg-6 d-flex align-items-center"
+          >
+            <div
+              class="oh-profile-section__edit-photo me-4 mb-3"
+              data-toggle="oh-modal-toggle"
+              data-target="#uploadPhotoModal"
+            >
+              <img
+              src="{{form.instance.get_avatar}}"
+              class="oh-profile-section__modal-image preview"
+                alt="Username"
+              />
+            </div>
+          </div>
+        </div>
+        <input type="file" hidden name="profile" id="hidden_profile" />
+        {{form.profile.errors}}
+
+          {{ form.as_p }}
+
+          <div class="w-100 d-flex align-items-center justify-content-end">
+            <button
+              type="submit"
+              class="oh-btn oh-btn--secondary oh-btn--w-100-resp"
+            >
+              {% trans "Save" %}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="oh-modal"
+        id="uploadPhotoModal"
+        role="dialog"
+        aria-labelledby="uploadPhotoModal"
+        aria-hidden="true"
+      >
+        <div class="oh-modal__dialog">
+          <div class="oh-modal__dialog-header">
+            <span class="oh-modal__dialog-title" id="uploadPhotoModalLabel"
+              >{% trans "Upload Photo" %}</span
+            >
+            <a href="#" class="oh-modal__close" aria-label="Close">
+              <ion-icon name="close-outline"></ion-icon>
+            </a>
+          </div>
+          <div class="oh-modal__dialog-body">
+            <div class="oh-profile-section__image-container">
+              {% csrf_token %}
+              <div class="oh-profile-section__modal-avatar">
+                <img
+                  src="{{form.instance.get_avatar}}"
+                  class="oh-profile-section__modal-image preview"
+                  alt="Username"
+                />
+              </div>
+              <input
+                type="file"
+                accept="image/*"
+                class="oh-input oh-input--file oh-input--file-sm mt-4"
+                placeholder="Profile"
+                id="choose_profile"
+              />
+              {% if form.instance.id %}
+              <div class="d-flex justify-content-center">
+                <a
+                  class="oh-btn oh-btn--light-danger mr-1"
+                  href="{% url 'delete-profile-image' form.instance.id %}"
+                >
+                  <ion-icon class="me-1" name="trash-outline"></ion-icon>{% trans "Delete Image" %}
+                </a>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <script>
+          {% include 'country.js' %}
+        </script>
+        <script>
+          $(document).ready(function () {
+            $("#choose_profile").change(function (e) {
+              var modal_profile = $(this)[0];
+              var hidden_profile = $("#hidden_profile")[0];
+              hidden_profile.files = modal_profile.files;
+
+              const file = this.files[0];
+              const reader = new FileReader();
+
+              reader.addEventListener("load", function () {
+                const imageUrl = reader.result;
+                $(".preview").attr("src", imageUrl);
+                setTimeout(function () {
+                  $("#uploadPhotoModal").removeClass("oh-modal--show");
+                }, 2000);
+              });
+
+              reader.readAsDataURL(file);
+            });
+            {% if not form.instance.pk %}
+              function setIfEmpty(selector, value) {
+                if ($(selector).val() === "" ){
+                  $(selector).val(value);
+                }
+                if ($(selector).val() == "None") {
+                  $(selector).val(value);
+                  $(selector).change();
+
+                  $("[name=country]").parent().find("span").remove()
+                  $("[name=country]").select2()
+                }
+              }
+
+              $("[name='resume']").on("change", function(){
+                var formData = new FormData();
+                var file = this.files[0];
+                formData.append('resume', file);
+
+                $.ajax({
+                  url: "{% url 'resume-completion' %}",
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  headers: {
+                      'X-CSRFToken': getCookie("csrftoken")
+                  },
+                  success: function(response) {
+
+                    var full_name = response.full_name;
+                    var address = response.address;
+                    var country = response.country;
+                    var state = response.state;
+                    var phone = response.phone_number;
+                    var dob = response.dob;
+                    var email = response.email_id;
+                    var zip = response.zip;
+
+                    setIfEmpty("[name='name']", full_name);
+                    setIfEmpty("[name='email']", email);
+                    setIfEmpty("[name='mobile']", phone);
+                    setIfEmpty("[name='address']", address);
+                    setIfEmpty("[name='country']", country);
+                    setIfEmpty("[name='state']", state);
+                    setIfEmpty("[name='zip']", zip);
+                    $("[name='dob']").val(dob);
+
+                  },
+                  error: function(xhr, status, error) {
+                      console.error('File upload failed: ', status, error);
+                  }
+                });
+              })
+            {% endif %}
+          });
+        </script>
+      </div>
+      <script src="{% static '/recruitment/stageScript.js' %}"></script>
+      {% endblock content %}
+    </div>
+  </form>
+</div>

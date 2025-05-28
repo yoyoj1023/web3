@@ -1,0 +1,41 @@
+{% load i18n %}
+{% if messages %}
+    <script>
+        setTimeout(function () {
+            reloadMessage();
+            $(".oh-modal__close").click();
+        }, 1000);
+    </script>
+    {% if close_hx_url %}
+        <span hx-get="{{close_hx_url}}" hx-target="{{close_hx_target}}" hx-trigger="load"></span>
+    {% endif %}
+{% endif %}
+<div class="oh-modal__dialog-header">
+    <span class="oh-modal__dialog-title" id="objectCreateModalLabel">{{form.verbose_name}}</span>
+    <button class="oh-modal__close" aria-label="Close">
+        <ion-icon name="close-outline"></ion-icon>
+    </button>
+</div>
+<div class="oh-modal__dialog-body" id="formBody">
+    <form hx-post="{{ request.get_full_path }}"
+        hx-target=" {% if form.instance.id %} #objectUpdateModalTarget {% else %} #objectCreateModalTarget {% endif %}">
+        {{form.as_p}}
+    </form>
+</div>
+<script>
+    function toggleFunctionWorkTypeRequestForm() {
+        if ($("#id_is_permanent_work_type").is(":checked")) {
+            $("#id_requested_till").parent().hide();
+        } else {
+            $("#id_requested_till").parent().show();
+        }
+    }
+
+    $(document).ready(function () {
+        $("[type=checkbox]").change(function (e) {
+            e.preventDefault();
+            toggleFunctionWorkTypeRequestForm();
+        });
+    });
+    toggleFunctionWorkTypeRequestForm();
+</script>

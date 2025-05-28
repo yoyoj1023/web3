@@ -1,0 +1,97 @@
+{% load i18n %}
+<div class="oh-modal__dialog-header">
+    <span class="oh-modal__dialog-title"
+        >{{form.instance.title|default:_("Add Template")}}</span
+    >
+    <button class="oh-modal__close" aria-label="Close">
+        <ion-icon name="close-outline"></ion-icon>
+    </button>
+</div>
+<div class="oh-modal__dialog-body">
+    <form
+        id="editForm"
+        hx-post="{{request.path}}"
+        hx-target="#objectCreateModalTarget"
+    >
+        <div id="viewTemplateModalContainer">
+            <div class="my-3" id="keyResultCard">
+                <div class="oh-card oh-card--no-shadow oh-card__body">
+                    <div class="oh-input__group">
+                        <label class="oh-input__label mt-0" for="id_title"
+                            >{% trans "Title" %}</label
+                        >
+                        {{ form.title }}
+                    </div>
+                    <div class="oh-input__group">
+                        <label class="oh-input__label mt-2" for="id_body"
+                            >{% trans "Body" %}</label
+                        >
+                        {{ form.body }}
+                    </div>
+                    <div
+                        class="form-hint"
+                        style="margin-top: 10px; font-size: 14px; color: #888"
+                    >
+                        {% trans "Hint: Type '{' to get sender or receiver data" %}
+                    </div>
+                    <div class="oh-input__group">
+                        <label class="oh-input__label mt-2" for="id_company_id"
+                            >{% trans "Company" %}</label
+                        >
+                        {{ form.company_id }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if duplicate %}
+        <div class="oh-modal__dialog-footer p-0">
+            <button
+                id="submitFormButton"
+                type="submit"
+                class="oh-btn oh-btn--secondary oh-btn--shadow"
+            >
+                {% trans "Save Duplicate" %}
+            </button>
+        </div>
+        {% else %}
+        <div class="oh-modal__dialog-footer">
+            <button
+                type="submit"
+                class="oh-btn oh-btn--secondary oh-btn--shadow"
+            >
+                {% trans "Save" %}
+            </button>
+        </div>
+        {% endif %}
+    </form>
+</div>
+<script>
+        function initializeSummernote() {
+            var searchWords = {{ searchWords|safe }};
+            var mentions = Object.keys(searchWords);
+            $("#id_body").summernote({
+                hint: {
+                    mentions: mentions,
+                    match: /\B{(\w*)$/,
+                    search: function (keyword, callback) {
+                        var pattern = new RegExp(keyword, "i"); // Case-insensitive search
+                        callback($.grep(this.mentions, function (item) {
+                            return pattern.test(item);
+                        }));
+                    },
+                    content: function (item) {
+                        var word = searchWords[item];
+                        return "{% templatetag openbrace %}{% templatetag openbrace %}"+ word +"{% templatetag closebrace %}{% templatetag closebrace %}";
+                    }
+                }
+            });
+        }
+        // Initial Summernote initialization
+        initializeSummernote();
+
+
+    // Re-initialize Summernote after HTMX content swap
+    $(document).on("htmx:afterRequest", function () {
+        initializeSummernote();
+    });
+</script>
