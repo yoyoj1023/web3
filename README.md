@@ -5,17 +5,13 @@
 
 1. 水龍頭 : ｜[Google Web3 水龍頭](https://cloud.google.com/application/web3/faucet)｜ [Optimism 水龍頭](https://console.optimism.io/faucet)｜[Chainlink 水龍頭](https://faucets.chain.link/)｜
 
-2. Alchemy : [儀錶板](https://dashboard.alchemy.com/?a=)
+2. 儀錶板 : ｜[Alchemy 儀錶板](https://dashboard.alchemy.com/?a=)｜[Vercel 儀錶板](https://vercel.com/)｜[Reown Cloud 儀錶板](https://cloud.reown.com/)｜
 
-3. Vercel : [儀錶板](https://vercel.com/)
+3. 區塊鏈瀏覽器： ｜[Blockchain.com](https://www.blockchain.com/explorer)｜[Bitcoin Office](https://bitcoin.gob.sv/)｜
 
-4. Reown Cloud : [儀錶板](https://cloud.reown.com/)
+4. 密碼學線上計算工具 : [emn178](https://emn178.github.io/online-tools/)
 
-5. 密碼學線上計算工具 : [emn178](https://emn178.github.io/online-tools/)
-
-6. EVM Opcodes : [Instructions](https://www.evm.codes/)
-
-7. 區塊鏈瀏覽器： ｜[Blockchain.com](https://www.blockchain.com/explorer)｜[Bitcoin Office](https://bitcoin.gob.sv/)｜
+5. EVM Opcodes : [Instructions](https://www.evm.codes/)
 
 ### 二、常用文檔：
 
@@ -27,13 +23,9 @@
 
 + Chainlink: ｜[官方開發者文檔](https://docs.chain.link/)｜[Github倉庫](https://github.com/smartcontractkit/chainlink)｜
 
-+ React: | [官方文檔](https://react.dev/) | [Github倉庫](https://github.com/facebook/react) |
++ 前端： | [React 官方文檔](https://react.dev/) | [Next.js 官方文檔](https://nextjs.org/docs) | [Next.js 官網](https://nextjs.org/) |
 
-+ Next.js : | [官方文檔](https://nextjs.org/docs) | [官網](https://nextjs.org/) |
-
-+ Alchemy: | [官方文檔](https://www.alchemy.com/docs) |
-
-+ 開發工具與框架文檔： ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) |
++ 開發工具與框架文檔： ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy 官方文檔](https://www.alchemy.com/docs) |
 
 
 ### 三、常用知名開源專案：
@@ -46,17 +38,13 @@
 
 ### 四、參考書目：
 
-1. [精通以太坊](https://cypherpunks-core.github.io/ethereumbook_zh/)  
+1. [Alchemy University](https://www.alchemy.com/university)
 
-2. [Pro Git book](https://git-scm.com/book/zh-tw/v2) 
+2. [Learn React](https://react.dev/learn/describing-the-ui)
 
-3. [Alchemy University](https://www.alchemy.com/university)
+3. [Learn Next.js](https://nextjs.org/learn)
 
-4. [Learn React](https://react.dev/learn/describing-the-ui)
-
-5. [Learn Next.js](https://nextjs.org/learn)
-
-6. [Solidity by Example](https://solidity-by-example.org/)
+4. [Solidity by Example](https://solidity-by-example.org/)
 
 ### 五、挑戰 Solidity CTF（Capture The Flag）：
 
