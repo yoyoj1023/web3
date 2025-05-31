@@ -23,9 +23,9 @@
 
 + Chainlink: ｜[官方開發者文檔](https://docs.chain.link/)｜[Github倉庫](https://github.com/smartcontractkit/chainlink)｜
 
-+ 前端： | [React 官方文檔](https://react.dev/) | [Next.js 官方文檔](https://nextjs.org/docs) | [Next.js 官網](https://nextjs.org/) |
++ 現代前端技術： | [React 官方文檔](https://react.dev/) | [Next.js 官方文檔](https://nextjs.org/docs) | [Next.js 官網](https://nextjs.org/) |
 
-+ 開發工具與框架文檔： ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy 官方文檔](https://www.alchemy.com/docs) |
++ 開發工具與框架文檔： ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy 官方文檔](https://www.alchemy.com/docs) | [Docker 官方文檔](https://docs.docker.com/) |
 
 
 ### 三、常用知名開源專案：
@@ -35,6 +35,8 @@
 + Uniswap: ｜[Github](https://github.com/Uniswap)｜
 
 + Hardhat: ｜[Github](https://github.com/NomicFoundation/hardhat)｜
+
++ account-abstraction: ｜[Github](https://github.com/eth-infinitism/account-abstraction)｜
 
 ### 四、參考書目：
 
