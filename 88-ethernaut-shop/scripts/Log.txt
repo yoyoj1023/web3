@@ -1,0 +1,7 @@
+PS C:\VScode\web3\88-ethernaut-shop> npx hardhat run .\scripts\Shop.ts --network opS
+isSold: false
+price: 100
+ShopAttacker deployed to: 0x5a04946117E4e6e2882A5860d502be0832D06f58
+isSold: true
+price: 1
+PS C:\VScode\web3\88-ethernaut-shop>
