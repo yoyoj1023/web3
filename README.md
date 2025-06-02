@@ -50,10 +50,6 @@
 
 ### 五、挑戰 Solidity CTF（Capture The Flag）：
 
-1. Ethernaut CTF: 
-https://ethernaut.openzeppelin.com/
+1. CTF: ｜ [Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [Ethernaut 自寫解答](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜
 
-    - 自寫解答： [ethernaut-level-solutions](https://github.com/yoyoj1023/ethernaut-level-solutions)
-
-2. Speed Run Ethereum:
-https://speedrunethereum.com/
+2. BuidlGuidl: ｜ [Speed Run Ethereum](https://speedrunethereum.com/) ｜
