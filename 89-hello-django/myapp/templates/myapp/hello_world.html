@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Hello World - Django入門教學{% endblock %}
+
+{% block header %}歡迎來到Django世界！{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px;">
+    <h2 style="color: #28a745;">🎉 恭喜！您的第一個Django應用程式已經成功運行！</h2>
+    
+    <div style="background: #e7f3ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <h3>您已經學會了：</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li>創建Django專案和應用程式</li>
+            <li>配置URL路由</li>
+            <li>創建視圖函數</li>
+            <li>使用模板系統</li>
+            <li>基本的HTML和CSS樣式</li>
+        </ul>
+    </div>
+    
+    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <h3>接下來您可以：</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li>查看文章列表功能</li>
+            <li>學習如何使用Django模型</li>
+            <li>探索Django管理後台</li>
+            <li>添加更多功能</li>
+        </ul>
+    </div>
+    
+    <p style="margin-top: 30px;">
+        <strong>這是您Django學習旅程的開始！</strong><br>
+        點擊上方的導航連結探索更多功能。
+    </p>
+</div>
+{% endblock %} 

@@ -1,0 +1,44 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}文章列表 - Django入門教學{% endblock %}
+
+{% block header %}文章列表{% endblock %}
+
+{% block content %}
+<div style="padding: 20px;">
+    {% if posts %}
+        <div style="margin-bottom: 20px;">
+            <p style="color: #28a745;"><strong>共有 {{ posts|length }} 篇文章</strong></p>
+        </div>
+        
+        {% for post in posts %}
+            <div style="background: #f8f9fa; padding: 20px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #007bff;">
+                <h3 style="color: #333; margin-bottom: 10px;">{{ post.title }}</h3>
+                <p style="color: #666; margin-bottom: 10px;">{{ post.content|truncatewords:30 }}</p>
+                <small style="color: #888;">發布時間：{{ post.created_at|date:"Y年m月d日 H:i" }}</small>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #6c757d;">📝 目前還沒有文章</h3>
+            <p style="color: #6c757d; margin: 20px 0;">您可以通過Django管理後台添加文章：</p>
+            
+            <div style="background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4>如何添加文章？</h4>
+                <ol style="text-align: left; display: inline-block;">
+                    <li>點擊上方的「管理後台」連結</li>
+                    <li>使用管理員帳號登入</li>
+                    <li>點擊「Posts」</li>
+                    <li>點擊「Add Post」添加新文章</li>
+                    <li>填寫標題和內容後保存</li>
+                    <li>回到這個頁面查看您的文章</li>
+                </ol>
+            </div>
+            
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px;">
+                <p><strong>💡 提示：</strong>如果您還沒有管理員帳號，請先運行 <code>python manage.py createsuperuser</code> 創建一個。</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 
