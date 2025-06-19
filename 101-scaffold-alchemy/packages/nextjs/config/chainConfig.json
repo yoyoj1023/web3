@@ -1,0 +1,6 @@
+{
+  "mainnetName": "opt-mainnet",
+  "mainnetChainId": 10,
+  "testnetChainId": 11155420,
+  "testnetChainName": "opt-sepolia"
+}
