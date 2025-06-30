@@ -32,7 +32,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 ### 3. Popular Open Source Projects:
 
-+ MetaMask: ｜[Github](https://github.com/MetaMask)｜
++ scaffold-eth-2: ｜[Github](https://github.com/scaffold-eth/scaffold-eth-2)｜
 
 + Uniswap: ｜[Github](https://github.com/Uniswap)｜
 
