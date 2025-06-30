@@ -34,7 +34,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 + scaffold-eth-2: ｜[Github](https://github.com/scaffold-eth/scaffold-eth-2)｜
 
-+ Uniswap: ｜[Github](https://github.com/Uniswap)｜
++ ethernaut: ｜[Github](https://github.com/OpenZeppelin/ethernaut)｜
 
 + Hardhat: ｜[Github](https://github.com/NomicFoundation/hardhat)｜
 
