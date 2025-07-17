@@ -1,0 +1,6 @@
+{
+  "mainnetName": "eth-mainnet",
+  "mainnetChainId": 1,
+  "testnetChainId": 11155111,
+  "testnetChainName": "eth-sepolia"
+}
