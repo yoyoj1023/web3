@@ -44,6 +44,9 @@ npm --version
 ```
 
 ```bash
+# 查看已安裝的 Node.js 版本
+nvm ls
+
 # 切換 Node.js 版本 v18.20.8
 nvm use 18.20.8
 ```
