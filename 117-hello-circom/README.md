@@ -2,6 +2,8 @@
 
 這是一個 ZK-SNARKs (Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge) 的基礎 Circom Hello World 範例專案。本專案將教您如何從零開始建立一個簡單的零知識證明電路。
 
+環境為 Node.js v18.20.8
+
 ## 🎯 專案目標
 
 學習如何建立一個簡單的乘法器電路，證明我們知道兩個數字 `a` 和 `b`，使得 `a * b = c`，而不洩露 `a` 和 `b` 的具體值。
@@ -39,6 +41,11 @@ node --version
 
 # 檢查 npm 版本
 npm --version
+```
+
+```bash
+# 切換 Node.js 版本 v18.20.8
+nvm use 18.20.8
 ```
 
 ### 2. 安裝 Circom 編譯器
