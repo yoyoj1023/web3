@@ -25,6 +25,8 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 + Chainlink: ｜[Official Developer Documentation](https://docs.chain.link/)｜[Github Repository](https://github.com/smartcontractkit/chainlink)｜
 
++ Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
+
 + Modern Frontend Technologies: | [React Official Documentation](https://react.dev/) | [Next.js Official Documentation](https://nextjs.org/docs) | [Next.js Official Website](https://nextjs.org/) |
 
 + Development Tools & Framework Documentation: ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy Official Documentation](https://www.alchemy.com/docs) | [Docker Official Documentation](https://docs.docker.com/) |
