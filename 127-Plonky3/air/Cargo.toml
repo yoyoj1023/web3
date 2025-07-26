@@ -1,0 +1,17 @@
+[package]
+name = "p3-air"
+description = "Defines the Algebraic Intermediate Representation (AIR) interface and supporting utilities for STARK provers."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-field.workspace = true
+p3-matrix.workspace = true
+
+[dev-dependencies]
+p3-baby-bear.workspace = true

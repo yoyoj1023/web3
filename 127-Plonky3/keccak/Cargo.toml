@@ -1,0 +1,41 @@
+[package]
+name = "p3-keccak"
+description = "An optimized implementation of the Keccak-f permutation and Keccak256 hash function."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-field.workspace = true
+p3-symmetric.workspace = true
+p3-util.workspace = true
+
+tiny-keccak = { workspace = true, features = ["keccak"] }
+
+[dev-dependencies]
+p3-mersenne-31.workspace = true
+
+criterion.workspace = true
+
+[features]
+nightly-features = []
+
+[[bench]]
+name = "bench_keccak"
+harness = false
+
+#[[bench]]
+#name = "bench_avx512"
+#harness = false
+#
+#[[bench]]
+#name = "bench_avx2"
+#harness = false
+#
+#[[bench]]
+#name = "bench_avx2split"
+#harness = false

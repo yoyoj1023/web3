@@ -1,0 +1,20 @@
+[package]
+name = "p3-blake3"
+description = "A wrapper for the standard BLAKE3 cryptographic hash function allowing it to be used in the Plonky3 environment."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-symmetric.workspace = true
+p3-util.workspace = true
+
+blake3.workspace = true
+
+[features]
+neon = ["blake3/neon"]
+parallel = ["blake3/rayon"]

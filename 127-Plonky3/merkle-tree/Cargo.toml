@@ -1,0 +1,37 @@
+[package]
+name = "p3-merkle-tree"
+# TODO: Replace this generic plonky3 description with one specific to this crate...
+description.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-commit.workspace = true
+p3-field.workspace = true
+p3-matrix.workspace = true
+p3-maybe-rayon.workspace = true
+p3-symmetric.workspace = true
+p3-util.workspace = true
+
+itertools.workspace = true
+rand.workspace = true
+serde = { workspace = true, features = ["alloc"] }
+tracing.workspace = true
+
+[dev-dependencies]
+p3-baby-bear.workspace = true
+p3-blake3.workspace = true
+p3-keccak.workspace = true
+p3-mds.workspace = true
+p3-rescue.workspace = true
+
+criterion.workspace = true
+
+[[bench]]
+name = "merkle_tree"
+harness = false

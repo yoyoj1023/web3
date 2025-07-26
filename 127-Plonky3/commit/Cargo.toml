@@ -1,0 +1,30 @@
+[package]
+name = "p3-commit"
+description = "A framework for implementing various cryptographic commitment schemes, including non-hiding variants."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-field.workspace = true
+p3-matrix.workspace = true
+p3-util.workspace = true
+
+itertools.workspace = true
+serde.workspace = true
+
+# for testing
+p3-challenger = { workspace = true, optional = true }
+p3-dft = { workspace = true, optional = true }
+
+[dev-dependencies]
+p3-challenger.workspace = true
+p3-dft.workspace = true
+
+[features]
+default = ["test-utils"]
+test-utils = ["p3-challenger", "p3-dft"]

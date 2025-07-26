@@ -1,0 +1,38 @@
+[package]
+name = "p3-matrix"
+# TODO: Replace this generic plonky3 description with one specific to this crate...
+description.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-field.workspace = true
+p3-maybe-rayon.workspace = true
+p3-util.workspace = true
+
+itertools.workspace = true
+rand.workspace = true
+serde = { workspace = true, features = ["derive"] }
+tracing.workspace = true
+transpose.workspace = true
+
+[dev-dependencies]
+p3-baby-bear.workspace = true
+p3-mersenne-31.workspace = true
+
+criterion.workspace = true
+
+[[bench]]
+name = "transpose_benchmark"
+path = "benches/transpose_benchmark.rs"
+harness = false
+
+[[bench]]
+name = "columnwise_dot_product"
+path = "benches/columnwise_dot_product.rs"
+harness = false

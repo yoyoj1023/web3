@@ -1,0 +1,41 @@
+[package]
+name = "p3-dft"
+description = "A collection of discrete Fourier transform (DFT) implementations for finite fields."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-field.workspace = true
+p3-matrix.workspace = true
+p3-maybe-rayon.workspace = true
+p3-util.workspace = true
+
+itertools.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+p3-baby-bear.workspace = true
+p3-goldilocks.workspace = true
+p3-mersenne-31.workspace = true
+p3-monty-31.workspace = true
+
+criterion.workspace = true
+rand.workspace = true
+
+[features]
+nightly-features = [
+    "p3-goldilocks/nightly-features",
+    "p3-monty-31/nightly-features",
+    "p3-baby-bear/nightly-features",
+    "p3-mersenne-31/nightly-features",
+]
+parallel = ["p3-maybe-rayon/parallel"]
+
+[[bench]]
+name = "fft"
+harness = false

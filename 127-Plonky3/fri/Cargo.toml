@@ -1,0 +1,41 @@
+[package]
+name = "p3-fri"
+description = "An implementation of the FRI low-degree test (LDT) protocol used in zero-knowledge proof systems."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+p3-challenger.workspace = true
+p3-commit.workspace = true
+p3-dft.workspace = true
+p3-field.workspace = true
+p3-interpolation.workspace = true
+p3-matrix.workspace = true
+p3-maybe-rayon.workspace = true
+p3-util.workspace = true
+
+itertools.workspace = true
+rand.workspace = true
+serde = { workspace = true, features = ["derive", "alloc"] }
+tracing.workspace = true
+
+[dev-dependencies]
+p3-baby-bear.workspace = true
+p3-circle.workspace = true
+p3-dft.workspace = true
+p3-goldilocks.workspace = true
+p3-keccak.workspace = true
+p3-merkle-tree.workspace = true
+p3-mersenne-31.workspace = true
+p3-symmetric.workspace = true
+
+criterion.workspace = true
+
+[[bench]]
+name = "fold_even_odd"
+harness = false
