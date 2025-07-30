@@ -1,0 +1,734 @@
+{
+  "address": "0xA5a6242109C12e629916e2e198987cDa43b5E571",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "tokenAddr",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "kycRegistryAddr",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuardReentrantCall",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "swapper",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokenOutput",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "ethInput",
+          "type": "uint256"
+        }
+      ],
+      "name": "EthToTokenSwap",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "provider",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "liquidityMinted",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "ethInput",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokensInput",
+          "type": "uint256"
+        }
+      ],
+      "name": "LiquidityProvided",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "remover",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "liquidityWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokensOutput",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "ethOutput",
+          "type": "uint256"
+        }
+      ],
+      "name": "LiquidityRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "beneficiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "ethWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokenWithdrawn",
+          "type": "uint256"
+        }
+      ],
+      "name": "SettlementExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "swapper",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokensInput",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "ethOutput",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenToEthSwap",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isBlocked",
+          "type": "bool"
+        }
+      ],
+      "name": "TradingBlockStatusChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokensDeposited",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "minTokensOut",
+          "type": "uint256"
+        }
+      ],
+      "name": "ethToToken",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenOutput",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "inputAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "inputReserve",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "outputReserve",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAmountOut",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getETHBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "lp",
+          "type": "address"
+        }
+      ],
+      "name": "getLiquidity",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTokenBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "init",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isTradingBlocked",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "kycRegistry",
+      "outputs": [
+        {
+          "internalType": "contract IKYCRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "liquidity",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "_isBlocked",
+          "type": "bool"
+        }
+      ],
+      "name": "setTradingBlock",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "settleAndClear",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokensIn",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minEthOut",
+          "type": "uint256"
+        }
+      ],
+      "name": "tokenToEth",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "ethOutput",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalLiquidity",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "liquidityAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "ethAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "tokenAmount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xf6515591eaa06d87a9117cbd398350c3c96b545c037fc6478014e4b5ccc45009",
+  "receipt": {
+    "to": null,
+    "from": "0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6",
+    "contractAddress": "0xA5a6242109C12e629916e2e198987cDa43b5E571",
+    "transactionIndex": 1,
+    "gasUsed": "1703071",
+    "logsBloom": "0x00000000000000000000000000000000000000000100000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000001000000000000800000000000010000000000020000000000000000000800000000000000000000000000000000400000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x506b7e881437230cddd9aa0f850a9b20c35bb245e34c23b1a789f603a0b90f49",
+    "transactionHash": "0xf6515591eaa06d87a9117cbd398350c3c96b545c037fc6478014e4b5ccc45009",
+    "logs": [
+      {
+        "transactionIndex": 1,
+        "blockNumber": 28998356,
+        "transactionHash": "0xf6515591eaa06d87a9117cbd398350c3c96b545c037fc6478014e4b5ccc45009",
+        "address": "0xA5a6242109C12e629916e2e198987cDa43b5E571",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x000000000000000000000000db4101e7f5e2cc0e1a749092ff5287e3d36a5df6"
+        ],
+        "data": "0x",
+        "logIndex": 0,
+        "blockHash": "0x506b7e881437230cddd9aa0f850a9b20c35bb245e34c23b1a789f603a0b90f49"
+      }
+    ],
+    "blockNumber": 28998356,
+    "cumulativeGasUsed": "1749179",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x76Ee828a2a3D69BDE22076F6d1A81DD35F5116a7",
+    "0xA68FC1c0bb5A11A90f5D620ef406a6B3b0a33368"
+  ],
+  "numDeployments": 3,
+  "solcInputHash": "08584f9baaa28a5614ef863ac9f63fcd",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddr\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"kycRegistryAddr\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ReentrancyGuardReentrantCall\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"swapper\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenOutput\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"ethInput\",\"type\":\"uint256\"}],\"name\":\"EthToTokenSwap\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"provider\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"liquidityMinted\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"ethInput\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokensInput\",\"type\":\"uint256\"}],\"name\":\"LiquidityProvided\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"remover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"liquidityWithdrawn\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokensOutput\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"ethOutput\",\"type\":\"uint256\"}],\"name\":\"LiquidityRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"beneficiary\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"ethWithdrawn\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenWithdrawn\",\"type\":\"uint256\"}],\"name\":\"SettlementExecuted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"swapper\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokensInput\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"ethOutput\",\"type\":\"uint256\"}],\"name\":\"TokenToEthSwap\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isBlocked\",\"type\":\"bool\"}],\"name\":\"TradingBlockStatusChanged\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"deposit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"tokensDeposited\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"minTokensOut\",\"type\":\"uint256\"}],\"name\":\"ethToToken\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenOutput\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"inputAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"inputReserve\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"outputReserve\",\"type\":\"uint256\"}],\"name\":\"getAmountOut\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getETHBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"lp\",\"type\":\"address\"}],\"name\":\"getLiquidity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTokenBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokens\",\"type\":\"uint256\"}],\"name\":\"init\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isTradingBlocked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kycRegistry\",\"outputs\":[{\"internalType\":\"contract IKYCRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"liquidity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_isBlocked\",\"type\":\"bool\"}],\"name\":\"setTradingBlock\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"settleAndClear\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokensIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minEthOut\",\"type\":\"uint256\"}],\"name\":\"tokenToEth\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"ethOutput\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalLiquidity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"liquidityAmount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"ethAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"tokenAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"stevepham.eth, m00npapi.eth (Original), Refactored by AI\",\"details\":\"This contract has been refactored to address potential security vulnerabilities including reentrancy, centralization risks, and handling of non-standard ERC20 tokens. Use code with caution. It uses OpenZeppelin's ReentrancyGuard for enhanced security. Use code with caution.\",\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}],\"ReentrancyGuardReentrantCall()\":[{\"details\":\"Unauthorized reentrant call.\"}]},\"kind\":\"dev\",\"methods\":{\"constructor\":{\"details\":\"Sets the addresses for the token and KYC registry.      IMPORTANT: For production, the initial owner should be a Multi-Sig wallet to mitigate single-point-of-failure risk.\"},\"deposit()\":{\"details\":\"The amount of tokens to deposit is calculated based on the current pool ratio.      Owner must approve the DEX to spend their tokens beforehand.\"},\"ethToToken(uint256)\":{\"params\":{\"minTokensOut\":\"The minimum amount of tokens the user is willing to accept (slippage protection).\"}},\"getAmountOut(uint256,uint256,uint256)\":{\"details\":\"This is a pure function for price calculation based on the constant product formula.      It includes a 0.3% trading fee.      WARNING: This should NOT be used as a price oracle due to its susceptibility to manipulation.\"},\"init(uint256)\":{\"params\":{\"tokens\":\"The initial amount of tokens to seed the pool with.\"},\"returns\":{\"_0\":\"The initial total liquidity minted.\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"settleAndClear()\":{\"details\":\"This is a final, irreversible action intended for contract end-of-life or emergency situations.      It permanently stops trading and drains all assets from the contract.      MUST be controlled by a Multi-Sig wallet with a Timelock.\"},\"tokenToEth(uint256,uint256)\":{\"details\":\"This function is robust against fee-on-transfer tokens by checking the balance change.\",\"params\":{\"minEthOut\":\"The minimum amount of ETH the user is willing to accept (slippage protection).\",\"tokensIn\":\"The amount of tokens the user wants to swap.\"}},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"withdraw(uint256)\":{\"params\":{\"liquidityAmount\":\"The amount of liquidity pool tokens to burn.\"}}},\"title\":\"DEX (Refactored)\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"deposit()\":{\"notice\":\"Adds liquidity to the pool. Can only be called by the owner.\"},\"ethToToken(uint256)\":{\"notice\":\"Swaps ETH for Tokens. Requires KYC verification.\"},\"getAmountOut(uint256,uint256,uint256)\":{\"notice\":\"Calculates the output amount for a given input amount and reserve state.\"},\"getLiquidity(address)\":{\"notice\":\"Returns the amount of liquidity tokens for a given address.\"},\"init(uint256)\":{\"notice\":\"Initializes the DEX with the first batch of liquidity. Can only be called once by the owner.\"},\"setTradingBlock(bool)\":{\"notice\":\"Allows the owner to block or unblock trading functions.\"},\"settleAndClear()\":{\"notice\":\"[DANGEROUS] Settles the contract and withdraws all remaining funds to the owner.\"},\"tokenToEth(uint256,uint256)\":{\"notice\":\"Swaps Tokens for ETH. Requires KYC verification.\"},\"withdraw(uint256)\":{\"notice\":\"Withdraws liquidity from the pool. Can only be called by the owner.\"}},\"notice\":\"A more secure and robust implementation of the DEX contract.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/HEX.sol\":\"HEX\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {Context} from \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * The initial owner is set to the address provided by the deployer. This can\\n * later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    /**\\n     * @dev The caller account is not authorized to perform an operation.\\n     */\\n    error OwnableUnauthorizedAccount(address account);\\n\\n    /**\\n     * @dev The owner is not a valid owner account. (eg. `address(0)`)\\n     */\\n    error OwnableInvalidOwner(address owner);\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.\\n     */\\n    constructor(address initialOwner) {\\n        if (initialOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(initialOwner);\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        if (owner() != _msgSender()) {\\n            revert OwnableUnauthorizedAccount(_msgSender());\\n        }\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        if (newOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\"},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (token/ERC20/IERC20.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Interface of the ERC20 standard as defined in the EIP.\\n */\\ninterface IERC20 {\\n    /**\\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\\n     * another (`to`).\\n     *\\n     * Note that `value` may be zero.\\n     */\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\n\\n    /**\\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\\n     * a call to {approve}. `value` is the new allowance.\\n     */\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\n\\n    /**\\n     * @dev Returns the value of tokens in existence.\\n     */\\n    function totalSupply() external view returns (uint256);\\n\\n    /**\\n     * @dev Returns the value of tokens owned by `account`.\\n     */\\n    function balanceOf(address account) external view returns (uint256);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from the caller's account to `to`.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transfer(address to, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Returns the remaining number of tokens that `spender` will be\\n     * allowed to spend on behalf of `owner` through {transferFrom}. This is\\n     * zero by default.\\n     *\\n     * This value changes when {approve} or {transferFrom} are called.\\n     */\\n    function allowance(address owner, address spender) external view returns (uint256);\\n\\n    /**\\n     * @dev Sets a `value` amount of tokens as the allowance of `spender` over the\\n     * caller's tokens.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * IMPORTANT: Beware that changing an allowance with this method brings the risk\\n     * that someone may use both the old and the new allowance by unfortunate\\n     * transaction ordering. One possible solution to mitigate this race\\n     * condition is to first reduce the spender's allowance to 0 and set the\\n     * desired value afterwards:\\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\\n     *\\n     * Emits an {Approval} event.\\n     */\\n    function approve(address spender, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from `from` to `to` using the\\n     * allowance mechanism. `value` is then deducted from the caller's\\n     * allowance.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transferFrom(address from, address to, uint256 value) external returns (bool);\\n}\\n\",\"keccak256\":\"0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/ReentrancyGuard.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (utils/ReentrancyGuard.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Contract module that helps prevent reentrant calls to a function.\\n *\\n * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier\\n * available, which can be applied to functions to make sure there are no nested\\n * (reentrant) calls to them.\\n *\\n * Note that because there is a single `nonReentrant` guard, functions marked as\\n * `nonReentrant` may not call one another. This can be worked around by making\\n * those functions `private`, and then adding `external` `nonReentrant` entry\\n * points to them.\\n *\\n * TIP: If you would like to learn more about reentrancy and alternative ways\\n * to protect against it, check out our blog post\\n * https://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul].\\n */\\nabstract contract ReentrancyGuard {\\n    // Booleans are more expensive than uint256 or any type that takes up a full\\n    // word because each write operation emits an extra SLOAD to first read the\\n    // slot's contents, replace the bits taken up by the boolean, and then write\\n    // back. This is the compiler's defense against contract upgrades and\\n    // pointer aliasing, and it cannot be disabled.\\n\\n    // The values being non-zero value makes deployment a bit more expensive,\\n    // but in exchange the refund on every call to nonReentrant will be lower in\\n    // amount. Since refunds are capped to a percentage of the total\\n    // transaction's gas, it is best to keep them low in cases like this one, to\\n    // increase the likelihood of the full refund coming into effect.\\n    uint256 private constant NOT_ENTERED = 1;\\n    uint256 private constant ENTERED = 2;\\n\\n    uint256 private _status;\\n\\n    /**\\n     * @dev Unauthorized reentrant call.\\n     */\\n    error ReentrancyGuardReentrantCall();\\n\\n    constructor() {\\n        _status = NOT_ENTERED;\\n    }\\n\\n    /**\\n     * @dev Prevents a contract from calling itself, directly or indirectly.\\n     * Calling a `nonReentrant` function from another `nonReentrant`\\n     * function is not supported. It is possible to prevent this from happening\\n     * by making the `nonReentrant` function external, and making it call a\\n     * `private` function that does the actual work.\\n     */\\n    modifier nonReentrant() {\\n        _nonReentrantBefore();\\n        _;\\n        _nonReentrantAfter();\\n    }\\n\\n    function _nonReentrantBefore() private {\\n        // On the first call to nonReentrant, _status will be NOT_ENTERED\\n        if (_status == ENTERED) {\\n            revert ReentrancyGuardReentrantCall();\\n        }\\n\\n        // Any calls to nonReentrant after this point will fail\\n        _status = ENTERED;\\n    }\\n\\n    function _nonReentrantAfter() private {\\n        // By storing the original value once again, a refund is triggered (see\\n        // https://eips.ethereum.org/EIPS/eip-2200)\\n        _status = NOT_ENTERED;\\n    }\\n\\n    /**\\n     * @dev Returns true if the reentrancy guard is currently set to \\\"entered\\\", which indicates there is a\\n     * `nonReentrant` function in the call stack.\\n     */\\n    function _reentrancyGuardEntered() internal view returns (bool) {\\n        return _status == ENTERED;\\n    }\\n}\\n\",\"keccak256\":\"0xf980daa263b661ab8ddee7d4fd833c7da7e7995e2c359ff1f17e67e4112f2236\",\"license\":\"MIT\"},\"contracts/HEX.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\n\\r\\npragma solidity ^0.8.20;\\r\\nimport \\\"@openzeppelin/contracts/token/ERC20/IERC20.sol\\\";\\r\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\r\\nimport \\\"@openzeppelin/contracts/utils/ReentrancyGuard.sol\\\";\\r\\n\\r\\n/**\\r\\n@title IKYCRegistry Interface\\r\\n@dev Defines the interface for the KYC verification contract.\\r\\n*/\\r\\ninterface IKYCRegistry {\\r\\n    function isVerified(address user) external view returns (bool);\\r\\n}\\r\\n\\r\\n/**\\r\\n@title DEX (Refactored)\\r\\n@author stevepham.eth, m00npapi.eth (Original), Refactored by AI\\r\\n@notice A more secure and robust implementation of the DEX contract.\\r\\n@dev This contract has been refactored to address potential security vulnerabilities including\\r\\nreentrancy, centralization risks, and handling of non-standard ERC20 tokens.\\r\\nUse code with caution.\\r\\nIt uses OpenZeppelin's ReentrancyGuard for enhanced security.\\r\\nUse code with caution.\\r\\n*/\\r\\n\\r\\ncontract HEX is Ownable, ReentrancyGuard {\\r\\n    /* ========== STATE VARIABLES ========== */\\r\\n    IERC20 public immutable token;\\r\\n    IKYCRegistry public immutable kycRegistry;\\r\\n\\r\\n    uint256 public totalLiquidity;\\r\\n    mapping(address => uint256) public liquidity;\\r\\n\\r\\n    bool public isTradingBlocked = true;\\r\\n\\r\\n    /* ========== EVENTS ========== */\\r\\n\\r\\n    event EthToTokenSwap(address indexed swapper, uint256 tokenOutput, uint256 ethInput);\\r\\n    event TokenToEthSwap(address indexed swapper, uint256 tokensInput, uint256 ethOutput);\\r\\n    event LiquidityProvided(address indexed provider, uint256 liquidityMinted, uint256 ethInput, uint256 tokensInput);\\r\\n    event LiquidityRemoved(\\r\\n        address indexed remover,\\r\\n        uint256 liquidityWithdrawn,\\r\\n        uint256 tokensOutput,\\r\\n        uint256 ethOutput\\r\\n    );\\r\\n    event SettlementExecuted(address indexed beneficiary, uint256 ethWithdrawn, uint256 tokenWithdrawn);\\r\\n    event TradingBlockStatusChanged(address indexed owner, bool isBlocked);\\r\\n\\r\\n    /* ========== MODIFIERS ========== */\\r\\n\\r\\n    modifier tradingAllowed() {\\r\\n        require(!isTradingBlocked, \\\"DEX: Trading is currently blocked\\\");\\r\\n        _;\\r\\n    }\\r\\n\\r\\n    /* ========== CONSTRUCTOR ========== */\\r\\n    /**\\r\\n     * @dev Sets the addresses for the token and KYC registry.\\r\\n     *      IMPORTANT: For production, the initial owner should be a Multi-Sig wallet to mitigate single-point-of-failure risk.\\r\\n     */\\r\\n    constructor(address tokenAddr, address kycRegistryAddr) Ownable(msg.sender) {\\r\\n        require(tokenAddr != address(0) && kycRegistryAddr != address(0), \\\"DEX: Zero address provided\\\");\\r\\n        token = IERC20(tokenAddr);\\r\\n        kycRegistry = IKYCRegistry(kycRegistryAddr);\\r\\n    }\\r\\n\\r\\n    /* ========== INITIALIZATION ========== */\\r\\n\\r\\n    /**\\r\\n     * @notice Initializes the DEX with the first batch of liquidity. Can only be called once by the owner.\\r\\n     * @param tokens The initial amount of tokens to seed the pool with.\\r\\n     * @return The initial total liquidity minted.\\r\\n     */\\r\\n    function init(uint256 tokens) public payable onlyOwner returns (uint256) {\\r\\n        require(totalLiquidity == 0, \\\"DEX: Already initialized\\\");\\r\\n        require(msg.value > 0 && tokens > 0, \\\"DEX: Initial liquidity cannot be zero\\\");\\r\\n\\r\\n        totalLiquidity = msg.value;\\r\\n        liquidity[msg.sender] = totalLiquidity;\\r\\n\\r\\n        require(token.transferFrom(msg.sender, address(this), tokens), \\\"DEX: Initial token transfer failed\\\");\\r\\n        emit LiquidityProvided(msg.sender, totalLiquidity, msg.value, tokens);\\r\\n        return totalLiquidity;\\r\\n    }\\r\\n\\r\\n    /* ========== READ-ONLY FUNCTIONS ========== */\\r\\n\\r\\n    /**\\r\\n     * @notice Calculates the output amount for a given input amount and reserve state.\\r\\n     * @dev This is a pure function for price calculation based on the constant product formula.\\r\\n     *      It includes a 0.3% trading fee.\\r\\n     *      WARNING: This should NOT be used as a price oracle due to its susceptibility to manipulation.\\r\\n     */\\r\\n    function getAmountOut(\\r\\n        uint256 inputAmount,\\r\\n        uint256 inputReserve,\\r\\n        uint256 outputReserve\\r\\n    ) public pure returns (uint256) {\\r\\n        require(inputAmount > 0, \\\"DEX: Input amount must be positive\\\");\\r\\n        require(inputReserve > 0 && outputReserve > 0, \\\"DEX: Reserves must be positive\\\");\\r\\n\\r\\n        uint256 fee = (inputAmount * 3) / 1000; // tax fee 0.3% from xInput\\r\\n        uint256 inputAmountWithFee = inputAmount - fee;\\r\\n\\r\\n        uint256 numerator = inputAmountWithFee * outputReserve;\\r\\n        uint256 denominator = inputReserve + inputAmountWithFee;\\r\\n\\r\\n        return numerator / denominator;\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Returns the amount of liquidity tokens for a given address.\\r\\n     */\\r\\n    function getLiquidity(address lp) public view returns (uint256) {\\r\\n        return liquidity[lp];\\r\\n    }\\r\\n\\r\\n    /* ========== SWAP FUNCTIONS ========== */\\r\\n\\r\\n    /**\\r\\n     * @notice Swaps ETH for Tokens. Requires KYC verification.\\r\\n     * @param minTokensOut The minimum amount of tokens the user is willing to accept (slippage protection).\\r\\n     */\\r\\n    function ethToToken(uint256 minTokensOut) public payable nonReentrant tradingAllowed returns (uint256 tokenOutput) {\\r\\n        require(kycRegistry.isVerified(msg.sender), \\\"DEX: User not KYC verified\\\");\\r\\n        require(msg.value > 0, \\\"DEX: Cannot swap 0 ETH\\\");\\r\\n\\r\\n        uint256 ethReserves = address(this).balance - msg.value;\\r\\n        uint256 tokenReserves = token.balanceOf(address(this));\\r\\n\\r\\n        tokenOutput = getAmountOut(msg.value, ethReserves, tokenReserves);\\r\\n        require(tokenOutput >= minTokensOut, \\\"DEX: Slippage tolerance not met\\\");\\r\\n\\r\\n        require(token.transfer(msg.sender, tokenOutput), \\\"DEX: Token transfer failed\\\");\\r\\n\\r\\n        emit EthToTokenSwap(msg.sender, tokenOutput, msg.value);\\r\\n        return tokenOutput;\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Swaps Tokens for ETH. Requires KYC verification.\\r\\n     * @dev This function is robust against fee-on-transfer tokens by checking the balance change.\\r\\n     * @param tokensIn The amount of tokens the user wants to swap.\\r\\n     * @param minEthOut The minimum amount of ETH the user is willing to accept (slippage protection).\\r\\n     */\\r\\n    function tokenToEth(\\r\\n        uint256 tokensIn,\\r\\n        uint256 minEthOut\\r\\n    ) public nonReentrant tradingAllowed returns (uint256 ethOutput) {\\r\\n        require(kycRegistry.isVerified(msg.sender), \\\"DEX: User not KYC verified\\\");\\r\\n        require(tokensIn > 0, \\\"DEX: Cannot swap 0 tokens\\\");\\r\\n\\r\\n        uint256 tokenReserves = token.balanceOf(address(this));\\r\\n        uint256 ethReserves = address(this).balance;\\r\\n\\r\\n        // Securely transfer tokens first and calculate based on actual amount received\\r\\n        uint256 balanceBefore = token.balanceOf(address(this));\\r\\n        require(token.transferFrom(msg.sender, address(this), tokensIn), \\\"DEX: Token transferFrom failed\\\");\\r\\n        uint256 actualTokensIn = token.balanceOf(address(this)) - balanceBefore;\\r\\n\\r\\n        ethOutput = getAmountOut(actualTokensIn, tokenReserves, ethReserves);\\r\\n        require(ethOutput >= minEthOut, \\\"DEX: Slippage tolerance not met\\\");\\r\\n\\r\\n        (bool sent, ) = msg.sender.call{ value: ethOutput }(\\\"\\\");\\r\\n        require(sent, \\\"DEX: ETH transfer failed\\\");\\r\\n\\r\\n        emit TokenToEthSwap(msg.sender, actualTokensIn, ethOutput);\\r\\n        return ethOutput;\\r\\n    }\\r\\n\\r\\n    /* ========== LIQUIDITY FUNCTIONS (OWNER ONLY) ========== */\\r\\n\\r\\n    /**\\r\\n     * @notice Adds liquidity to the pool. Can only be called by the owner.\\r\\n     * @dev The amount of tokens to deposit is calculated based on the current pool ratio.\\r\\n     *      Owner must approve the DEX to spend their tokens beforehand.\\r\\n     */\\r\\n    function deposit() public payable onlyOwner nonReentrant returns (uint256 tokensDeposited) {\\r\\n        require(msg.value > 0, \\\"DEX: Cannot deposit 0 ETH\\\");\\r\\n\\r\\n        uint256 ethReserves = address(this).balance - msg.value;\\r\\n        uint256 tokenReserves = token.balanceOf(address(this));\\r\\n\\r\\n        // Calculate token amount based on current ratio, add 1 for rounding\\r\\n        uint256 tokenAmount = ((msg.value * tokenReserves) / ethReserves) + 1;\\r\\n        uint256 liquidityMinted = (msg.value * totalLiquidity) / ethReserves;\\r\\n\\r\\n        liquidity[msg.sender] += liquidityMinted;\\r\\n        totalLiquidity += liquidityMinted;\\r\\n\\r\\n        require(token.transferFrom(msg.sender, address(this), tokenAmount), \\\"DEX: Token deposit failed\\\");\\r\\n\\r\\n        emit LiquidityProvided(msg.sender, liquidityMinted, msg.value, tokenAmount);\\r\\n        return tokenAmount;\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Withdraws liquidity from the pool. Can only be called by the owner.\\r\\n     * @param liquidityAmount The amount of liquidity pool tokens to burn.\\r\\n     */\\r\\n    function withdraw(\\r\\n        uint256 liquidityAmount\\r\\n    ) public onlyOwner nonReentrant returns (uint256 ethAmount, uint256 tokenAmount) {\\r\\n        require(liquidityAmount > 0, \\\"DEX: Cannot withdraw 0 liquidity\\\");\\r\\n        require(liquidity[msg.sender] >= liquidityAmount, \\\"DEX: Insufficient liquidity tokens\\\");\\r\\n\\r\\n        uint256 ethReserves = address(this).balance;\\r\\n        uint256 tokenReserves = token.balanceOf(address(this));\\r\\n\\r\\n        ethAmount = (liquidityAmount * ethReserves) / totalLiquidity;\\r\\n        tokenAmount = (liquidityAmount * tokenReserves) / totalLiquidity;\\r\\n\\r\\n        liquidity[msg.sender] -= liquidityAmount;\\r\\n        totalLiquidity -= liquidityAmount;\\r\\n\\r\\n        require(token.transfer(msg.sender, tokenAmount), \\\"DEX: Token withdrawal failed\\\");\\r\\n        (bool sent, ) = msg.sender.call{ value: ethAmount }(\\\"\\\");\\r\\n        require(sent, \\\"DEX: ETH withdrawal failed\\\");\\r\\n\\r\\n        emit LiquidityRemoved(msg.sender, liquidityAmount, tokenAmount, ethAmount);\\r\\n        return (ethAmount, tokenAmount);\\r\\n    }\\r\\n\\r\\n    /* ========== ADMIN FUNCTIONS ========== */\\r\\n\\r\\n    /**\\r\\n     * @notice Allows the owner to block or unblock trading functions.\\r\\n     */\\r\\n    function setTradingBlock(bool _isBlocked) public onlyOwner {\\r\\n        isTradingBlocked = _isBlocked;\\r\\n        emit TradingBlockStatusChanged(msg.sender, _isBlocked);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice [DANGEROUS] Settles the contract and withdraws all remaining funds to the owner.\\r\\n     * @dev This is a final, irreversible action intended for contract end-of-life or emergency situations.\\r\\n     *      It permanently stops trading and drains all assets from the contract.\\r\\n     *      MUST be controlled by a Multi-Sig wallet with a Timelock.\\r\\n     */\\r\\n    function settleAndClear() external onlyOwner nonReentrant {\\r\\n        // 1. \\u7d50\\u7b97\\u524d\\uff0c\\u5fc5\\u9808\\u5148\\u505c\\u6b62\\u4ea4\\u6613\\r\\n        require(isTradingBlocked, \\\"DEX: Trading is not blocked\\\");\\r\\n\\r\\n        // 2. \\u7372\\u53d6\\u5408\\u7d04\\u4e2d\\u6240\\u6709\\u5269\\u9918\\u7684 ETH \\u548c Token \\u9918\\u984d\\r\\n        uint256 ethBalance = address(this).balance;\\r\\n        uint256 tokenBalance = token.balanceOf(address(this));\\r\\n\\r\\n        // 3. \\u63d0\\u9818\\u6240\\u6709\\u8cc7\\u7522\\u5230 owner \\u5730\\u5740\\r\\n        // \\u63d0\\u9818 Token\\r\\n        if (tokenBalance > 0) {\\r\\n            // \\u4f7f\\u7528 require(token.transfer(...)) \\u800c\\u975e SafeERC20 \\u5728\\u6b64\\u8655\\u662f\\u53ef\\u63a5\\u53d7\\u7684\\uff0c\\r\\n            // \\u56e0\\u70ba\\u5982\\u679c\\u5931\\u6557\\uff0c\\u6574\\u500b\\u4ea4\\u6613\\u90fd\\u6703\\u56de\\u6efe\\uff0c\\u4f46\\u5f37\\u70c8\\u5efa\\u8b70\\u4f7f\\u7528 SafeERC20\\u3002\\r\\n            require(token.transfer(owner(), tokenBalance), \\\"DEX: Final token withdrawal failed\\\");\\r\\n        }\\r\\n\\r\\n        // \\u63d0\\u9818 ETH\\r\\n        if (ethBalance > 0) {\\r\\n            (bool sent, ) = owner().call{ value: ethBalance }(\\\"\\\");\\r\\n            require(sent, \\\"DEX: Final ETH withdrawal failed\\\");\\r\\n        }\\r\\n\\r\\n        // 4. \\u5c07\\u6d41\\u52d5\\u6027\\u6e05\\u96f6\\uff0c\\u4f7f\\u5408\\u7d04\\u7684\\u6d41\\u52d5\\u6027\\u529f\\u80fd\\u6c38\\u4e45\\u5931\\u6548\\r\\n        totalLiquidity = 0;\\r\\n\\r\\n        // 5. \\u89f8\\u767c\\u4e8b\\u4ef6\\uff0c\\u8a18\\u9304\\u64cd\\u4f5c\\r\\n        emit SettlementExecuted(owner(), ethBalance, tokenBalance);\\r\\n    }\\r\\n\\r\\n    function getETHBalance() public view returns (uint256) {\\r\\n        return address(this).balance;\\r\\n    }\\r\\n\\r\\n    function getTokenBalance() public view returns (uint256) {\\r\\n        return token.balanceOf(address(this));\\r\\n    }\\r\\n}\\r\\n\",\"keccak256\":\"0xc3b4e12d106eedf176eac3eb86a7563a6bdc2867ec8f090e9eb9ac86eec93d00\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60c06040526004805460ff191660011790553480156200001e57600080fd5b5060405162001ecc38038062001ecc83398101604081905262000041916200016d565b33806200006957604051631e4fbdf760e01b8152600060048201526024015b60405180910390fd5b620000748162000100565b50600180556001600160a01b038216158015906200009a57506001600160a01b03811615155b620000e85760405162461bcd60e51b815260206004820152601a60248201527f4445583a205a65726f20616464726573732070726f7669646564000000000000604482015260640162000060565b6001600160a01b039182166080521660a052620001a5565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b80516001600160a01b03811681146200016857600080fd5b919050565b600080604083850312156200018157600080fd5b6200018c8362000150565b91506200019c6020840162000150565b90509250929050565b60805160a051611c916200023b600039600081816101a9015281816108980152611654015260008181610382015281816105a4015281816106a9015281816109bf01528181610a4f01528181610ae701528181610bca01528181610db101528181610ea501528181610f220152818161124b015281816113ee015281816114fe0152818161178b01526118710152611c916000f3fe6080604052600436106101145760003560e01c80638da5cb5b116100a0578063d0e30db011610064578063d0e30db014610315578063e27a24891461031d578063e5dc907d14610330578063f2fde38b14610350578063fc0c546a1461037057600080fd5b80638da5cb5b1461026c578063a747b93b1461028a578063abfe2314146102c0578063b7b0422d146102d5578063b8c876b1146102e857600080fd5b806353fd97d7116100e757806353fd97d7146101e357806363ffeafd1461020d5780636e9472981461022d578063715018a61461024057806382b2e2571461025757600080fd5b8063054d50d41461011957806315770f921461014c5780632e1a7d4d146101625780634b155b9714610197575b600080fd5b34801561012557600080fd5b50610139610134366004611aad565b6103a4565b6040519081526020015b60405180910390f35b34801561015857600080fd5b5061013960025481565b34801561016e57600080fd5b5061018261017d366004611ad9565b6104bd565b60408051928352602083019190915201610143565b3480156101a357600080fd5b506101cb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610143565b3480156101ef57600080fd5b506004546101fd9060ff1681565b6040519015158152602001610143565b34801561021957600080fd5b50610139610228366004611af2565b610856565b34801561023957600080fd5b5047610139565b34801561024c57600080fd5b50610255610d85565b005b34801561026357600080fd5b50610139610d99565b34801561027857600080fd5b506000546001600160a01b03166101cb565b34801561029657600080fd5b506101396102a5366004611b14565b6001600160a01b031660009081526003602052604090205490565b3480156102cc57600080fd5b50610255610e29565b6101396102e3366004611ad9565b611141565b3480156102f457600080fd5b50610139610303366004611b14565b60036020526000908152604090205481565b61013961135d565b61013961032b366004611ad9565b611612565b34801561033c57600080fd5b5061025561034b366004611b52565b611977565b34801561035c57600080fd5b5061025561036b366004611b14565b6119c8565b34801561037c57600080fd5b506101cb7f000000000000000000000000000000000000000000000000000000000000000081565b60008084116104055760405162461bcd60e51b815260206004820152602260248201527f4445583a20496e70757420616d6f756e74206d75737420626520706f73697469604482015261766560f01b60648201526084015b60405180910390fd5b6000831180156104155750600082115b6104615760405162461bcd60e51b815260206004820152601e60248201527f4445583a205265736572766573206d75737420626520706f736974697665000060448201526064016103fc565b60006103e8610471866003611b85565b61047b9190611b9c565b905060006104898287611bbe565b905060006104978583611b85565b905060006104a58388611bd1565b90506104b18183611b9c565b98975050505050505050565b6000806104c8611a06565b6104d0611a33565b600083116105205760405162461bcd60e51b815260206004820181905260248201527f4445583a2043616e6e6f742077697468647261772030206c697175696469747960448201526064016103fc565b3360009081526003602052604090205483111561058a5760405162461bcd60e51b815260206004820152602260248201527f4445583a20496e73756666696369656e74206c697175696469747920746f6b656044820152616e7360f01b60648201526084016103fc565b6040516370a0823160e01b815230600482015247906000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa1580156105f3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106179190611be4565b6002549091506106278387611b85565b6106319190611b9c565b6002549094506106418287611b85565b61064b9190611b9c565b3360009081526003602052604081208054929550879290919061066f908490611bbe565b9250508190555084600260008282546106889190611bbe565b909155505060405163a9059cbb60e01b8152336004820152602481018490527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063a9059cbb906044016020604051808303816000875af11580156106fa573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061071e9190611bfd565b61076a5760405162461bcd60e51b815260206004820152601c60248201527f4445583a20546f6b656e207769746864726177616c206661696c65640000000060448201526064016103fc565b604051600090339086908381818185875af1925050503d80600081146107ac576040519150601f19603f3d011682016040523d82523d6000602084013e6107b1565b606091505b50509050806108025760405162461bcd60e51b815260206004820152601a60248201527f4445583a20455448207769746864726177616c206661696c656400000000000060448201526064016103fc565b604080518781526020810186905290810186905233907f1dc8bb69df2b8e91fbdcbfcf93d951b3f0000f085a95fe3f7946d6161439245d9060600160405180910390a250505061085160018055565b915091565b6000610860611a33565b60045460ff16156108835760405162461bcd60e51b81526004016103fc90611c1a565b60405163b9209e3360e01b81523360048201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063b9209e3390602401602060405180830381865afa1580156108e7573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061090b9190611bfd565b6109575760405162461bcd60e51b815260206004820152601a60248201527f4445583a2055736572206e6f74204b594320766572696669656400000000000060448201526064016103fc565b600083116109a75760405162461bcd60e51b815260206004820152601960248201527f4445583a2043616e6e6f742073776170203020746f6b656e730000000000000060448201526064016103fc565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610a0e573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610a329190611be4565b6040516370a0823160e01b815230600482015290915047906000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610a9e573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610ac29190611be4565b6040516323b872dd60e01b8152336004820152306024820152604481018890529091507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303816000875af1158015610b38573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610b5c9190611bfd565b610ba85760405162461bcd60e51b815260206004820152601e60248201527f4445583a20546f6b656e207472616e7366657246726f6d206661696c6564000060448201526064016103fc565b6040516370a0823160e01b815230600482015260009082906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa158015610c11573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610c359190611be4565b610c3f9190611bbe565b9050610c4c8185856103a4565b945085851015610c9e5760405162461bcd60e51b815260206004820152601f60248201527f4445583a20536c69707061676520746f6c6572616e6365206e6f74206d65740060448201526064016103fc565b604051600090339087908381818185875af1925050503d8060008114610ce0576040519150601f19603f3d011682016040523d82523d6000602084013e610ce5565b606091505b5050905080610d365760405162461bcd60e51b815260206004820152601860248201527f4445583a20455448207472616e73666572206661696c6564000000000000000060448201526064016103fc565b604080518381526020810188905233917f472303b1e7ca7d00fb77f255c0a8c577f9ca4264c0306aaed3ff18e831523a6d910160405180910390a25050505050610d7f60018055565b92915050565b610d8d611a06565b610d976000611a5d565b565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610e00573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610e249190611be4565b905090565b610e31611a06565b610e39611a33565b60045460ff16610e8b5760405162461bcd60e51b815260206004820152601b60248201527f4445583a2054726164696e67206973206e6f7420626c6f636b6564000000000060448201526064016103fc565b6040516370a0823160e01b815230600482015247906000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610ef4573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610f189190611be4565b90508015611029577f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663a9059cbb610f616000546001600160a01b031690565b6040516001600160e01b031960e084901b1681526001600160a01b039091166004820152602481018490526044016020604051808303816000875af1158015610fae573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610fd29190611bfd565b6110295760405162461bcd60e51b815260206004820152602260248201527f4445583a2046696e616c20746f6b656e207769746864726177616c206661696c604482015261195960f21b60648201526084016103fc565b81156110d457600080546040516001600160a01b039091169084908381818185875af1925050503d806000811461107c576040519150601f19603f3d011682016040523d82523d6000602084013e611081565b606091505b50509050806110d25760405162461bcd60e51b815260206004820181905260248201527f4445583a2046696e616c20455448207769746864726177616c206661696c656460448201526064016103fc565b505b60006002556110eb6000546001600160a01b031690565b6001600160a01b03167fe38c3d6f03b038436f0b540cabdeeed3181a7fc816b9afa0e92fa39038c74222838360405161112e929190918252602082015260400190565b60405180910390a25050610d9760018055565b600061114b611a06565b6002541561119b5760405162461bcd60e51b815260206004820152601860248201527f4445583a20416c726561647920696e697469616c697a6564000000000000000060448201526064016103fc565b6000341180156111ab5750600082115b6112055760405162461bcd60e51b815260206004820152602560248201527f4445583a20496e697469616c206c69717569646974792063616e6e6f74206265604482015264207a65726f60d81b60648201526084016103fc565b34600281905533600081815260036020526040908190209290925590516323b872dd60e01b81526004810191909152306024820152604481018390526001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906323b872dd906064016020604051808303816000875af1158015611294573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906112b89190611bfd565b61130f5760405162461bcd60e51b815260206004820152602260248201527f4445583a20496e697469616c20746f6b656e207472616e73666572206661696c604482015261195960f21b60648201526084016103fc565b60025460408051918252346020830152810183905233907f3bca7014f4c0ccc8016338c79f4c00e82068dbadaf4f01ca5449040fdd39f5009060600160405180910390a2506002545b919050565b6000611367611a06565b61136f611a33565b600034116113bf5760405162461bcd60e51b815260206004820152601960248201527f4445583a2043616e6e6f74206465706f7369742030204554480000000000000060448201526064016103fc565b60006113cb3447611bbe565b6040516370a0823160e01b81523060048201529091506000906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa158015611435573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906114599190611be4565b90506000826114688334611b85565b6114729190611b9c565b61147d906001611bd1565b9050600083600254346114909190611b85565b61149a9190611b9c565b336000908152600360205260408120805492935083929091906114be908490611bd1565b9250508190555080600260008282546114d79190611bd1565b90915550506040516323b872dd60e01b8152336004820152306024820152604481018390527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303816000875af115801561154f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906115739190611bfd565b6115bf5760405162461bcd60e51b815260206004820152601960248201527f4445583a20546f6b656e206465706f736974206661696c65640000000000000060448201526064016103fc565b6040805182815234602082015290810183905233907f3bca7014f4c0ccc8016338c79f4c00e82068dbadaf4f01ca5449040fdd39f5009060600160405180910390a2509250505061160f60018055565b90565b600061161c611a33565b60045460ff161561163f5760405162461bcd60e51b81526004016103fc90611c1a565b60405163b9209e3360e01b81523360048201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063b9209e3390602401602060405180830381865afa1580156116a3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906116c79190611bfd565b6117135760405162461bcd60e51b815260206004820152601a60248201527f4445583a2055736572206e6f74204b594320766572696669656400000000000060448201526064016103fc565b6000341161175c5760405162461bcd60e51b81526020600482015260166024820152750888ab0744086c2dcdcdee840e6eec2e04060408aa8960531b60448201526064016103fc565b60006117683447611bbe565b6040516370a0823160e01b81523060048201529091506000906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa1580156117d2573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906117f69190611be4565b90506118033483836103a4565b9250838310156118555760405162461bcd60e51b815260206004820152601f60248201527f4445583a20536c69707061676520746f6c6572616e6365206e6f74206d65740060448201526064016103fc565b60405163a9059cbb60e01b8152336004820152602481018490527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063a9059cbb906044016020604051808303816000875af11580156118c2573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906118e69190611bfd565b6119325760405162461bcd60e51b815260206004820152601a60248201527f4445583a20546f6b656e207472616e73666572206661696c656400000000000060448201526064016103fc565b6040805184815234602082015233917f6d4870e9281c01ea54a4420c8684ac713b77f0c590b40c4b1fbf4c6ba892ccea910160405180910390a2505061135860018055565b61197f611a06565b6004805460ff191682151590811790915560405190815233907f74b0b300082f57e386e9c3554df5fdc40dc1a491f17b3a8d56f1e1c7cfea9d8b9060200160405180910390a250565b6119d0611a06565b6001600160a01b0381166119fa57604051631e4fbdf760e01b8152600060048201526024016103fc565b611a0381611a5d565b50565b6000546001600160a01b03163314610d975760405163118cdaa760e01b81523360048201526024016103fc565b600260015403611a5657604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600080600060608486031215611ac257600080fd5b505081359360208301359350604090920135919050565b600060208284031215611aeb57600080fd5b5035919050565b60008060408385031215611b0557600080fd5b50508035926020909101359150565b600060208284031215611b2657600080fd5b81356001600160a01b0381168114611b3d57600080fd5b9392505050565b8015158114611a0357600080fd5b600060208284031215611b6457600080fd5b8135611b3d81611b44565b634e487b7160e01b600052601160045260246000fd5b8082028115828204841417610d7f57610d7f611b6f565b600082611bb957634e487b7160e01b600052601260045260246000fd5b500490565b81810381811115610d7f57610d7f611b6f565b80820180821115610d7f57610d7f611b6f565b600060208284031215611bf657600080fd5b5051919050565b600060208284031215611c0f57600080fd5b8151611b3d81611b44565b60208082526021908201527f4445583a2054726164696e672069732063757272656e746c7920626c6f636b656040820152601960fa1b60608201526080019056fea26469706673582212202e76aaaa1766803680e0ff6d18564e98661dc14655587fc4f7aaafafd7dd6a0e64736f6c63430008140033",
+  "deployedBytecode": "0x6080604052600436106101145760003560e01c80638da5cb5b116100a0578063d0e30db011610064578063d0e30db014610315578063e27a24891461031d578063e5dc907d14610330578063f2fde38b14610350578063fc0c546a1461037057600080fd5b80638da5cb5b1461026c578063a747b93b1461028a578063abfe2314146102c0578063b7b0422d146102d5578063b8c876b1146102e857600080fd5b806353fd97d7116100e757806353fd97d7146101e357806363ffeafd1461020d5780636e9472981461022d578063715018a61461024057806382b2e2571461025757600080fd5b8063054d50d41461011957806315770f921461014c5780632e1a7d4d146101625780634b155b9714610197575b600080fd5b34801561012557600080fd5b50610139610134366004611aad565b6103a4565b6040519081526020015b60405180910390f35b34801561015857600080fd5b5061013960025481565b34801561016e57600080fd5b5061018261017d366004611ad9565b6104bd565b60408051928352602083019190915201610143565b3480156101a357600080fd5b506101cb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610143565b3480156101ef57600080fd5b506004546101fd9060ff1681565b6040519015158152602001610143565b34801561021957600080fd5b50610139610228366004611af2565b610856565b34801561023957600080fd5b5047610139565b34801561024c57600080fd5b50610255610d85565b005b34801561026357600080fd5b50610139610d99565b34801561027857600080fd5b506000546001600160a01b03166101cb565b34801561029657600080fd5b506101396102a5366004611b14565b6001600160a01b031660009081526003602052604090205490565b3480156102cc57600080fd5b50610255610e29565b6101396102e3366004611ad9565b611141565b3480156102f457600080fd5b50610139610303366004611b14565b60036020526000908152604090205481565b61013961135d565b61013961032b366004611ad9565b611612565b34801561033c57600080fd5b5061025561034b366004611b52565b611977565b34801561035c57600080fd5b5061025561036b366004611b14565b6119c8565b34801561037c57600080fd5b506101cb7f000000000000000000000000000000000000000000000000000000000000000081565b60008084116104055760405162461bcd60e51b815260206004820152602260248201527f4445583a20496e70757420616d6f756e74206d75737420626520706f73697469604482015261766560f01b60648201526084015b60405180910390fd5b6000831180156104155750600082115b6104615760405162461bcd60e51b815260206004820152601e60248201527f4445583a205265736572766573206d75737420626520706f736974697665000060448201526064016103fc565b60006103e8610471866003611b85565b61047b9190611b9c565b905060006104898287611bbe565b905060006104978583611b85565b905060006104a58388611bd1565b90506104b18183611b9c565b98975050505050505050565b6000806104c8611a06565b6104d0611a33565b600083116105205760405162461bcd60e51b815260206004820181905260248201527f4445583a2043616e6e6f742077697468647261772030206c697175696469747960448201526064016103fc565b3360009081526003602052604090205483111561058a5760405162461bcd60e51b815260206004820152602260248201527f4445583a20496e73756666696369656e74206c697175696469747920746f6b656044820152616e7360f01b60648201526084016103fc565b6040516370a0823160e01b815230600482015247906000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa1580156105f3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106179190611be4565b6002549091506106278387611b85565b6106319190611b9c565b6002549094506106418287611b85565b61064b9190611b9c565b3360009081526003602052604081208054929550879290919061066f908490611bbe565b9250508190555084600260008282546106889190611bbe565b909155505060405163a9059cbb60e01b8152336004820152602481018490527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063a9059cbb906044016020604051808303816000875af11580156106fa573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061071e9190611bfd565b61076a5760405162461bcd60e51b815260206004820152601c60248201527f4445583a20546f6b656e207769746864726177616c206661696c65640000000060448201526064016103fc565b604051600090339086908381818185875af1925050503d80600081146107ac576040519150601f19603f3d011682016040523d82523d6000602084013e6107b1565b606091505b50509050806108025760405162461bcd60e51b815260206004820152601a60248201527f4445583a20455448207769746864726177616c206661696c656400000000000060448201526064016103fc565b604080518781526020810186905290810186905233907f1dc8bb69df2b8e91fbdcbfcf93d951b3f0000f085a95fe3f7946d6161439245d9060600160405180910390a250505061085160018055565b915091565b6000610860611a33565b60045460ff16156108835760405162461bcd60e51b81526004016103fc90611c1a565b60405163b9209e3360e01b81523360048201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063b9209e3390602401602060405180830381865afa1580156108e7573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061090b9190611bfd565b6109575760405162461bcd60e51b815260206004820152601a60248201527f4445583a2055736572206e6f74204b594320766572696669656400000000000060448201526064016103fc565b600083116109a75760405162461bcd60e51b815260206004820152601960248201527f4445583a2043616e6e6f742073776170203020746f6b656e730000000000000060448201526064016103fc565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610a0e573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610a329190611be4565b6040516370a0823160e01b815230600482015290915047906000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610a9e573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610ac29190611be4565b6040516323b872dd60e01b8152336004820152306024820152604481018890529091507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303816000875af1158015610b38573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610b5c9190611bfd565b610ba85760405162461bcd60e51b815260206004820152601e60248201527f4445583a20546f6b656e207472616e7366657246726f6d206661696c6564000060448201526064016103fc565b6040516370a0823160e01b815230600482015260009082906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa158015610c11573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610c359190611be4565b610c3f9190611bbe565b9050610c4c8185856103a4565b945085851015610c9e5760405162461bcd60e51b815260206004820152601f60248201527f4445583a20536c69707061676520746f6c6572616e6365206e6f74206d65740060448201526064016103fc565b604051600090339087908381818185875af1925050503d8060008114610ce0576040519150601f19603f3d011682016040523d82523d6000602084013e610ce5565b606091505b5050905080610d365760405162461bcd60e51b815260206004820152601860248201527f4445583a20455448207472616e73666572206661696c6564000000000000000060448201526064016103fc565b604080518381526020810188905233917f472303b1e7ca7d00fb77f255c0a8c577f9ca4264c0306aaed3ff18e831523a6d910160405180910390a25050505050610d7f60018055565b92915050565b610d8d611a06565b610d976000611a5d565b565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610e00573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610e249190611be4565b905090565b610e31611a06565b610e39611a33565b60045460ff16610e8b5760405162461bcd60e51b815260206004820152601b60248201527f4445583a2054726164696e67206973206e6f7420626c6f636b6564000000000060448201526064016103fc565b6040516370a0823160e01b815230600482015247906000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa158015610ef4573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610f189190611be4565b90508015611029577f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663a9059cbb610f616000546001600160a01b031690565b6040516001600160e01b031960e084901b1681526001600160a01b039091166004820152602481018490526044016020604051808303816000875af1158015610fae573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610fd29190611bfd565b6110295760405162461bcd60e51b815260206004820152602260248201527f4445583a2046696e616c20746f6b656e207769746864726177616c206661696c604482015261195960f21b60648201526084016103fc565b81156110d457600080546040516001600160a01b039091169084908381818185875af1925050503d806000811461107c576040519150601f19603f3d011682016040523d82523d6000602084013e611081565b606091505b50509050806110d25760405162461bcd60e51b815260206004820181905260248201527f4445583a2046696e616c20455448207769746864726177616c206661696c656460448201526064016103fc565b505b60006002556110eb6000546001600160a01b031690565b6001600160a01b03167fe38c3d6f03b038436f0b540cabdeeed3181a7fc816b9afa0e92fa39038c74222838360405161112e929190918252602082015260400190565b60405180910390a25050610d9760018055565b600061114b611a06565b6002541561119b5760405162461bcd60e51b815260206004820152601860248201527f4445583a20416c726561647920696e697469616c697a6564000000000000000060448201526064016103fc565b6000341180156111ab5750600082115b6112055760405162461bcd60e51b815260206004820152602560248201527f4445583a20496e697469616c206c69717569646974792063616e6e6f74206265604482015264207a65726f60d81b60648201526084016103fc565b34600281905533600081815260036020526040908190209290925590516323b872dd60e01b81526004810191909152306024820152604481018390526001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906323b872dd906064016020604051808303816000875af1158015611294573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906112b89190611bfd565b61130f5760405162461bcd60e51b815260206004820152602260248201527f4445583a20496e697469616c20746f6b656e207472616e73666572206661696c604482015261195960f21b60648201526084016103fc565b60025460408051918252346020830152810183905233907f3bca7014f4c0ccc8016338c79f4c00e82068dbadaf4f01ca5449040fdd39f5009060600160405180910390a2506002545b919050565b6000611367611a06565b61136f611a33565b600034116113bf5760405162461bcd60e51b815260206004820152601960248201527f4445583a2043616e6e6f74206465706f7369742030204554480000000000000060448201526064016103fc565b60006113cb3447611bbe565b6040516370a0823160e01b81523060048201529091506000906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa158015611435573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906114599190611be4565b90506000826114688334611b85565b6114729190611b9c565b61147d906001611bd1565b9050600083600254346114909190611b85565b61149a9190611b9c565b336000908152600360205260408120805492935083929091906114be908490611bd1565b9250508190555080600260008282546114d79190611bd1565b90915550506040516323b872dd60e01b8152336004820152306024820152604481018390527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303816000875af115801561154f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906115739190611bfd565b6115bf5760405162461bcd60e51b815260206004820152601960248201527f4445583a20546f6b656e206465706f736974206661696c65640000000000000060448201526064016103fc565b6040805182815234602082015290810183905233907f3bca7014f4c0ccc8016338c79f4c00e82068dbadaf4f01ca5449040fdd39f5009060600160405180910390a2509250505061160f60018055565b90565b600061161c611a33565b60045460ff161561163f5760405162461bcd60e51b81526004016103fc90611c1a565b60405163b9209e3360e01b81523360048201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063b9209e3390602401602060405180830381865afa1580156116a3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906116c79190611bfd565b6117135760405162461bcd60e51b815260206004820152601a60248201527f4445583a2055736572206e6f74204b594320766572696669656400000000000060448201526064016103fc565b6000341161175c5760405162461bcd60e51b81526020600482015260166024820152750888ab0744086c2dcdcdee840e6eec2e04060408aa8960531b60448201526064016103fc565b60006117683447611bbe565b6040516370a0823160e01b81523060048201529091506000906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa1580156117d2573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906117f69190611be4565b90506118033483836103a4565b9250838310156118555760405162461bcd60e51b815260206004820152601f60248201527f4445583a20536c69707061676520746f6c6572616e6365206e6f74206d65740060448201526064016103fc565b60405163a9059cbb60e01b8152336004820152602481018490527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063a9059cbb906044016020604051808303816000875af11580156118c2573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906118e69190611bfd565b6119325760405162461bcd60e51b815260206004820152601a60248201527f4445583a20546f6b656e207472616e73666572206661696c656400000000000060448201526064016103fc565b6040805184815234602082015233917f6d4870e9281c01ea54a4420c8684ac713b77f0c590b40c4b1fbf4c6ba892ccea910160405180910390a2505061135860018055565b61197f611a06565b6004805460ff191682151590811790915560405190815233907f74b0b300082f57e386e9c3554df5fdc40dc1a491f17b3a8d56f1e1c7cfea9d8b9060200160405180910390a250565b6119d0611a06565b6001600160a01b0381166119fa57604051631e4fbdf760e01b8152600060048201526024016103fc565b611a0381611a5d565b50565b6000546001600160a01b03163314610d975760405163118cdaa760e01b81523360048201526024016103fc565b600260015403611a5657604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600080600060608486031215611ac257600080fd5b505081359360208301359350604090920135919050565b600060208284031215611aeb57600080fd5b5035919050565b60008060408385031215611b0557600080fd5b50508035926020909101359150565b600060208284031215611b2657600080fd5b81356001600160a01b0381168114611b3d57600080fd5b9392505050565b8015158114611a0357600080fd5b600060208284031215611b6457600080fd5b8135611b3d81611b44565b634e487b7160e01b600052601160045260246000fd5b8082028115828204841417610d7f57610d7f611b6f565b600082611bb957634e487b7160e01b600052601260045260246000fd5b500490565b81810381811115610d7f57610d7f611b6f565b80820180821115610d7f57610d7f611b6f565b600060208284031215611bf657600080fd5b5051919050565b600060208284031215611c0f57600080fd5b8151611b3d81611b44565b60208082526021908201527f4445583a2054726164696e672069732063757272656e746c7920626c6f636b656040820152601960fa1b60608201526080019056fea26469706673582212202e76aaaa1766803680e0ff6d18564e98661dc14655587fc4f7aaafafd7dd6a0e64736f6c63430008140033",
+  "devdoc": {
+    "author": "stevepham.eth, m00npapi.eth (Original), Refactored by AI",
+    "details": "This contract has been refactored to address potential security vulnerabilities including reentrancy, centralization risks, and handling of non-standard ERC20 tokens. Use code with caution. It uses OpenZeppelin's ReentrancyGuard for enhanced security. Use code with caution.",
+    "errors": {
+      "OwnableInvalidOwner(address)": [
+        {
+          "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+        }
+      ],
+      "OwnableUnauthorizedAccount(address)": [
+        {
+          "details": "The caller account is not authorized to perform an operation."
+        }
+      ],
+      "ReentrancyGuardReentrantCall()": [
+        {
+          "details": "Unauthorized reentrant call."
+        }
+      ]
+    },
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "details": "Sets the addresses for the token and KYC registry.      IMPORTANT: For production, the initial owner should be a Multi-Sig wallet to mitigate single-point-of-failure risk."
+      },
+      "deposit()": {
+        "details": "The amount of tokens to deposit is calculated based on the current pool ratio.      Owner must approve the DEX to spend their tokens beforehand."
+      },
+      "ethToToken(uint256)": {
+        "params": {
+          "minTokensOut": "The minimum amount of tokens the user is willing to accept (slippage protection)."
+        }
+      },
+      "getAmountOut(uint256,uint256,uint256)": {
+        "details": "This is a pure function for price calculation based on the constant product formula.      It includes a 0.3% trading fee.      WARNING: This should NOT be used as a price oracle due to its susceptibility to manipulation."
+      },
+      "init(uint256)": {
+        "params": {
+          "tokens": "The initial amount of tokens to seed the pool with."
+        },
+        "returns": {
+          "_0": "The initial total liquidity minted."
+        }
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "settleAndClear()": {
+        "details": "This is a final, irreversible action intended for contract end-of-life or emergency situations.      It permanently stops trading and drains all assets from the contract.      MUST be controlled by a Multi-Sig wallet with a Timelock."
+      },
+      "tokenToEth(uint256,uint256)": {
+        "details": "This function is robust against fee-on-transfer tokens by checking the balance change.",
+        "params": {
+          "minEthOut": "The minimum amount of ETH the user is willing to accept (slippage protection).",
+          "tokensIn": "The amount of tokens the user wants to swap."
+        }
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      },
+      "withdraw(uint256)": {
+        "params": {
+          "liquidityAmount": "The amount of liquidity pool tokens to burn."
+        }
+      }
+    },
+    "title": "DEX (Refactored)",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "deposit()": {
+        "notice": "Adds liquidity to the pool. Can only be called by the owner."
+      },
+      "ethToToken(uint256)": {
+        "notice": "Swaps ETH for Tokens. Requires KYC verification."
+      },
+      "getAmountOut(uint256,uint256,uint256)": {
+        "notice": "Calculates the output amount for a given input amount and reserve state."
+      },
+      "getLiquidity(address)": {
+        "notice": "Returns the amount of liquidity tokens for a given address."
+      },
+      "init(uint256)": {
+        "notice": "Initializes the DEX with the first batch of liquidity. Can only be called once by the owner."
+      },
+      "setTradingBlock(bool)": {
+        "notice": "Allows the owner to block or unblock trading functions."
+      },
+      "settleAndClear()": {
+        "notice": "[DANGEROUS] Settles the contract and withdraws all remaining funds to the owner."
+      },
+      "tokenToEth(uint256,uint256)": {
+        "notice": "Swaps Tokens for ETH. Requires KYC verification."
+      },
+      "withdraw(uint256)": {
+        "notice": "Withdraws liquidity from the pool. Can only be called by the owner."
+      }
+    },
+    "notice": "A more secure and robust implementation of the DEX contract.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 8,
+        "contract": "contracts/HEX.sol:HEX",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 266,
+        "contract": "contracts/HEX.sol:HEX",
+        "label": "_status",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 351,
+        "contract": "contracts/HEX.sol:HEX",
+        "label": "totalLiquidity",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 355,
+        "contract": "contracts/HEX.sol:HEX",
+        "label": "liquidity",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 358,
+        "contract": "contracts/HEX.sol:HEX",
+        "label": "isTradingBlocked",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_bool"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
