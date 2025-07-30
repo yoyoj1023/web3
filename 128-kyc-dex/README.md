@@ -1,8 +1,4 @@
-# �� Scaffold-ETH 2 KYC DEX 去中心化交易所 v0.5.1
-
-<h4 align="center">
-  <a href="https://orion-dex-sigma.vercel.app/">部屬網站</a>
-</h4>
+# caffold-ETH 2 KYC DEX 去中心化交易所
 
 🚀 這是一個基於 **Scaffold-ETH 2** 構建的具有 KYC (Know Your Customer) 功能的去中心化交易所，集成了身份驗證、自動做市商 (AMM) 和流動性挖礦功能。使用 NextJS、RainbowKit、Wagmi、Viem 和 TypeScript 開發。
 
@@ -10,7 +6,11 @@
 
 🔥 **Burner Wallet & Local Faucet**: 快速測試您的應用程式，無需處理測試網的水龍頭。
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+![Debug Contracts tab](https://github.com/yoyoj1023/web3/blob/main/128-kyc-dex/sample.png)
+
+<h4 align="center">
+  <a href="https://orion-dex-sigma.vercel.app/">部屬網站</a>
+</h4>
 
 ## 🎯 核心功能
 
