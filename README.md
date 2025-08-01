@@ -17,6 +17,10 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 ### 2. Common Documentation:
 
++ Fast Reed-Solomon Interactive Oracle Proofs of Proximity (FRI) : ｜[Paper](https://drops.dagstuhl.de/storage/00lipics/lipics-vol107-icalp2018/LIPIcs.ICALP.2018.14/LIPIcs.ICALP.2018.14.pdf)｜
+
++ Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
+
 + Solidity: ｜[Official Documentation](https://soliditylang.org/)｜
 
 + Ethers.js: ｜[Official Documentation](https://docs.ethers.org/v6/)｜
@@ -24,8 +28,6 @@ This is a collection of web3 exploration and practice projects, documenting my l
 + OpenZeppelin: ｜[Official Documentation](https://docs.openzeppelin.com/)｜[Github Repository](https://github.com/OpenZeppelin/openzeppelin-contracts)｜
 
 + Chainlink: ｜[Official Developer Documentation](https://docs.chain.link/)｜[Github Repository](https://github.com/smartcontractkit/chainlink)｜
-
-+ Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
 
 + Modern Frontend Technologies: | [React Official Documentation](https://react.dev/) | [Next.js Official Documentation](https://nextjs.org/docs) | [Next.js Official Website](https://nextjs.org/) |
 
@@ -38,7 +40,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 + ethernaut: ｜[Github](https://github.com/OpenZeppelin/ethernaut)｜
 
-+ Hardhat: ｜[Github](https://github.com/NomicFoundation/hardhat)｜
++ hardhat: ｜[Github](https://github.com/NomicFoundation/hardhat)｜
 
 + account-abstraction: ｜[Github](https://github.com/eth-infinitism/account-abstraction)｜
 
