@@ -21,26 +21,18 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 + Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
 
-+ Solidity: ｜[Official Documentation](https://soliditylang.org/)｜
++ EVM Chain Related: ｜[Solidity Documentation](https://soliditylang.org/)｜[Ethers.js Documentation](https://docs.ethers.org/v6/)｜[OpenZeppelin  Documentation](https://docs.openzeppelin.com/)｜[Chainlink Developer Documentation](https://docs.chain.link/)｜
 
-+ Ethers.js: ｜[Official Documentation](https://docs.ethers.org/v6/)｜
++ Modern Frontend Technologies: | [React Documentation](https://react.dev/) | [Next.js Documentation](https://nextjs.org/docs) |
 
-+ OpenZeppelin: ｜[Official Documentation](https://docs.openzeppelin.com/)｜[Github Repository](https://github.com/OpenZeppelin/openzeppelin-contracts)｜
-
-+ Chainlink: ｜[Official Developer Documentation](https://docs.chain.link/)｜[Github Repository](https://github.com/smartcontractkit/chainlink)｜
-
-+ Modern Frontend Technologies: | [React Official Documentation](https://react.dev/) | [Next.js Official Documentation](https://nextjs.org/docs) | [Next.js Official Website](https://nextjs.org/) |
-
-+ Development Tools & Framework Documentation: ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy Official Documentation](https://www.alchemy.com/docs) | [Docker Official Documentation](https://docs.docker.com/) |
++ Development Tools & Framework Documentation: ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy Documentation](https://www.alchemy.com/docs) | [Docker  Documentation](https://docs.docker.com/) |
 
 
 ### 3. Popular Open Source Projects:
 
-+ scaffold-eth-2: ｜[Github](https://github.com/scaffold-eth/scaffold-eth-2)｜
-
 + ethernaut: ｜[Github](https://github.com/OpenZeppelin/ethernaut)｜
 
-+ hardhat: ｜[Github](https://github.com/NomicFoundation/hardhat)｜
++ scaffold-eth-2: ｜[Github](https://github.com/scaffold-eth/scaffold-eth-2)｜
 
 + account-abstraction: ｜[Github](https://github.com/eth-infinitism/account-abstraction)｜
 
