@@ -17,8 +17,6 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 ### 2. Common Documentation:
 
-+ Fast Reed-Solomon Interactive Oracle Proofs of Proximity (FRI) : ｜[Paper](https://drops.dagstuhl.de/storage/00lipics/lipics-vol107-icalp2018/LIPIcs.ICALP.2018.14/LIPIcs.ICALP.2018.14.pdf)｜
-
 + Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
 
 + EVM Chain Related: ｜[Solidity Documentation](https://soliditylang.org/)｜[Ethers.js Documentation](https://docs.ethers.org/v6/)｜[OpenZeppelin  Documentation](https://docs.openzeppelin.com/)｜[Chainlink Developer Documentation](https://docs.chain.link/)｜
@@ -47,6 +45,8 @@ This is a collection of web3 exploration and practice projects, documenting my l
 3. [Learn Next.js](https://nextjs.org/learn)
 
 4. [Solidity by Example](https://solidity-by-example.org/)
+
+5. [The Rust Programming Language](https://doc.rust-lang.org/book/) ｜ [Rust 程式設計語言](https://rust-lang.tw/book-tw/)
 
 ### 5. Solidity CTF (Capture The Flag) Challenges:
 
