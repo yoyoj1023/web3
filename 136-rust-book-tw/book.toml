@@ -1,0 +1,9 @@
+[book]
+title = "Rust 程式設計語言"
+author = ["Steve Klabnik", "Carol Nichols", "Contributions from the Rust Community"]
+language = "zh-TW"
+
+[output.html]
+additional-css = ["ferris.css", "theme/2018-edition.css"]
+additional-js = ["ferris.js"]
+git-repository-url = "https://github.com/rust-tw/book-tw"
