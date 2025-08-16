@@ -1,0 +1,17 @@
+{
+  "title": "我的第一則 IPFS 訊息",
+  "content": "Hello IPFS World!",
+  "author": "IPFS 學習者",
+  "timestamp": "2024-12-19T10:00:00Z",
+  "tags": ["IPFS", "學習", "去中心化"],
+  "metadata": {
+    "version": "1.0",
+    "encoding": "UTF-8",
+    "type": "test-message"
+  },
+  "ipfs_info": {
+    "note": "這個 JSON 檔案展示了結構化資料在 IPFS 中的儲存方式",
+    "content_addressing": "任何內容的改變都會產生新的 CID",
+    "immutability": "一旦上傳，內容就無法被修改，只能創建新版本"
+  }
+}

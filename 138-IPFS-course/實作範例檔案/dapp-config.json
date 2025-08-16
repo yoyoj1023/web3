@@ -1,0 +1,35 @@
+{
+  "appName": "我的去中心化留言板",
+  "version": "1.0.0",
+  "description": "基於 IPFS 和智能合約的留言板應用",
+  "features": [
+    "去中心化儲存",
+    "不可篡改記錄",
+    "Web3 整合",
+    "低成本儲存"
+  ],
+  "settings": {
+    "maxMessageLength": 1000,
+    "allowAnonymous": true,
+    "moderationEnabled": false,
+    "pinningRequired": true
+  },
+  "ipfs": {
+    "pinningService": "Pinata",
+    "gateway": "https://gateway.pinata.cloud",
+    "backupGateways": [
+      "https://ipfs.io",
+      "https://cloudflare-ipfs.com"
+    ]
+  },
+  "blockchain": {
+    "network": "sepolia",
+    "contractAddress": "0x...",
+    "gasLimit": 300000
+  },
+  "ui": {
+    "theme": "dark",
+    "language": "zh-TW",
+    "maxMessagesPerPage": 20
+  }
+}
