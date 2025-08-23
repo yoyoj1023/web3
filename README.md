@@ -5,7 +5,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 1. Faucets: ｜[Google Web3 Faucet](https://cloud.google.com/application/web3/faucet)｜ [Optimism Faucet](https://console.optimism.io/faucet)｜[Chainlink Faucet](https://faucets.chain.link/)｜
 
-2. Dashboards: ｜[Alchemy Dashboard](https://dashboard.alchemy.com/?a=)｜[Vercel Dashboard](https://vercel.com/)｜[Reown Cloud Dashboard](https://cloud.reown.com/)｜
+2. Dashboards: ｜[Alchemy Dashboard](https://dashboard.alchemy.com/?a=)｜[Vercel Dashboard](https://vercel.com/)｜[Reown Cloud Dashboard](https://cloud.reown.com/)｜[Pinata Dashboard](https://app.pinata.cloud/ipfs/files)
 
 3. Blockchain Explorers: ｜[Blockchain.com](https://www.blockchain.com/explorer)｜[Bitcoin Office](https://bitcoin.gob.sv/)｜
 
