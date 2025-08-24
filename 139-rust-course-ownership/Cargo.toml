@@ -1,0 +1,38 @@
+[package]
+name = "rust-ownership-course"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rust Ownership Course <course@example.com>"]
+description = "A comprehensive course on Rust ownership system"
+license = "MIT"
+
+[dependencies]
+
+# 單元一：所有權基礎範例
+[[example]]
+name = "ownership_basic"
+path = "unit1-what-is-ownership/examples/ownership_basic.rs"
+
+[[example]]
+name = "memory_model"
+path = "unit1-what-is-ownership/examples/memory_model.rs"
+
+[[example]]
+name = "move_semantics"
+path = "unit1-what-is-ownership/examples/move_semantics.rs"
+
+[[example]]
+name = "copy_trait"
+path = "unit1-what-is-ownership/examples/copy_trait.rs"
+
+# 單元二：借用與參考範例
+[[example]]
+name = "borrowing_practice"
+path = "unit2-references-borrowing/examples/borrowing_practice.rs"
+
+# 單元三：切片型別範例
+[[example]]
+name = "slice_examples"
+path = "unit3-slice-type/examples/slice_examples.rs"
+
+# 更多範例可以在這裡添加
