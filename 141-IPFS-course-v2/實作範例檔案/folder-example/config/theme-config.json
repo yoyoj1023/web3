@@ -1,0 +1,12 @@
+{
+  "primaryColor": "#3B82F6",
+  "secondaryColor": "#1F2937",
+  "backgroundColor": "#F9FAFB",
+  "textColor": "#111827",
+  "borderRadius": "8px",
+  "fontSize": {
+    "small": "14px",
+    "medium": "16px",
+    "large": "20px"
+  }
+}

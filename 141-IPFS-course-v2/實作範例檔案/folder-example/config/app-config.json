@@ -1,0 +1,10 @@
+{
+  "appName": "IPFS 留言板",
+  "version": "1.0.0",
+  "environment": "development",
+  "features": {
+    "ipfsStorage": true,
+    "smartContracts": true,
+    "userAuthentication": true
+  }
+}

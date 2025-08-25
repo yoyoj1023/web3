@@ -1,0 +1,11 @@
+{
+    "title": "我的第一則 IPFS 訊息",
+    "content": "Hello IPFS World!",
+    "author": "IPFS 學習者",
+    "timestamp": "2024-12-19T10:00:00Z",
+    "tags": ["IPFS", "學習", "去中心化"],
+    "metadata": {
+      "version": "1.0",
+      "encoding": "UTF-8"
+    }
+  }
