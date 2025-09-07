@@ -17,14 +17,13 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 ### 2. Common Documentation:
 
-+ Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
-
-+ EVM Chain Related: ｜[Solidity Documentation](https://soliditylang.org/)｜[Ethers.js Documentation](https://docs.ethers.org/v6/)｜[OpenZeppelin  Documentation](https://docs.openzeppelin.com/)｜[Chainlink Developer Documentation](https://docs.chain.link/)｜
++ EVM Chain Related: ｜[ethereum.org](https://ethereum.org/zh-tw/)｜[Ethereum Whitepaper](https://ethereum.org/zh-tw/whitepaper/)｜[Solidity Documentation](https://soliditylang.org/)｜[Ethers.js Documentation](https://docs.ethers.org/v6/)｜[OpenZeppelin  Documentation](https://docs.openzeppelin.com/)｜[Chainlink Developer Documentation](https://docs.chain.link/)｜
 
 + Modern Frontend Technologies: | [React Documentation](https://react.dev/) | [Next.js Documentation](https://nextjs.org/docs) |
 
 + Development Tools & Framework Documentation: ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy Documentation](https://www.alchemy.com/docs) | [Docker  Documentation](https://docs.docker.com/) |
 
++ Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
 
 ### 3. Popular Open Source Projects:
 
