@@ -1,0 +1,6 @@
+PS C:\VScode\web3\142-se2-message-board\packages\nextjs> node scripts/test-pinata.js
+✅ Pinata API 連接成功!
+回應: {
+  message: 'Congratulations! You are communicating with the Pinata API!'
+}
+PS C:\VScode\web3\142-se2-message-board\packages\nextjs>

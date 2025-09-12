@@ -1,0 +1,74 @@
+PS C:\VScode\web3\142-se2-message-board\packages\nextjs> node scripts/test-api.js
+🚀 開始 API 測試...
+
+🔍 測試健康檢查 API...
+✅ 健康檢查通過: {
+  status: 'healthy',
+  services: { pinata: 'connected' },
+  timestamp: '2025-09-12T07:12:49.995Z'
+}
+
+📤 測試正常上傳功能...
+
+🔍 測試上傳留言 1...
+資料: {
+  "text": "這是一則測試留言",
+  "author": "測試使用者",
+  "title": "測試標題",
+  "tags": [
+    "測試",
+    "API"
+  ]
+}
+✅ 上傳成功: {
+  success: true,
+  cid: 'bafkreiadrbwnzys7vtxl2bqetgkzy2uqvjbd2s5v3s4sss462bex2hl3jy'
+}
+⚠️ CID 格式可能有問題: bafkreiadrbwnzys7vtxl2bqetgkzy2uqvjbd2s5v3s4sss462bex2hl3jy
+
+🔍 測試上傳留言 2...
+資料: {
+  "text": "只有文字內容的簡單留言"
+}
+✅ 上傳成功: {
+  success: true,
+  cid: 'bafkreibyw5labobjokgrcdcfbo7pwqo2kkmlmhcqcnmo5urvzhazyrjthy'
+}
+⚠️ CID 格式可能有問題: bafkreibyw5labobjokgrcdcfbo7pwqo2kkmlmhcqcnmo5urvzhazyrjthy
+
+🔍 測試上傳留言 3...
+資料: {
+  "text": "包含各種字元的留言 123 !@# 中文 English",
+  "author": "Multi-Language User",
+  "tags": [
+    "多語言",
+    "multilingual",
+    "test"
+  ]
+}
+✅ 上傳成功: {
+  success: true,
+  cid: 'bafkreign227ysbjtmgmpa7felvi2bqbhq2kujcoed7hj5gh6qt646ujbcu'
+}
+⚠️ CID 格式可能有問題: bafkreign227ysbjtmgmpa7felvi2bqbhq2kujcoed7hj5gh6qt646ujbcu
+
+🛡️ 測試錯誤處理...
+
+🔍 測試錯誤處理: 空內容測試
+✅ 正確捕獲錯誤: 輸入資料格式不正確
+
+🔍 測試錯誤處理: 過長內容測試
+✅ 正確捕獲錯誤: 輸入資料格式不正確
+
+🔍 測試錯誤處理: 過多標籤測試
+✅ 正確捕獲錯誤: 輸入資料格式不正確
+
+📊 測試總結:
+✅ 成功上傳: 3 則留言
+🔗 生成的 CID 列表:
+  1. bafkreiadrbwnzys7vtxl2bqetgkzy2uqvjbd2s5v3s4sss462bex2hl3jy
+  2. bafkreibyw5labobjokgrcdcfbo7pwqo2kkmlmhcqcnmo5urvzhazyrjthy
+  3. bafkreign227ysbjtmgmpa7felvi2bqbhq2kujcoed7hj5gh6qt646ujbcu
+
+🎉 API 測試完成！
+PS C:\VScode\web3\142-se2-message-board\packages\nextjs>
