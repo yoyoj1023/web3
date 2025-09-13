@@ -46,11 +46,11 @@ function validateEnvironment() {
     const apiKey = process.env.PINATA_API_KEY;
     const apiSecret = process.env.PINATA_API_SECRET;
 
-    if (!apiKey || !apiSecret) {
-        throw new Error('Pinata API 金鑰未正確設定');
-    }
-
-    return { apiKey, apiSecret };
+    return { 
+        apiKey, 
+        apiSecret, 
+        hasPinataCredentials: !!(apiKey && apiSecret) 
+    };
 }
 
 // ===========================================
@@ -120,7 +120,14 @@ async function uploadToPinata(
 export async function POST(req: NextRequest) {
     try {
         // 1. 驗證環境變數
-        const { apiKey, apiSecret } = validateEnvironment();
+        const { apiKey, apiSecret, hasPinataCredentials } = validateEnvironment();
+        
+        if (!hasPinataCredentials || !apiKey || !apiSecret) {
+            return NextResponse.json({
+                success: false,
+                error: 'Pinata API 金鑰未正確設定',
+            }, { status: 500 });
+        }
 
         // 2. 解析請求體
         const body = await req.json();
