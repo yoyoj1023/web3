@@ -1,4 +1,5 @@
 import type { HardhatUserConfig } from "hardhat/config";
+import "dotenv/config";
 
 import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 import { configVariable } from "hardhat/config";
@@ -41,6 +42,12 @@ const config: HardhatUserConfig = {
       chainType: "l1",
       url: configVariable("SEPOLIA_RPC_URL"),
       accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+    },
+    optimismSepolia: {
+      type: "http",
+      chainType: "op",
+      url: configVariable("OP_SEPOLIA_RPC_URL_API_KEY"),
+      accounts: [configVariable("PRIVATE_KEY")],
     },
   },
 };
