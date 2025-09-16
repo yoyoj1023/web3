@@ -1,0 +1,56 @@
+{
+  "name": "scaffold-alchemy",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/hardhat",
+      "packages/nextjs"
+    ]
+  },
+  "scripts": {
+    "compile": "yarn hardhat:compile",
+    "deploy": "ts-node packages/hardhat/chainDeploy.ts",
+    "deploy:mainnet": "ts-node packages/hardhat/chainDeploy.ts -mainnet",
+    "fork": "yarn hardhat:fork",
+    "format": "yarn next:format && yarn hardhat:format",
+    "generate": "yarn account:generate",
+    "hardhat:account": "yarn workspace @scaffold-alchemy/hardhat account",
+    "hardhat:chain": "yarn workspace @scaffold-alchemy/hardhat chain",
+    "hardhat:check-types": "yarn workspace @scaffold-alchemy/hardhat check-types",
+    "hardhat:compile": "yarn workspace @scaffold-alchemy/hardhat compile",
+    "hardhat:deploy": "yarn workspace @scaffold-alchemy/hardhat deploy",
+    "hardhat:flatten": "yarn workspace @scaffold-alchemy/hardhat flatten",
+    "hardhat:fork": "yarn workspace @scaffold-alchemy/hardhat fork",
+    "hardhat:format": "yarn workspace @scaffold-alchemy/hardhat format",
+    "hardhat:generate": "yarn workspace @scaffold-alchemy/hardhat generate",
+    "hardhat:hardhat-verify": "yarn workspace @scaffold-alchemy/hardhat hardhat-verify",
+    "hardhat:lint": "yarn workspace @scaffold-alchemy/hardhat lint",
+    "hardhat:lint-staged": "yarn workspace @scaffold-alchemy/hardhat lint-staged",
+    "hardhat:test": "yarn workspace @scaffold-alchemy/hardhat test",
+    "hardhat:verify": "yarn workspace @scaffold-alchemy/hardhat verify",
+    "lint": "yarn next:lint && yarn hardhat:lint",
+    "next:build": "yarn workspace @scaffold-alchemy/nextjs build",
+    "next:check-types": "yarn workspace @scaffold-alchemy/nextjs check-types",
+    "next:format": "yarn workspace @scaffold-alchemy/nextjs format",
+    "next:lint": "yarn workspace @scaffold-alchemy/nextjs lint",
+    "next:serve": "yarn workspace @scaffold-alchemy/nextjs serve",
+    "postinstall": "husky",
+    "precommit": "lint-staged",
+    "chain": "node common/script/chain.js \"$@\"",
+    "start": "yarn workspace @scaffold-alchemy/nextjs dev",
+    "test": "yarn hardhat:test",
+    "vercel": "yarn workspace @scaffold-alchemy/nextjs vercel",
+    "vercel:yolo": "yarn workspace @scaffold-alchemy/nextjs vercel:yolo",
+    "verify": "yarn hardhat:verify"
+  },
+  "packageManager": "yarn@3.2.3",
+  "devDependencies": {
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "ts-node": "^10.9.2"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}
