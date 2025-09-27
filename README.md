@@ -7,7 +7,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 2. Dashboards: ｜[Alchemy Dashboard](https://dashboard.alchemy.com/?a=)｜[Vercel Dashboard](https://vercel.com/)｜[Reown Cloud Dashboard](https://cloud.reown.com/)｜[Pinata Dashboard](https://app.pinata.cloud/ipfs/files)
 
-3. Blockchain Explorers: ｜[Blockchain.com](https://www.blockchain.com/explorer)｜[Bitcoin Office](https://bitcoin.gob.sv/)｜
+3. Blockchain Explorers: ｜[Blockchain.com](https://www.blockchain.com/explorer)｜[Bitcoin Office](https://bitcoin.gob.sv/)｜[Polygon PoS Chain Explorer](https://polygonscan.com/)｜
 
 4. Online Cryptography Tools: [emn178](https://emn178.github.io/online-tools/)
 
@@ -22,8 +22,6 @@ This is a collection of web3 exploration and practice projects, documenting my l
 + Modern Frontend Technologies: | [React Documentation](https://react.dev/) | [Next.js Documentation](https://nextjs.org/docs) |
 
 + Development Tools & Framework Documentation: ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy Documentation](https://www.alchemy.com/docs) | [Docker  Documentation](https://docs.docker.com/) |
-
-+ Polygon Knowledge Layer: ｜[Fibonacci in Plonky3 - Introduction to Plonky3](https://docs.polygon.technology/learn/plonky3/examples/fibonacci/)｜
 
 ### 3. Popular Open Source Projects:
 
