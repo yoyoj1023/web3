@@ -15,6 +15,8 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 6. Unix Timestamp Converter: [Converter](https://youtils.cc/timestamp/zh-hants)
 
+7. ABI Ninja: [ABI Ninja](https://abi.ninja/)
+
 ### 2. Common Documentation:
 
 + EVM Chain Related: ｜[ethereum.org](https://ethereum.org/zh-tw/)｜[Ethereum Whitepaper](https://ethereum.org/zh-tw/whitepaper/)｜[Solidity Documentation](https://soliditylang.org/)｜[Ethers.js Documentation](https://docs.ethers.org/v6/)｜[OpenZeppelin  Documentation](https://docs.openzeppelin.com/)｜[Chainlink Developer Documentation](https://docs.chain.link/)｜
@@ -25,11 +27,11 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 ### 3. Popular Open Source Projects:
 
++ account-abstraction: ｜[Github](https://github.com/eth-infinitism/account-abstraction)｜
+
 + ethernaut: ｜[Github](https://github.com/OpenZeppelin/ethernaut)｜
 
 + scaffold-eth-2: ｜[Github](https://github.com/scaffold-eth/scaffold-eth-2)｜
-
-+ account-abstraction: ｜[Github](https://github.com/eth-infinitism/account-abstraction)｜
 
 + ens-contracts: ｜[Github](https://github.com/ensdomains/ens-contracts/tree/staging)｜
 
@@ -45,8 +47,8 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 5. [The Rust Programming Language](https://doc.rust-lang.org/book/) ｜ [Rust 程式設計語言](https://rust-lang.tw/book-tw/)
 
-### 5. Solidity CTF (Capture The Flag) Challenges:
+### 5. Challenges:
 
-1. CTF: ｜ [Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [Ethernaut Self-written Solutions](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜
+1. Solidity CTF (Capture The Flag): ｜ [Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [Ethernaut Self-written Solutions](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜
 
 2. BuidlGuidl: ｜ [Speed Run Ethereum](https://speedrunethereum.com/) ｜
