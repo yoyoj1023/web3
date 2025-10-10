@@ -54,3 +54,5 @@ This is a collection of web3 exploration and practice projects, documenting my l
 1. Solidity CTF (Capture The Flag): ｜ [Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [Ethernaut Self-written Solutions](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜
 
 2. BuidlGuidl: ｜ [Speed Run Ethereum](https://speedrunethereum.com/) ｜
+
+3. LeetCode: ｜ [LeetCode Problems](https://leetcode.com/problemset/) ｜
