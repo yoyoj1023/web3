@@ -19,7 +19,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 ### 2. Common Documentation:
 
-+ EVM Chain Related: ｜[ethereum.org](https://ethereum.org/zh-tw/)｜[Ethereum Whitepaper](https://ethereum.org/zh-tw/whitepaper/)｜[Solidity Documentation](https://soliditylang.org/)｜[Ethers.js Documentation](https://docs.ethers.org/v6/)｜[OpenZeppelin  Documentation](https://docs.openzeppelin.com/)｜[Chainlink Developer Documentation](https://docs.chain.link/)｜
++ EVM Chain Related: ｜[ethereum.org](https://ethereum.org/zh-tw/)｜[Solidity Documentation](https://soliditylang.org/)｜[Ethers.js Documentation](https://docs.ethers.org/v6/)｜[OpenZeppelin  Documentation](https://docs.openzeppelin.com/)｜[Chainlink Developer Documentation](https://docs.chain.link/)｜
 
 + Modern Frontend Technologies: | [React Documentation](https://react.dev/) | [Next.js Documentation](https://nextjs.org/docs) |
 
@@ -48,6 +48,8 @@ This is a collection of web3 exploration and practice projects, documenting my l
 4. [Solidity by Example](https://solidity-by-example.org/)
 
 5. [The Rust Programming Language](https://doc.rust-lang.org/book/) ｜ [Rust 程式設計語言](https://rust-lang.tw/book-tw/)
+
+6. [EIPs](https://github.com/ethereum/EIPs)
 
 ### 5. Challenges:
 
