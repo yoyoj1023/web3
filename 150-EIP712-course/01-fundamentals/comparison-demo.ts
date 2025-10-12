@@ -25,7 +25,7 @@ async function traditionalSigningDemo() {
 
   // 要簽名的數據
   const transferData = {
-    to: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+    to: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
     amount: 100,
     deadline: 1234567890,
   };
@@ -92,7 +92,7 @@ async function eip712SigningDemo() {
 
   // 3. 定義 Value（實際數據）
   const value = {
-    to: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+    to: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
     amount: 100n,
     deadline: 1234567890n,
   };
