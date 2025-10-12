@@ -1,0 +1,26 @@
+{
+  "name": "eip712-learning-course",
+  "version": "1.0.0",
+  "description": "完整的 EIP712 學習課程 - 從概念到實作",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "clean": "hardhat clean"
+  },
+  "keywords": ["EIP712", "ethereum", "signing", "typescript", "solidity"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@types/node": "^20.10.0",
+    "hardhat": "^2.19.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "ethers": "^6.9.0",
+    "viem": "^2.0.0",
+    "dotenv": "^16.3.0"
+  }
+}
+

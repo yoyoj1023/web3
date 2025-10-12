@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "./01-fundamentals/**/*",
+    "./02-encoding-flow/**/*",
+    "./03-signature-components/**/*",
+    "./04-hello-world/**/*",
+    "./05-practical-examples/**/*",
+    "./06-security-best-practices/**/*",
+    "./07-exercises/**/*"
+  ],
+  "exclude": ["node_modules", "artifacts", "cache"]
+}
+
