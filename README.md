@@ -48,7 +48,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 5. [The Rust Programming Language](https://doc.rust-lang.org/book/) ｜ [Rust 程式設計語言](https://rust-lang.tw/book-tw/)
 
 6. [EIPs](https://github.com/ethereum/EIPs):
-    - [EIP-712](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md)
+    - [EIP-712: Structured Signature](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md)
 
 ### 5. Challenges:
 
