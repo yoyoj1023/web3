@@ -31,8 +31,6 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 + account-abstraction: ｜[Github](https://github.com/eth-infinitism/account-abstraction)｜
 
-+ ethernaut: ｜[Github](https://github.com/OpenZeppelin/ethernaut)｜
-
 + scaffold-eth-2: ｜[Github](https://github.com/scaffold-eth/scaffold-eth-2)｜
 
 + ens-contracts: ｜[Github](https://github.com/ensdomains/ens-contracts/tree/staging)｜
@@ -49,11 +47,12 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 5. [The Rust Programming Language](https://doc.rust-lang.org/book/) ｜ [Rust 程式設計語言](https://rust-lang.tw/book-tw/)
 
-6. [EIPs](https://github.com/ethereum/EIPs)
+6. [EIPs](https://github.com/ethereum/EIPs):
+    - [EIP-712](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md)
 
 ### 5. Challenges:
 
-1. Solidity CTF (Capture The Flag): ｜ [Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [Ethernaut Self-written Solutions](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜
+1. Solidity CTF (Capture The Flag): ｜ [The Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [The Ethernaut level solutions](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜[The Ethernaut Github](https://github.com/OpenZeppelin/ethernaut)
 
 2. BuidlGuidl: ｜ [Speed Run Ethereum](https://speedrunethereum.com/) ｜
 
