@@ -1,0 +1,29 @@
+{
+  "name": "kafka-course",
+  "version": "1.0.0",
+  "description": "Kafka 深入淺出課程 - TypeScript 示例",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node",
+    "build": "tsc",
+    "clean": "rm -rf dist node_modules",
+    "setup": "npm install"
+  },
+  "keywords": [
+    "kafka",
+    "typescript",
+    "tutorial",
+    "course"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
+
