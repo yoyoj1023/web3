@@ -9,7 +9,7 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 3. Blockchain Explorers: ｜[Blockchain.com](https://www.blockchain.com/explorer)｜[Bitcoin Office](https://bitcoin.gob.sv/)｜[Polygon PoS Chain Explorer](https://polygonscan.com/)｜[Polygon PoS Chain Amoy Testnet Explorer](https://amoy.polygonscan.com/)｜
 
-4. Online Cryptography Tools: [emn178](https://emn178.github.io/online-tools/)
+4. Online Cryptography Tools: ｜[emn178](https://emn178.github.io/online-tools/)｜[desmos](https://www.desmos.com/calculator?lang=zh-TW)｜
 
 5. EVM Opcodes: [Instructions](https://www.evm.codes/)
 
