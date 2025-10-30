@@ -1,0 +1,48 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Hardhat
+cache/
+artifacts/
+typechain-types/
+
+# 環境變數（包含私鑰）
+.env
+.env.local
+.env.*.local
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 測試覆蓋率
+coverage/
+coverage.json
+
+# Hardhat
+typechain/
+
+# 生產構建
+dist/
+build/
+
+# 日誌
+*.log
+logs/
+
+# 臨時文件
+*.tmp
+temp/
+
