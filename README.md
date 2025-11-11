@@ -1,5 +1,5 @@
 # web3
-This is a collection of web3 exploration and practice projects, documenting my learning journey from beginner level. Higher project numbers usually indicate more advanced content.
+This is a collection of web3 exploration and practice projects, documenting my learning journey from beginner level.
 
 ### 1. Useful Tools:
 
