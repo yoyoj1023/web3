@@ -1,0 +1,102 @@
+yoyoj1023@MSI:/mnt/c/VScode/web3/160-UUPS-by-example$ forge test -vv
+[⠆] Compiling...
+[⠊] Compiling 1 files with Solc 0.8.28
+[⠒] Solc 0.8.28 finished in 626.88ms
+Compiler run successful with warnings:
+Warning (5667): Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> src/UUPSUpgradeable.sol:252:32:
+    |
+252 |     function getImplementation(address proxy)
+    |                                ^^^^^^^^^^^^^
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> src/UUPSUpgradeable.sol:262:5:
+    |
+262 |     function isProxiable(address implementation)
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> test/UUPSUpgradeable.t.sol:138:5:
+    |
+138 |     function test_ProxiableUUID() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> test/UUPSUpgradeable.t.sol:143:5:
+    |
+143 |     function test_ProxiableUUIDMatchesStandard() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> test/UUPSUpgradeable.t.sol:520:5:
+    |
+520 |     function test_Helper_GetImplementation() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> test/UUPSUpgradeable.t.sol:527:5:
+    |
+527 |     function test_Helper_IsProxiable() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to view
+   --> test/UUPSUpgradeable.t.sol:554:5:
+    |
+554 |     function test_StorageSlotCorrect() public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Ran 44 tests for test/UUPSUpgradeable.t.sol:UUPSUpgradeableTest
+[PASS] test_CounterV1UUPS_Inc() (gas: 28862)
+[PASS] test_CounterV2UUPS_Dec() (gas: 30968)
+[PASS] test_CounterV2UUPS_Inc() (gas: 28798)
+[PASS] test_CounterV2UUPS_IncAndDec() (gas: 32028)
+[PASS] test_FullUpgradeFlow() (gas: 59382)
+[PASS] test_GasUsageComparison() (gas: 34428)
+[PASS] test_Helper_GetImplementation() (gas: 8012)
+[PASS] test_Helper_IsProxiable() (gas: 11921)
+[PASS] test_Helper_IsProxiableReturnsFalseForNonProxiable() (gas: 97805)
+[PASS] test_Initializable_UpgradeFromV1ToV2() (gas: 77777)
+[PASS] test_Initializable_UpgradePreservesState() (gas: 83989)
+[PASS] test_InitializeCanBeCalledByAnyone() (gas: 40704)
+[PASS] test_InitializeFailsTwice() (gas: 41100)
+[PASS] test_InitializeOnce() (gas: 37688)
+[PASS] test_InitializeSetsOwner() (gas: 37543)
+[PASS] test_MultipleUpgrades() (gas: 63511)
+[PASS] test_ProxiableUUID() (gas: 5893)
+[PASS] test_ProxiableUUIDMatchesStandard() (gas: 5918)
+[PASS] test_ProxyDeployment() (gas: 110569)
+[PASS] test_ProxyDeploymentWithInvalidImplementation() (gas: 41217)
+[PASS] test_ProxyDeploymentWithZeroAddress() (gas: 36652)
+[PASS] test_ProxyFallback() (gas: 33029)
+[PASS] test_ProxyForwardsCalls() (gas: 34067)
+[PASS] test_ProxyReceiveEther() (gas: 8572)
+[PASS] test_Proxy_CounterV1UUPS_Count() (gas: 35543)
+[PASS] test_Proxy_CounterV1UUPS_Inc() (gas: 34090)
+[PASS] test_Proxy_CounterV2UUPS_IncAndDec() (gas: 56456)
+[PASS] test_Proxy_Initialize() (gas: 37621)
+[PASS] test_Proxy_InitializeThenUse() (gas: 60456)
+[PASS] test_RevertWhenUpgradingToSameImplementation() (gas: 24834)
+[PASS] test_StateConsistencyAfterUpgrade() (gas: 59669)
+[PASS] test_StorageSlotCorrect() (gas: 8336)
+[PASS] test_StorageSlotDoesNotCollide() (gas: 58339)
+[PASS] test_UpgradeAddsNewFunction() (gas: 39923)
+[PASS] test_UpgradeDoesNotResetCount() (gas: 57810)
+[PASS] test_UpgradeEventEmitted() (gas: 28888)
+[PASS] test_UpgradeFailsIfNotOwner() (gas: 21178)
+[PASS] test_UpgradeFailsWithNonContract() (gas: 25405)
+[PASS] test_UpgradeFailsWithWrongUUID() (gas: 111936)
+[PASS] test_UpgradeFailsWithZeroAddress() (gas: 20813)
+[PASS] test_UpgradeFromV1ToV2() (gas: 54843)
+[PASS] test_UpgradeMaintainsData() (gas: 60998)
+[PASS] test_UpgradeOnlyOwner() (gas: 28912)
+[PASS] test_UpgradePreservesState() (gas: 59646)
+Suite result: ok. 44 passed; 0 failed; 0 skipped; finished in 2.64ms (4.86ms CPU time)
+
+Ran 2 tests for test/Counter.t.sol:CounterTest
+[PASS] testFuzz_SetNumber(uint256) (runs: 256, μ: 28744, ~: 29289)
+[PASS] test_Increment() (gas: 28783)
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 6.57ms (6.25ms CPU time)
+
+Ran 2 test suites in 10.47ms (9.21ms CPU time): 46 tests passed, 0 failed, 0 skipped (46 total tests)
+yoyoj1023@MSI:/mnt/c/VScode/web3/160-UUPS-by-example$
