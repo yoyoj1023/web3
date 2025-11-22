@@ -1,0 +1,21 @@
+{
+  "_format": "hh3-artifact-1",
+  "contractName": "MaliciousEngine",
+  "sourceName": "contracts/MaliciousEngine.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "destroy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600e575f5ffd5b50607f80601a5f395ff3fe6080604052348015600e575f5ffd5b50600436106026575f3560e01c806383197ef014602a575b5f5ffd5b60306032565b005b73db4101e7f5e2cc0e1a749092ff5287e3d36a5df6fffea2646970667358221220942a8e262fb94c689e6ef8286a186b2a1ec18e537a32f171e3a8a8a8ba937a2364736f6c634300081c0033",
+  "deployedBytecode": "0x6080604052348015600e575f5ffd5b50600436106026575f3560e01c806383197ef014602a575b5f5ffd5b60306032565b005b73db4101e7f5e2cc0e1a749092ff5287e3d36a5df6fffea2646970667358221220942a8e262fb94c689e6ef8286a186b2a1ec18e537a32f171e3a8a8a8ba937a2364736f6c634300081c0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "immutableReferences": {},
+  "inputSourceName": "project/contracts/MaliciousEngine.sol",
+  "buildInfoId": "solc-0_8_28-3b7e5710b2e75f831248af848aa51423d17576cd"
+}
