@@ -25,6 +25,8 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 + Development Tools & Framework Documentation: ｜[Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)｜[Foundry Book](https://book.getfoundry.sh/) | [Scaffold-ETH-2](https://scaffoldeth.io/) | [Scaffold-Alchemy](https://docs.alchemy.com/docs/scaffold-alchemy) | [Alchemy Documentation](https://www.alchemy.com/docs) | [Docker  Documentation](https://docs.docker.com/) |
 
++ Ethereum Magicians: ｜ [Ethereum Magicians](https://ethereum-magicians.org/) ｜
+
 ### 3. Popular Open Source Projects:
 
 + openzeppelin-contracts: ｜[Github](https://github.com/OpenZeppelin/openzeppelin-contracts)｜
