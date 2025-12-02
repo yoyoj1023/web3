@@ -54,6 +54,10 @@ UMA Github](https://github.com/umaprotocol)｜
 
 6. [EIPs](https://github.com/ethereum/EIPs):
     - [EIP-712: Typed structured data hashing and signing](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md)
+    - [EIP-1559: Fee market change for ETH 1.0 chain](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1559.md)
+
+7. [ERCs](https://github.com/ethereum/ERCs):
+    - [ERC-8004: Trustless Agents](https://github.com/ethereum/ERCs/blob/master/ERCS/erc-8004.md)
 
 ### 5. Challenges:
 
