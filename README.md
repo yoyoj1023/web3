@@ -66,11 +66,5 @@ UMA Github](https://github.com/umaprotocol)｜
 2. BuidlGuidl: ｜ [Speed Run Ethereum](https://speedrunethereum.com/) ｜
 
 
-### 6. Others:
-
-+ [Private Repo - 流星](https://github.com/yoyoj1023/English)
-
-+ [Private Repo - 鳳凰](https://github.com/yoyoj1023/evervictory)
-
 
 
