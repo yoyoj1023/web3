@@ -27,6 +27,8 @@ This is a collection of web3 exploration and practice projects, documenting my l
 
 + Ethereum Magicians: ｜ [Ethereum Magicians](https://ethereum-magicians.org/) ｜
 
++ ZKP: | [Noir](https://noir-lang.org/docs/) |
+
 ### 3. Popular Open Source Projects:
 
 + openzeppelin-contracts: ｜[Github](https://github.com/OpenZeppelin/openzeppelin-contracts)｜
