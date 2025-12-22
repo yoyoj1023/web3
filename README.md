@@ -65,7 +65,7 @@ UMA Github](https://github.com/umaprotocol)｜
 
 1. Solidity CTF (Capture The Flag): ｜ [The Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [The Ethernaut level solutions](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜[The Ethernaut Github](https://github.com/OpenZeppelin/ethernaut)
 
-2. BuidlGuidl: ｜ [Speed Run Ethereum](https://speedrunethereum.com/) ｜
+2. BuidlGuidl: ｜[Speed Run Ethereum](https://speedrunethereum.com/) ｜
 
-3. LeetCode: ｜ [LeetCode Problem Set](https://leetcode.com/problemset/) ｜
+3. LeetCode: ｜[LeetCode Problem Set](https://leetcode.com/problemset/) ｜[LeetCode Quest](https://leetcode.com/quest/) ｜[my-leetcode-solutions](https://github.com/yoyoj1023/my-leetcode-solutions) ｜
 
