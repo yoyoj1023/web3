@@ -67,5 +67,5 @@ UMA Github](https://github.com/umaprotocol)｜
 
 2. BuidlGuidl: ｜[Speed Run Ethereum](https://speedrunethereum.com/) ｜
 
-3. LeetCode: ｜[LeetCode Problem Set](https://leetcode.com/problemset/) ｜[LeetCode Quest](https://leetcode.com/quest/) ｜[my-leetcode-solutions](https://github.com/yoyoj1023/my-leetcode-solutions) ｜[My LeetCode Dashboard](https://leetcode.com/u/stu60001/) ｜
+3. LeetCode: ｜[LeetCode Problem Set](https://leetcode.com/problemset/) ｜[LeetCode Quest](https://leetcode.com/quest/) ｜[my-leetcode-solutions](https://github.com/yoyoj1023/my-leetcode-solutions) ｜[My LeetCode Dashboard](https://leetcode.com/u/yoyoj1023/) ｜
 
