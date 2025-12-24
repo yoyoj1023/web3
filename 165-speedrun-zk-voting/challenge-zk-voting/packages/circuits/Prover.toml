@@ -1,0 +1,8 @@
+depth = 0
+index = "0"
+nullifier = "12345"
+nullifier_hash = "0x096f56a93ef8bcf4f5efc79d0967649f93d08eff0af7dca5a4f9aa8db1a434b6"
+root = "0x1914879b2a4e7f9555f3eb55837243cefb1366a692794a7e5b5b3181fb14b49b"
+secret = "67890"
+siblings = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+vote = true
