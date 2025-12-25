@@ -57,15 +57,17 @@ UMA Github](https://github.com/umaprotocol)｜
 
     - [Solidity by Example](https://solidity-by-example.org/)
 
+    - [The Rust Programming Language](https://doc.rust-lang.org/book/) ｜ [Rust 程式設計語言](https://rust-lang.tw/book-tw/)
+
     - [Go by Example](https://gobyexample.com/) ｜ [Tour of Go](https://go.dev/learn/)
 
-    - [The Rust Programming Language](https://doc.rust-lang.org/book/) ｜ [Rust 程式設計語言](https://rust-lang.tw/book-tw/)
+    - [Learn Python By Example](https://www.learnbyexample.org/python/)
 
 ### 5. Challenges:
 
 1. Solidity CTF (Capture The Flag): ｜ [The Ethernaut](https://ethernaut.openzeppelin.com/) ｜ [The Ethernaut level solutions](https://github.com/yoyoj1023/ethernaut-level-solutions) ｜[The Ethernaut Github](https://github.com/OpenZeppelin/ethernaut)
 
-2. BuidlGuidl: ｜[Speed Run Ethereum](https://speedrunethereum.com/) ｜
+2. BuidlGuidl: ｜[Speedrun Ethereum](https://speedrunethereum.com/) ｜ [Speedrun Ethereum Portfolio](https://speedrunethereum.com/builders/0xdb4101e7f5E2cC0e1A749092ff5287e3d36A5df6)
 
 3. LeetCode: ｜[LeetCode Problem Set](https://leetcode.com/problemset/) ｜[LeetCode Quest](https://leetcode.com/quest/) ｜[my-leetcode-solutions](https://github.com/yoyoj1023/my-leetcode-solutions) ｜[My LeetCode Dashboard](https://leetcode.com/u/yoyoj1023/) ｜
 
