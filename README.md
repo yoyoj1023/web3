@@ -72,3 +72,10 @@ UMA Github](https://github.com/umaprotocol)｜
 3. LeetCode: ｜ [LeetCode Problem Set](https://leetcode.com/problemset/) ｜ [LeetCode Quest](https://leetcode.com/quest/) ｜ [my-leetcode-solutions](https://github.com/yoyoj1023/my-leetcode-solutions) ｜ [My LeetCode Dashboard](https://leetcode.com/u/yoyoj1023/) ｜
 
 4. CodeSignal: ｜ [Assessments Practice](https://app.codesignal.com/assessments/practice) ｜
+
+
+### 6. Job Opportunity
+
+1. Yourator: [https://www.yourator.co/](https://www.yourator.co/)
+
+2. Cake: [https://www.cake.me/dashboard](https://www.cake.me/dashboard)
