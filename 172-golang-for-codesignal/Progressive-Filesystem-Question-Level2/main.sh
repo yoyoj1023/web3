@@ -1,0 +1,3 @@
+echo "> go mod download && go clean -cache && go test -v ./..."
+  go mod download && go clean -cache && go test -v ./...
+  
