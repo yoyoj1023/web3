@@ -3,6 +3,8 @@
 專案名稱：**TW-Birth-Tracker (台灣出生人口趨勢儀表板)**
 技術堆疊：Next.js v14 (App Router), Neon (Serverless Postgres), Postgres.js, Recharts (視覺化), Vercel.
 
+![Sample Image](https://github.com/yoyoj1023/web3/blob/main/171-population-market-cap-v2/sample.png)
+
 ---
 
 ### 課程大綱總覽
