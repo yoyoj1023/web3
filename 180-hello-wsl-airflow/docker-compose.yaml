@@ -1,0 +1,167 @@
+# =============================================================================
+# Apache Airflow 2.9.1 — WSL2 / Docker Compose（LocalExecutor）
+# =============================================================================
+# 啟動前請在 WSL2 執行：echo "AIRFLOW_UID=$(id -u)" > .env
+#
+# 服務架構：
+#   postgres          → 儲存 DAG 執行紀錄、連線設定等元資料
+#   airflow-init      → 一次性初始化（資料庫遷移、建立管理員、修正目錄權限）
+#   airflow-webserver → Web UI（http://localhost:8080）
+#   airflow-scheduler → 排程器，負責觸發與監控 DAG 執行
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 共用設定錨點（YAML anchor）
+# 以 &airflow-common 定義一次，各 Airflow 服務以 <<: *airflow-common 繼承
+# -----------------------------------------------------------------------------
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:2.9.1
+
+  environment:
+    &airflow-common-env
+    # 執行器：LocalExecutor 在本機單容器內執行任務，適合開發／學習，不需 Redis / Worker
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    # 元資料資料庫連線（對應下方 postgres 服務）
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    # 加密連線密碼用的金鑰；本機學習可留空，正式環境請設定隨機字串
+    AIRFLOW__CORE__FERNET_KEY: ''
+    # 新 DAG 建立時預設為「暫停」，需手動開啟才會排程執行
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    # 載入官方範例 DAG（如 example_bash_operator）；僅跑自訂 DAG 可改為 'false'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+    # Web UI 與 API 的驗證方式（基本帳密 + Session）
+    AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+    # 讓 scheduler 暴露健康檢查端點（供下方 healthcheck 使用）
+    AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+
+  volumes:
+    # 本機目錄掛載進容器；${AIRFLOW_PROJ_DIR:-.} 表示預設為 compose 檔所在目錄
+    - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags         # 自訂 DAG（*.py）
+    - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs         # 任務執行日誌
+    - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins   # 自訂外掛
+    - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config     # 選用的 airflow.cfg 覆寫
+
+  # 以 .env 中的 AIRFLOW_UID 執行，避免 WSL2 掛載目錄寫入權限問題
+  user: "${AIRFLOW_UID:-50000}:0"
+
+  depends_on:
+    &airflow-common-depends-on
+    postgres:
+      condition: service_healthy   # 等 PostgreSQL 通過健康檢查後才啟動
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # PostgreSQL：Airflow 元資料資料庫
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data   # 持久化，docker compose down 不會清除
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  # ---------------------------------------------------------------------------
+  # Web UI：瀏覽器存取 http://localhost:8080（預設帳密 airflow / airflow）
+  # ---------------------------------------------------------------------------
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"   # 左：本機埠，右：容器內埠
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s   # 首次啟動給予較長暖機時間
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully   # 必須等 init 成功後才啟動
+
+  # ---------------------------------------------------------------------------
+  # 排程器：掃描 DAG、依排程觸發任務
+  # ---------------------------------------------------------------------------
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  # ---------------------------------------------------------------------------
+  # 一次性初始化服務
+  # 執行完畢後容器會結束（Exited），屬正常行為
+  # ---------------------------------------------------------------------------
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash   # 覆寫預設 entrypoint，以便先執行自訂 shell 腳本
+    command:
+      - -c
+      - |
+        # 檢查是否已設定 AIRFLOW_UID（應寫入 .env）
+        if [[ -z "$${AIRFLOW_UID}" ]]; then
+          echo
+          echo -e "\033[1;33mWARNING!!!: AIRFLOW_UID is not set!\033[0m"
+          echo "在 WSL2 請執行：echo \"AIRFLOW_UID=$$(id -u)\" > .env"
+          echo
+        fi
+        # 資源檢查（僅警告，不阻擋啟動）
+        one_meg=1048576
+        mem_available=$$(($$(getconf _PHYS_PAGES) * $$(getconf PAGE_SIZE) / one_meg))
+        cpus_available=$$(grep -cE 'cpu[0-9]+' /proc/stat)
+        disk_available=$$(df / | tail -1 | awk '{print $$4}')
+        warning_resources="false"
+        if (( mem_available < 4000 )); then
+          echo -e "\033[1;33mWARNING!!!: 可用記憶體不足 4GB（目前約 $${mem_available}MB）\033[0m"
+          warning_resources="true"
+        fi
+        if (( cpus_available < 2 )); then
+          echo -e "\033[1;33mWARNING!!!: CPU 核心數不足 2（目前 $${cpus_available}）\033[0m"
+          warning_resources="true"
+        fi
+        if (( disk_available < one_meg * 10 )); then
+          echo -e "\033[1;33mWARNING!!!: 可用磁碟空間不足 10GB\033[0m"
+          warning_resources="true"
+        fi
+        if [[ $${warning_resources} == "true" ]]; then
+          echo -e "\033[1;33mWARNING!!!: 資源可能不足以順利執行 Airflow。\033[0m"
+        fi
+        # 確保目錄存在，並將擁有者設為 AIRFLOW_UID（解決 /mnt/c 權限問題）
+        mkdir -p /sources/logs /sources/dags /sources/plugins /sources/config
+        chown -R "$${AIRFLOW_UID}:0" /sources/{logs,dags,plugins,config}
+        # 呼叫官方 entrypoint：執行 DB 遷移、建立管理員帳號等
+        exec /entrypoint airflow version
+    environment:
+      <<: *airflow-common-env
+      _AIRFLOW_DB_MIGRATE: 'true'                                          # 自動執行資料庫 schema 遷移
+      _AIRFLOW_WWW_USER_CREATE: 'true'                                       # 建立 Web UI 管理員
+      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}     # 可在 .env 覆寫
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+      _PIP_ADDITIONAL_REQUIREMENTS: ''                                       # 額外 pip 套件（留空）
+    user: "0:0"   # 以 root 執行，才能 chown 掛載目錄
+    volumes:
+      - ${AIRFLOW_PROJ_DIR:-.}:/sources   # 將專案根目錄掛載為 /sources，供 chown 使用
+
+# 具名 volume：PostgreSQL 資料持久化儲存
+volumes:
+  postgres-db-volume:
