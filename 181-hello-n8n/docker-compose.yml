@@ -1,0 +1,69 @@
+# =============================================================================
+# n8n — Docker Compose（本機入門學習）
+# =============================================================================
+# 啟動：docker compose up -d
+# 停止：docker compose down
+# 查看日誌：docker compose logs -f n8n
+#
+# 服務架構：
+#   postgres → 儲存 workflow、執行紀錄、憑證等資料
+#   n8n      → Web UI 與工作流引擎（http://localhost:5678）
+#
+# 首次開啟瀏覽器會引導建立擁有者帳號（Owner account）。
+# 建議複製 .env.example 為 .env 並修改 N8N_ENCRYPTION_KEY（首次啟動前設定，
+# 之後請勿更換，否則已儲存的 API 憑證將無法解密）。
+# =============================================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-n8n}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-n8n}
+      POSTGRES_DB: ${POSTGRES_DB:-n8n}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U n8n -d n8n']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.25.6
+    restart: unless-stopped
+    ports:
+      - '${N8N_PORT:-5678}:5678'
+    environment:
+      # 使用 PostgreSQL 作為後端資料庫（比預設 SQLite 更適合長期學習與使用）
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: ${POSTGRES_DB:-n8n}
+      DB_POSTGRESDB_USER: ${POSTGRES_USER:-n8n}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD:-n8n}
+      # 加密儲存的 API 金鑰／OAuth 憑證；本機可先用預設值，正式環境請改為長隨機字串
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:-please-change-me-before-first-run}
+      # 本機存取位址（影響 Webhook URL 顯示與 OAuth 回呼）
+      N8N_HOST: ${N8N_HOST:-localhost}
+      N8N_PORT: ${N8N_PORT:-5678}
+      N8N_PROTOCOL: ${N8N_PROTOCOL:-http}
+      WEBHOOK_URL: ${WEBHOOK_URL:-http://localhost:5678/}
+      GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-Asia/Taipei}
+      TZ: ${TZ:-Asia/Taipei}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://localhost:5678/healthz || exit 1']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  postgres_data:
+  n8n_data:
