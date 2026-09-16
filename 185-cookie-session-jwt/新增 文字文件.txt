@@ -1,0 +1,1276 @@
+可以。這一門我會把它定位成前一門 **Authentication / Authorization** 的「實作核心」。
+
+而且這一門有一個很重要的教學策略：
+
+> **不要把 Cookie、Session、JWT 當成三個互相競爭的技術。**
+>
+> 它們其實處在不同層次。
+
+先建立這個 mental model：
+
+```text
+Cookie
+  ↓
+「瀏覽器怎麼保存、何時自動送出資料」
+
+Session
+  ↓
+「Server 怎麼記住這個使用者」
+
+JWT
+  ↓
+「如何把身份/claims 包裝成一個可驗證的 token」
+```
+
+所以你甚至可以有：
+
+```text
+JWT + Cookie
+```
+
+也可以：
+
+```text
+Session ID + Cookie
+```
+
+這是這門課最重要的第一個觀念。
+
+---
+
+# Cookie / Session / JWT 課程綱要
+
+我會設計成 **10 個 Module、約 30 個單元**。
+
+---
+
+# Module 0 — 先建立三者的 Mental Model
+
+### 難度：★★☆☆☆
+
+這章先不要寫 code。
+
+## 0.1 Cookie 是什麼？
+
+理解：
+
+```text
+Browser
+   │
+   │ Cookie
+   ▼
+Server
+```
+
+Cookie 是 **HTTP state transport mechanism**，不是 authentication 本身。
+
+---
+
+## 0.2 Session 是什麼？
+
+```text
+Browser
+   │
+   │ session_id=abc
+   ▼
+Server
+   │
+   ▼
+Session Store
+```
+
+Session 是 server-side state。
+
+---
+
+## 0.3 JWT 是什麼？
+
+```text
+JWT
+ ↓
+Header
+Payload
+Signature
+```
+
+JWT 是一種 **token format**。
+
+---
+
+## 0.4 三者可以怎麼組合？
+
+這裡一定要搞懂：
+
+### Session + Cookie
+
+```text
+Cookie
+   ↓
+session_id
+   ↓
+Server Session Store
+   ↓
+User
+```
+
+### JWT + Cookie
+
+```text
+Cookie
+   ↓
+JWT
+   ↓
+Server verifies JWT
+   ↓
+User
+```
+
+### JWT + Authorization Header
+
+```text
+Authorization: Bearer <JWT>
+```
+
+所以：
+
+> **Cookie 和 JWT 根本不是同一層的東西。**
+
+---
+
+# Module 1 — Cookie Fundamentals
+
+### 難度：★★☆☆☆
+
+## 1.1 Cookie 的生命週期
+
+學會：
+
+```http
+Set-Cookie: session=abc123
+```
+
+然後 Browser 之後：
+
+```http
+Cookie: session=abc123
+```
+
+理解：
+
+```text
+Server → Browser
+```
+
+與：
+
+```text
+Browser → Server
+```
+
+---
+
+## 1.2 Cookie Attribute
+
+逐個實驗：
+
+```text
+Expires
+Max-Age
+Domain
+Path
+Secure
+HttpOnly
+SameSite
+```
+
+不要只背定義。
+
+直接用 Browser DevTools 觀察。
+
+---
+
+## 1.3 Session Cookie vs Persistent Cookie
+
+比較：
+
+```text
+Session Cookie
+Persistent Cookie
+```
+
+理解 browser 關掉後到底會不會消失。
+
+---
+
+## 1.4 Domain / Path
+
+例如：
+
+```text
+.example.com
+api.example.com
+www.example.com
+```
+
+理解：
+
+> Cookie 到底會被送給哪些 request？
+
+這對 Next.js + Backend 特別重要。
+
+---
+
+# Module 2 — Cookie Security
+
+### 難度：★★★★☆
+
+這一章非常重要。
+
+---
+
+## 2.1 HttpOnly
+
+理解：
+
+```text
+HttpOnly Cookie
+       ↓
+document.cookie 看不到
+```
+
+但同時理解：
+
+> HttpOnly **不是防 XSS 的萬靈丹**。
+
+---
+
+## 2.2 Secure
+
+```text
+Secure
+   ↓
+只透過 HTTPS 傳送
+```
+
+---
+
+## 2.3 SameSite
+
+深入：
+
+```text
+Strict
+Lax
+None
+```
+
+然後理解它和：
+
+```text
+CSRF
+Cross-Site Request
+```
+
+之間的關係。
+
+---
+
+## 2.4 Cookie Prefix
+
+進階理解：
+
+```text
+__Host-
+__Secure-
+```
+
+以及它們解決什麼問題。
+
+---
+
+## 2.5 Cookie Theft
+
+模擬：
+
+```text
+Attacker
+   ↓
+偷到 session cookie
+   ↓
+冒充 User
+```
+
+理解：
+
+> Authentication credential 一旦被竊取，攻擊者可能直接成為該 user。
+
+---
+
+# Module 3 — Session Fundamentals
+
+### 難度：★★★☆☆
+
+這一章開始進入 Backend。
+
+---
+
+## 3.1 為什麼 HTTP 是 Stateless？
+
+例如：
+
+```text
+Request 1
+GET /login
+```
+
+與：
+
+```text
+Request 2
+GET /profile
+```
+
+Server 預設不會知道：
+
+> Request 2 是不是剛才登入的那個人。
+
+---
+
+## 3.2 Session 解決什麼？
+
+```text
+Login
+ ↓
+Create Session
+ ↓
+Session ID
+ ↓
+Cookie
+```
+
+之後：
+
+```text
+Request
+ ↓
+session_id
+ ↓
+Session Store
+ ↓
+User ID
+```
+
+---
+
+## 3.3 Session ID
+
+例如：
+
+```text
+session_id = 8f7a...
+```
+
+理解：
+
+> Session ID 本身通常不是 user data。
+
+它比較像：
+
+```text
+「去 Server 找你的鑰匙」
+```
+
+---
+
+## 3.4 Session Store
+
+比較：
+
+```text
+Memory
+Database
+Redis
+```
+
+理解：
+
+> 為什麼 production environment 通常不能只依賴 process memory？
+
+---
+
+# Module 4 — Session Lifecycle
+
+### 難度：★★★☆☆
+
+完整走一遍：
+
+```text
+Register
+   ↓
+Login
+   ↓
+Create Session
+   ↓
+Set Cookie
+   ↓
+Authenticated Requests
+   ↓
+Logout
+   ↓
+Session Revocation
+```
+
+---
+
+## 4.1 Login
+
+```http
+POST /login
+```
+
+---
+
+## 4.2 Session Creation
+
+```text
+User authenticated
+       ↓
+Create random session ID
+       ↓
+Store session
+       ↓
+Set-Cookie
+```
+
+---
+
+## 4.3 Authentication Middleware
+
+例如：
+
+```text
+GET /profile
+      ↓
+Read Cookie
+      ↓
+Find Session
+      ↓
+Get User
+      ↓
+Request.user
+```
+
+---
+
+## 4.4 Logout
+
+比較：
+
+```text
+Client deletes cookie
+```
+
+vs
+
+```text
+Server invalidates session
+```
+
+這個差異非常重要。
+
+---
+
+## 4.5 Session Expiration
+
+理解：
+
+```text
+Idle timeout
+Absolute timeout
+Sliding expiration
+```
+
+---
+
+# Module 5 — Session Security
+
+### 難度：★★★★☆
+
+---
+
+## 5.1 Session Fixation
+
+理解：
+
+```text
+Attacker
+   ↓
+固定 Session ID
+   ↓
+Victim Login
+   ↓
+Attacker reuse Session
+```
+
+以及：
+
+> Login 成功後為什麼應該 rotate session ID？
+
+---
+
+## 5.2 Session Hijacking
+
+```text
+Session Cookie
+      ↓
+被偷
+      ↓
+Attacker impersonates user
+```
+
+---
+
+## 5.3 Session Rotation
+
+例如：
+
+```text
+Before login:
+session = AAA
+
+After login:
+session = BBB
+```
+
+---
+
+## 5.4 Logout 與 Revocation
+
+研究：
+
+```text
+logout
+password changed
+account disabled
+```
+
+如何讓既有 session 失效。
+
+---
+
+# Module 6 — JWT Fundamentals
+
+### 難度：★★★★☆
+
+**這時候才正式進 JWT。**
+
+---
+
+## 6.1 JWT Anatomy
+
+```text
+xxxxx.yyyyy.zzzzz
+   │     │     │
+Header Payload Signature
+```
+
+---
+
+## 6.2 Header
+
+例如：
+
+```json
+{
+  "alg": "RS256",
+  "typ": "JWT"
+}
+```
+
+---
+
+## 6.3 Payload / Claims
+
+理解：
+
+```text
+iss
+sub
+aud
+exp
+iat
+nbf
+jti
+```
+
+以及 custom claims。
+
+---
+
+## 6.4 Signature
+
+理解：
+
+```text
+Header + Payload
+       ↓
+Signing
+       ↓
+Signature
+```
+
+Server：
+
+```text
+JWT
+ ↓
+Verify Signature
+ ↓
+Trust claims
+```
+
+---
+
+## 6.5 JWT ≠ Encryption
+
+這一點必須牢記：
+
+```text
+JWT
+ ↓
+通常只是 encoded + signed
+```
+
+不是：
+
+```text
+JWT
+ ↓
+encrypted
+```
+
+所以 payload 不應該放：
+
+```text
+password
+credit card
+secret
+private information
+```
+
+---
+
+# Module 7 — JWT Authentication
+
+### 難度：★★★★☆
+
+---
+
+## 7.1 Access Token
+
+```text
+Login
+ ↓
+Access Token
+ ↓
+API Request
+```
+
+例如：
+
+```http
+Authorization: Bearer eyJ...
+```
+
+---
+
+## 7.2 Expiration
+
+```text
+exp
+ ↓
+Token expired
+ ↓
+401
+```
+
+理解短生命週期的原因。
+
+---
+
+## 7.3 Refresh Token
+
+完整 flow：
+
+```text
+Login
+ │
+ ├── Access Token
+ │
+ └── Refresh Token
+          │
+          ▼
+       Client
+```
+
+Access Token 過期：
+
+```text
+Refresh Token
+      ↓
+Token Endpoint
+      ↓
+New Access Token
+```
+
+---
+
+## 7.4 Refresh Token Rotation
+
+進一步：
+
+```text
+Refresh Token A
+      ↓
+Refresh
+      ↓
+Refresh Token B
+```
+
+理解：
+
+> 為什麼 refresh token 不一定應該永久不變？
+
+---
+
+# Module 8 — Session vs JWT
+
+### 難度：★★★★☆
+
+這是整門課最重要的比較章節之一。
+
+---
+
+## 8.1 State 放哪裡？
+
+### Session
+
+```text
+Server
+ ↓
+Session State
+```
+
+### JWT
+
+```text
+Token
+ ↓
+Claims
+```
+
+---
+
+## 8.2 Revocation
+
+比較：
+
+```text
+Session
+→ server 可以直接刪除
+
+JWT
+→ 已簽發 token 通常會持續有效直到 expiry
+```
+
+因此會開始理解：
+
+```text
+JWT revocation
+Token blacklist
+Short-lived access token
+Refresh token
+```
+
+---
+
+## 8.3 Scalability
+
+比較：
+
+```text
+Session
+```
+
+與：
+
+```text
+JWT
+```
+
+在 distributed systems 中的差異。
+
+但也要避免一個常見誤區：
+
+> **JWT ≠ automatically more scalable。**
+
+---
+
+## 8.4 Stateless Authentication
+
+理解：
+
+> 「Stateless」到底是真的沒有 state，還是 state 被移到 token / refresh token / infrastructure 的其他地方？
+
+這個問題非常值得思考。
+
+---
+
+# Module 9 — Next.js 實戰 Architecture
+
+### 難度：★★★★★
+
+這章會直接對應你的開發場景。
+
+---
+
+# 9.1 Next.js + Session Cookie
+
+```text
+Browser
+   │
+   │ Cookie
+   ▼
+Next.js
+   │
+   ▼
+Session Store
+```
+
+---
+
+# 9.2 Next.js + Backend API
+
+```text
+Browser
+   │
+   │ Cookie
+   ▼
+Next.js
+   │
+   │ Service Credential
+   ▼
+Backend
+```
+
+這時候要分清楚兩個身份：
+
+```text
+User Identity
+Service Identity
+```
+
+---
+
+# 9.3 Browser 直接打 Backend
+
+```text
+Browser
+   │
+   │ Bearer Token
+   ▼
+Backend
+```
+
+這時：
+
+> token 在誰手上？
+
+答案：
+
+**Browser。**
+
+因此：
+
+```bash
+curl
+```
+
+只要拿得到 token，就能重放 request。
+
+---
+
+# 9.4 BFF
+
+研究：
+
+```text
+Browser
+   ↓
+Next.js BFF
+   ↓
+Backend
+```
+
+理解：
+
+* credential hiding
+* API aggregation
+* user session
+* server-to-server authentication
+
+---
+
+# Module 10 — Production Token Architecture
+
+### 難度：★★★★★
+
+最後進入真正 production-level 的設計。
+
+---
+
+## 10.1 Access Token / Refresh Token Architecture
+
+例如：
+
+```text
+Browser
+   │
+   │
+   ├── Access Token
+   │
+   └── Refresh Token
+```
+
+研究不同儲存策略：
+
+```text
+Cookie
+Memory
+localStorage
+sessionStorage
+```
+
+以及各自的 attack surface。
+
+---
+
+## 10.2 Key Management
+
+JWT 開始碰到：
+
+```text
+HS256
+RS256
+ES256
+```
+
+以及：
+
+```text
+Symmetric Key
+Asymmetric Key
+Public Key
+Private Key
+Key Rotation
+JWKS
+```
+
+---
+
+## 10.3 Token Revocation
+
+研究：
+
+```text
+JWT
+ ↓
+如何讓它失效？
+```
+
+方法包括：
+
+```text
+Short expiry
+Refresh token revocation
+Token version
+Revocation list
+Session state
+```
+
+---
+
+## 10.4 Multi-Service Architecture
+
+例如：
+
+```text
+              ┌──► User Service
+              │
+Browser
+   ↓          ├──► Order Service
+Auth
+   ↓          ├──► Payment Service
+Token
+              └──► Notification Service
+```
+
+研究：
+
+> JWT 在 microservices 裡到底解決了什麼問題？
+
+---
+
+# 最終實戰專案
+
+我會讓你做一個完整的：
+
+## Authentication Playground
+
+```text
+                    Browser
+                       │
+                       ▼
+                    Next.js
+                       │
+              ┌────────┴────────┐
+              │                 │
+          Cookie Session      JWT
+              │                 │
+              └────────┬────────┘
+                       ▼
+                  Backend API
+                       │
+                       ▼
+                   PostgreSQL
+                       │
+                       ▼
+                     Redis
+```
+
+然後實作兩套 authentication：
+
+### Version A — Session
+
+```text
+POST /login
+     ↓
+Session
+     ↓
+HttpOnly Cookie
+```
+
+### Version B — JWT
+
+```text
+POST /login
+     ↓
+Access Token
+     +
+Refresh Token
+```
+
+然後拿同一套 API 比較。
+
+---
+
+# 最後的攻擊實驗
+
+這個部分我認為比「寫出 login」重要很多。
+
+---
+
+### 實驗 1：Cookie 被竊取
+
+```text
+session cookie
+      ↓
+attacker
+      ↓
+impersonation
+```
+
+---
+
+### 實驗 2：JWT 被竊取
+
+```text
+access token
+      ↓
+attacker
+      ↓
+curl API
+```
+
+你會真正看到：
+
+> **「防止匿名 curl」≠「防止已經 authenticated 的人使用 curl」。**
+
+---
+
+### 實驗 3：XSS
+
+比較：
+
+```text
+HttpOnly Cookie
+```
+
+與：
+
+```text
+localStorage JWT
+```
+
+在 XSS 下的差異。
+
+---
+
+### 實驗 4：CSRF
+
+使用 Cookie authentication：
+
+```text
+Victim Browser
+     ↓
+Malicious Site
+     ↓
+Request
+     ↓
+Cookie automatically attached
+```
+
+理解：
+
+```text
+SameSite
+CSRF Token
+Origin Check
+```
+
+---
+
+### 實驗 5：JWT Replay
+
+```text
+Attacker
+   ↓
+stolen JWT
+   ↓
+curl
+   ↓
+API
+```
+
+然後研究：
+
+> 如果 JWT 沒有過期，我要怎麼讓它失效？
+
+---
+
+### 實驗 6：Refresh Token Rotation
+
+模擬：
+
+```text
+Refresh Token A
+      ↓
+正常 refresh
+      ↓
+Refresh Token B
+```
+
+然後再次使用 A：
+
+```text
+Refresh Token A
+      ↓
+Detected reuse
+      ↓
+Invalidate token family
+```
+
+這會讓你開始接觸真正的 production security design。
+
+---
+
+# 學習曲線
+
+我會這樣安排：
+
+```text
+Module 0  Mental Model              ★★☆☆☆
+Module 1  Cookie                   ★★☆☆☆
+Module 2  Cookie Security          ★★★★☆
+Module 3  Session                  ★★★☆☆
+Module 4  Session Lifecycle        ★★★☆☆
+Module 5  Session Security         ★★★★☆
+Module 6  JWT                      ★★★★☆
+Module 7  JWT Authentication       ★★★★☆
+Module 8  Session vs JWT           ★★★★☆
+Module 9  Next.js Architecture     ★★★★★
+Module 10 Production Architecture ★★★★★
+```
+
+---
+
+# 這門課真正的主線
+
+如果把 10 個 Module 壓縮成一條線，其實就是：
+
+```text
+HTTP
+ │
+ ▼
+Cookie
+ │
+ ▼
+Session
+ │
+ ├── Session ID
+ │
+ └── Server-side State
+ │
+ ▼
+Authentication
+ │
+ ▼
+JWT
+ │
+ ├── Access Token
+ │
+ └── Refresh Token
+ │
+ ▼
+Authorization
+ │
+ ▼
+Next.js / BFF
+ │
+ ▼
+Service-to-Service Auth
+ │
+ ▼
+Production Security
+```
+
+而我最希望你最後建立的不是：
+
+> 「JWT 要怎麼 implement？」
+
+而是看到一個 architecture 時，你會自然問：
+
+```text
+1. Credential 在哪裡？
+2. Browser 能不能拿到？
+3. Browser 會不會自動送？
+4. Server-side state 在哪？
+5. Token 能不能被 replay？
+6. Credential 怎麼 expire？
+7. Credential 怎麼 revoke？
+8. XSS 會怎樣？
+9. CSRF 會怎樣？
+10. User identity 和 service identity 有沒有分開？
+```
+
+**如果這 10 個問題變成你的直覺，你就已經跨過「會做登入」到「懂 authentication architecture」的門檻了。**

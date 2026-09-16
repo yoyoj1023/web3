@@ -1,0 +1,1194 @@
+可以。這一門我會接著前面的 HTTP 課程設計，而且會刻意**不從「JWT 怎麼寫」開始**。
+
+因為真正重要的不是 JWT，而是建立這個 mental model：
+
+> **Authentication：你是誰？**
+> **Authorization：你可以做什麼？**
+> **Session / Token：系統如何在每次 request 中知道你是誰？**
+
+最後再把它落到你實際會遇到的：
+
+```text
+Browser
+   ↓
+Next.js
+   ↓
+Backend API
+   ↓
+Database
+```
+
+---
+
+# Authentication / Authorization 課程綱要
+
+我會設計成 **9 個 Module、約 25 個單元**。
+
+---
+
+# Module 0 — 先建立正確的 Security Mental Model
+
+### 難度：★★☆☆☆
+
+這一章非常重要，因為很多 authentication 教學一開始就：
+
+> 「我們來做 JWT Login。」
+
+這其實太早了。
+
+### 0.1 Authentication 是什麼？
+
+```text
+Authentication
+      ↓
+「你是誰？」
+```
+
+例如：
+
+```text
+username + password
+email + password
+Google Login
+Passkey
+OAuth
+```
+
+最後都在解決：
+
+> **如何確認某個 request 背後的 principal 是誰？**
+
+---
+
+### 0.2 Authorization 是什麼？
+
+```text
+Authorization
+      ↓
+「你可以做什麼？」
+```
+
+例如：
+
+```text
+User A
+  ↓
+GET /me                 ✅
+
+User A
+  ↓
+GET /users/B/private    ❌
+
+Admin
+  ↓
+GET /admin/users        ✅
+```
+
+---
+
+### 0.3 Authentication ≠ Authorization
+
+這一定要徹底理解。
+
+```text
+Authentication
+      ↓
+User = Alice
+      ↓
+Authorization
+      ↓
+Alice 能不能讀取 Bob 的資料？
+```
+
+即使 Authentication 完全正確：
+
+```text
+Alice 已經登入
+```
+
+也不代表：
+
+```text
+Alice 可以讀取所有資料
+```
+
+---
+
+# Module 1 — Identity：到底「誰」在使用 API？
+
+### 難度：★★★☆☆
+
+這一章開始建立 **Principal / Identity** 的概念。
+
+### 1.1 User Identity
+
+例如：
+
+```text
+user_id = 123
+```
+
+這個 ID 到底代表什麼？
+
+---
+
+### 1.2 Principal
+
+理解：
+
+```text
+Request
+   ↓
+Principal
+   ↓
+User 123
+```
+
+以及：
+
+```text
+Anonymous
+Authenticated User
+Service Account
+Admin
+```
+
+---
+
+### 1.3 Authentication Context
+
+例如 Backend 收到：
+
+```http
+GET /orders
+Authorization: Bearer xxx
+```
+
+Backend 最終希望得到：
+
+```ts
+{
+  userId: "123",
+  role: "user"
+}
+```
+
+之後 business logic 才能使用。
+
+---
+
+### 1.4 Trust Boundary
+
+這會直接接到你上一堂 HTTP 的問題。
+
+例如：
+
+```text
+Internet
+   │
+   ▼
+Browser
+   │
+   ▼
+Next.js
+   │
+   ▼
+Backend
+   │
+   ▼
+Database
+```
+
+問題：
+
+> 每一層到底「信任」誰？
+
+這是之後 system design 非常重要的能力。
+
+---
+
+# Module 2 — Password Authentication
+
+### 難度：★★★☆☆
+
+先從最原始的：
+
+```text
+Email + Password
+```
+
+開始。
+
+### 2.1 Registration
+
+```text
+POST /auth/register
+```
+
+流程：
+
+```text
+password
+ ↓
+password hashing
+ ↓
+database
+```
+
+---
+
+### 2.2 Password Hashing
+
+一定要理解：
+
+```text
+password
+    ↓
+hash
+    ↓
+database
+```
+
+而不是：
+
+```text
+password
+    ↓
+encrypt
+    ↓
+database
+```
+
+理解：
+
+* Hash vs Encryption
+* Salt
+* Password hashing
+* Argon2 / bcrypt
+* Rainbow table
+* Brute force
+
+---
+
+### 2.3 Login
+
+```text
+POST /auth/login
+```
+
+流程：
+
+```text
+email
+password
+   ↓
+lookup user
+   ↓
+verify password
+   ↓
+Authentication success
+   ↓
+建立 session / token
+```
+
+---
+
+### 2.4 Password 不應該怎麼做
+
+例如：
+
+```text
+❌ plaintext password
+❌ MD5
+❌ SHA-256(password)
+❌ 自己發明 hashing algorithm
+```
+
+這一章會建立很重要的安全直覺。
+
+---
+
+# Module 3 — Session Authentication
+
+### 難度：★★★☆☆～★★★★☆
+
+這是我非常建議你認真學的一章。
+
+因為你用 Next.js 做 Web App 時，**Session + Cookie 是非常重要的模型**。
+
+---
+
+## 3.1 Session 是什麼？
+
+```text
+Browser
+   │
+   │ Cookie: session_id=abc
+   ▼
+Server
+   │
+   ▼
+Session Store
+```
+
+Server 保存：
+
+```text
+abc123 → User 123
+```
+
+---
+
+## 3.2 Login
+
+```text
+POST /login
+       ↓
+verify password
+       ↓
+create session
+       ↓
+Set-Cookie
+```
+
+例如：
+
+```http
+Set-Cookie: session=abc123; HttpOnly; Secure
+```
+
+---
+
+## 3.3 每次 Request
+
+```text
+Browser
+   │
+   │ Cookie: session=abc123
+   ▼
+Backend
+   │
+   ▼
+Session Store
+   │
+   ▼
+User = 123
+```
+
+---
+
+## 3.4 Logout
+
+理解：
+
+```text
+Client logout
+vs
+Server-side session invalidation
+```
+
+---
+
+## 3.5 Session Storage
+
+比較：
+
+```text
+Memory
+Redis
+Database
+```
+
+以及：
+
+> 為什麼 production 不應該隨便把 session 放在單機 memory？
+
+---
+
+# Module 4 — Cookie Security
+
+### 難度：★★★★☆
+
+這一章會直接承接你的 HTTP 課程。
+
+### 4.1 HttpOnly
+
+理解：
+
+```text
+HttpOnly Cookie
+```
+
+為什麼 JavaScript 不能直接讀。
+
+---
+
+### 4.2 Secure
+
+```text
+Secure
+```
+
+為什麼 authentication cookie 應該透過 HTTPS 傳送。
+
+---
+
+### 4.3 SameSite
+
+理解：
+
+```text
+Strict
+Lax
+None
+```
+
+以及它與 CSRF 的關係。
+
+---
+
+### 4.4 Domain / Path
+
+理解 Cookie 到底：
+
+> 什麼情況會被 browser 自動送出去？
+
+---
+
+### 4.5 Cookie vs localStorage
+
+這一題一定會出現。
+
+比較：
+
+```text
+HttpOnly Cookie
+localStorage
+sessionStorage
+```
+
+以及：
+
+> 為什麼「把 JWT 放 localStorage」並不是唯一答案？
+
+---
+
+# Module 5 — Token Authentication / JWT
+
+### 難度：★★★★☆
+
+**到這裡才開始 JWT。**
+
+你會發現 JWT 其實沒有想像中神秘。
+
+---
+
+## 5.1 Token 是什麼？
+
+```text
+Login
+ ↓
+Token
+ ↓
+Client
+ ↓
+下一次 Request
+```
+
+---
+
+## 5.2 JWT Anatomy
+
+例如：
+
+```text
+xxxxx.yyyyy.zzzzz
+```
+
+理解：
+
+```text
+Header
+Payload
+Signature
+```
+
+---
+
+## 5.3 JWT Signature
+
+理解：
+
+```text
+Private Key / Secret
+       ↓
+    Signing
+       ↓
+     JWT
+```
+
+以及：
+
+```text
+JWT
+ ↓
+Verify Signature
+ ↓
+可信？
+```
+
+---
+
+## 5.4 JWT Payload 不是 Secret
+
+這個非常重要。
+
+理解：
+
+> JWT payload 通常只是 encoded，不代表 encrypted。
+
+因此不要放：
+
+```json
+{
+  "password": "...",
+  "credit_card": "..."
+}
+```
+
+---
+
+## 5.5 Access Token / Refresh Token
+
+開始理解：
+
+```text
+Access Token
+      +
+Refresh Token
+```
+
+以及：
+
+```text
+short-lived
+long-lived
+```
+
+---
+
+## 5.6 Token Expiration
+
+理解：
+
+```text
+exp
+iat
+nbf
+```
+
+以及：
+
+> Token 過期之後怎麼辦？
+
+---
+
+# Module 6 — Authorization
+
+### 難度：★★★★☆
+
+這會是整門課的核心。
+
+因為很多人：
+
+> Authentication 學得很好，Authorization 卻寫爛。
+
+---
+
+## 6.1 Authentication
+
+```text
+Who are you?
+
+→ Alice
+```
+
+---
+
+## 6.2 Authorization
+
+```text
+What can Alice do?
+```
+
+例如：
+
+```text
+Alice
+ ├─ read own profile       ✅
+ ├─ edit own profile       ✅
+ ├─ read Bob's profile     ❌
+ ├─ delete users           ❌
+ └─ access admin panel     ❌
+```
+
+---
+
+# Module 7 — Authorization Models
+
+### 難度：★★★★☆～★★★★★
+
+這一章開始進入真正的 Backend Architecture。
+
+---
+
+## 7.1 Role-Based Access Control — RBAC
+
+```text
+User
+ ↓
+Role
+ ↓
+Permission
+```
+
+例如：
+
+```text
+Alice
+ ↓
+admin
+ ↓
+users.read
+users.delete
+orders.read
+```
+
+---
+
+## 7.2 Resource-Based Authorization
+
+例如：
+
+```text
+GET /documents/123
+```
+
+不能只問：
+
+```text
+user.isLoggedIn?
+```
+
+而是：
+
+```text
+Does Alice have permission
+to access Document #123?
+```
+
+---
+
+## 7.3 Ownership
+
+例如：
+
+```text
+User 123
+   ↓
+Order 456
+```
+
+User 123 可以：
+
+```text
+GET /orders/456
+```
+
+User 999：
+
+```text
+GET /orders/456
+```
+
+→ `403 Forbidden`
+
+---
+
+## 7.4 RBAC vs Ownership
+
+比較：
+
+```text
+Role
+Resource ownership
+Permission
+```
+
+---
+
+## 7.5 ABAC
+
+進一步理解：
+
+> Attribute-Based Access Control
+
+例如：
+
+```text
+user.department == document.department
+```
+
+才允許讀取。
+
+---
+
+# Module 8 — 常見 Authentication / Authorization 攻擊
+
+### 難度：★★★★★
+
+這章非常重要。
+
+不是學「怎麼防」，而是先學：
+
+> **攻擊者會怎麼想？**
+
+---
+
+## 8.1 Credential Stuffing
+
+```text
+email + password
+```
+
+被拿去其他網站重試。
+
+---
+
+## 8.2 Brute Force
+
+```text
+login
+ ↓
+大量嘗試 password
+```
+
+理解：
+
+```text
+Rate Limiting
+Account Lockout
+CAPTCHA
+```
+
+---
+
+## 8.3 Session Hijacking
+
+如果：
+
+```text
+session cookie
+```
+
+被偷走：
+
+```text
+Attacker
+ ↓
+Cookie
+ ↓
+Impersonate User
+```
+
+---
+
+## 8.4 Session Fixation
+
+理解攻擊者如何試圖固定 session identifier。
+
+---
+
+## 8.5 CSRF
+
+尤其要理解：
+
+```text
+Cookie authentication
+        ↓
+Browser automatically sends Cookie
+        ↓
+CSRF risk
+```
+
+以及：
+
+```text
+SameSite
+CSRF Token
+Origin checking
+```
+
+---
+
+## 8.6 XSS 與 Token Theft
+
+理解：
+
+```text
+XSS
+ ↓
+JavaScript execution
+ ↓
+可能竊取 token / session
+```
+
+以及：
+
+> HttpOnly 能解決什麼、不能解決什麼？
+
+---
+
+## 8.7 IDOR / BOLA
+
+這個我會特別強調。
+
+例如：
+
+```http
+GET /api/orders/123
+```
+
+User A 改成：
+
+```http
+GET /api/orders/124
+```
+
+如果成功取得別人的 order：
+
+**Authorization 爆了。**
+
+---
+
+# Module 9 — 真正的 Production Authentication Architecture
+
+### 難度：★★★★★
+
+最後把所有東西串起來。
+
+---
+
+# 9.1 Next.js + Backend
+
+你剛才問的問題會在這裡完整解答：
+
+```text
+                  Internet
+                     │
+                     ▼
+                 Browser
+                     │
+                     │ Session Cookie
+                     ▼
+                  Next.js
+                     │
+                     │ Service Authentication
+                     ▼
+                 Backend API
+                     │
+                     │ Authorization
+                     ▼
+                  Database
+```
+
+---
+
+# 9.2 BFF Pattern
+
+理解：
+
+> Backend for Frontend
+
+```text
+Browser
+   ↓
+Next.js BFF
+   ↓
+Backend
+```
+
+以及什麼情況適合這樣做。
+
+---
+
+# 9.3 Service-to-Service Authentication
+
+例如：
+
+```text
+Next.js
+   ↓
+Backend
+```
+
+Backend 不應該只相信：
+
+```text
+"User-Agent: Next.js"
+```
+
+而要使用真正的 credential，例如：
+
+```text
+Service Token
+OAuth Client Credentials
+mTLS
+Workload Identity
+```
+
+---
+
+# 9.4 User Identity Propagation
+
+這個是進階但非常值得學。
+
+```text
+Browser
+   ↓
+Next.js
+   ↓
+Backend
+```
+
+Backend 最終如何知道：
+
+```text
+這是 Alice
+```
+
+而不是：
+
+```text
+這是 Next.js
+```
+
+也就是區分：
+
+```text
+User Authentication
+Service Authentication
+```
+
+兩種身份。
+
+---
+
+# 9.5 Least Privilege
+
+最後建立這個原則：
+
+> **每個 principal 只拿到完成工作所需要的最低權限。**
+
+例如：
+
+```text
+Frontend Service
+    ↓
+只能 GET products
+
+Order Service
+    ↓
+可以讀寫 orders
+
+Admin Service
+    ↓
+可以管理 users
+```
+
+而不是：
+
+```text
+Everything
+   ↓
+Full Database Access
+```
+
+---
+
+# 課程的實戰專案
+
+我會讓你最後做一個小型：
+
+**「電商 Backend Authentication System」**
+
+架構：
+
+```text
+                     Browser
+                        │
+                        ▼
+                    Next.js
+                        │
+               ┌────────┴────────┐
+               │                 │
+          User Session       Server Auth
+               │                 │
+               └────────┬────────┘
+                        ▼
+                   Backend API
+                        │
+             ┌──────────┴──────────┐
+             ▼                     ▼
+          PostgreSQL             Redis
+```
+
+實作：
+
+```text
+POST /auth/register
+POST /auth/login
+POST /auth/logout
+GET  /me
+
+GET  /products
+GET  /orders
+GET  /orders/:id
+
+POST /orders
+PATCH /orders/:id
+
+GET /admin/users
+```
+
+然後建立：
+
+```text
+Guest
+User
+Admin
+```
+
+三種 principal。
+
+---
+
+# 最後做一輪「攻擊自己的 API」
+
+例如：
+
+### Attack 1
+
+```bash
+curl GET /orders
+```
+
+→ `401`
+
+### Attack 2
+
+拿 User A 的 credential：
+
+```bash
+GET /orders/B-order
+```
+
+→ `403`
+
+### Attack 3
+
+修改：
+
+```text
+user_id
+```
+
+看看能不能讀到別人的資料。
+
+### Attack 4
+
+偷 session cookie。
+
+### Attack 5
+
+嘗試 CSRF。
+
+### Attack 6
+
+嘗試 brute force login。
+
+### Attack 7
+
+嘗試 replay token。
+
+做到這裡，你對 Authentication / Authorization 的理解會比「會用某個 auth library」深很多。
+
+---
+
+# 我會給這門課的學習曲線
+
+```text
+Module 0  Security Mental Model       ★★☆☆☆
+Module 1  Identity / Principal        ★★★☆☆
+Module 2  Password Authentication     ★★★☆☆
+Module 3  Session                     ★★★★☆
+Module 4  Cookie Security             ★★★★☆
+Module 5  JWT / Token                 ★★★★☆
+Module 6  Authorization               ★★★★☆
+Module 7  RBAC / ABAC / Ownership     ★★★★★
+Module 8  Attacks                     ★★★★★
+Module 9  Production Architecture    ★★★★★
+```
+
+其中有一個很重要的學習順序：
+
+```text
+Password
+   ↓
+Session
+   ↓
+Cookie
+   ↓
+Authentication
+   ↓
+JWT
+   ↓
+Authorization
+   ↓
+RBAC
+   ↓
+BOLA / IDOR
+   ↓
+BFF
+   ↓
+Service-to-Service Auth
+```
+
+**不要反過來。**
+
+尤其不要一開始就：
+
+```text
+「NextAuth 怎麼設定？」
+「JWT middleware 怎麼寫？」
+「OAuth callback 怎麼接？」
+```
+
+那會讓你變成「會操作 framework」，但遇到架構問題時還是不知道**為什麼這樣做**。
+
+---
+
+## 這門課學完，你應該能回答這 10 個問題
+
+1. **Authentication 和 Authorization 差在哪？**
+2. **為什麼登入後每個 request 都需要某種 credential？**
+3. **Session 和 JWT 解決的是什麼問題？**
+4. **Cookie 為什麼會有 HttpOnly / Secure / SameSite？**
+5. **JWT 為什麼不是加密資料？**
+6. **Access Token 和 Refresh Token 為什麼要分開？**
+7. **User 已經 authenticated，為什麼還可能被 `403`？**
+8. **為什麼 `/users/:id` 很容易產生 IDOR/BOLA？**
+9. **為什麼 CORS 不能代替 Authentication？**
+10. **Next.js → Backend 到底應該驗證「使用者身份」還是「服務身份」？**
+
+如果這 10 題你都能用自己的話講清楚，**你就不只是「會登入功能」，而是開始真正理解 Web Authentication Architecture。**

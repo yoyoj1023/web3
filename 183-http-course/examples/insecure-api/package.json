@@ -1,0 +1,13 @@
+{
+  "name": "insecure-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mini HTTP lab for course 183: five API protection versions (A–E).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
